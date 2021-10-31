@@ -1,0 +1,73 @@
+// --- variables --- //
+
+// colors:
+$principal-color: rgb(0, 0, 40);
+$secondary-color: #dce6ef;
+$hover-color: #95A3B3;
+
+
+// #################### header #################### //
+header{
+    width: 100%;
+    height: 250px;
+    background-color: $principal-color;
+    margin-bottom: 40px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1.9px 2.5px;
+
+    .main{
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // logo styles
+        .logo-container{
+            width: 100%;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;                
+            fill: white;
+            color: white;
+            
+            transition: all .3s ease;
+            &:hover{
+                color: $hover-color;
+                fill: $hover-color;
+            }
+        }
+        
+        // nav styles
+        .nav-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            .links-container{    
+                li{
+                    display: inline-block;
+                    
+                    .link{
+                        text-decoration: none;
+                        font-weight: 500;
+                        font-size: 38px;
+                        color: white;
+                        padding:5px 30px;
+                        
+                        transition: all .3s ease;        
+                        &:hover{
+                            color:$hover-color;
+                        }   
+                    }                    
+                }
+            }
+        }
+    }
+}
