@@ -302,3 +302,33 @@ $hover-color: #95A3B3;
         }
     }
 }
+
+// ############################## Responsive ############################## //
+
+// ___ Tablet ___ //
+@media ( min-width: 768px ) {
+    // btn-add adjusted width. 
+    .main{    
+        .btn-add{
+            width: 30%;               
+        }    
+    }    
+}
+// ___ Laptop ___ //
+@media ( min-width: 1024px ){
+    //sarch-nav adjusted width
+    .main{
+        .search-container{
+            width: 50%;
+        }
+    }
+}
+// ___ Laptop L ___ //
+@media ( min-width: 1440px ){
+    // btn-add adjusted width.  
+    .main{    
+        .btn-add{
+            width: 15%;               
+        }    
+    } 
+}
