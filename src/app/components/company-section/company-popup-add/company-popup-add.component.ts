@@ -41,9 +41,14 @@ export class CompanyPopupAddComponent implements OnInit {
     if(this.clickPopup == false){
       const overlay = this.overlay.nativeElement;
       const popup = this.popup.nativeElement;
+      const title = this.title.nativeElement;
+      const form = this.form.nativeElement;
+      
       
       this.renderer.removeClass(overlay,'active')
       this.renderer.removeClass(popup,'active')
+      this.renderer.removeClass(title,'active');
+      this.renderer.removeClass(form,'active');
       
     }
     this.clickPopup = false;
