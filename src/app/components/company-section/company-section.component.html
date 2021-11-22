@@ -1,10 +1,8 @@
 <div class="main">
     <h2 class="title">Empresas</h2>
     <!---------- btn create ---------->
-    <button class="btn-add">Añadir registro</button>
-    <!-- popup add data ?? -->
-
-    <!-- popup add data ?? -->
+    <button class="btn-add" (click)="trigger_popup()">Añadir registro</button>
+    <app-company-popup-add #popupADD></app-company-popup-add>
     
     <!---------- nav search ---------->
     <div class="search-container">
