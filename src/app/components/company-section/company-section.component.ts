@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-company-section',
@@ -6,14 +6,17 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./company-section.component.scss']
 })
 export class CompanySectionComponent implements OnInit {
-  @ViewChild('popupADD') popupAdd:any;
+  @ViewChild('popupAddEdit') popupAddEdit:any; 
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  trigger_popup(){
-    this.popupAdd.open_popup();
+  trigger_popup_add(){
+    this.popupAddEdit.open_popup_add();
+  }
+  trigger_popup_edit(){
+    this.popupAddEdit.open_popup_edit();
   }
 }
