@@ -15,7 +15,6 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   @ViewChild('title') title!: ElementRef;
   @ViewChild('form') form!: ElementRef;
 
-  isClose:boolean = false;
   clickPopup:boolean = false;
   titleText:string = "";
   btnText:string = "";
@@ -31,16 +30,23 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   ngOnChanges():void {
     
     if(this.isOpen == true){
-      this.open_popup_add();
+      this.open_popup();
     }
   }
 
-  open_popup_add():void{
+  open_popup():void{
 
-    this.isEdit = false;
-    this.titleText = "AÑADIR REGISTRO";
-    this.btnText = "AÑADIR";
+    if (this.isEdit == false){
 
+      this.titleText = "AÑADIR REGISTRO";
+      this.btnText = "AÑADIR";      
+    }
+
+    if(this.isEdit == true){
+      this.titleText = "EDITAR REGISTRO";
+      this.btnText = "EDITAR"
+    }
+    
     const overlay = this.overlay.nativeElement;
     const popup = this.popup.nativeElement;
     const title = this.title.nativeElement;
@@ -72,23 +78,6 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       this.closePopup.emit(this.isOpen);     
     }       
     this.clickPopup = false;
-  }
-  
-  // combinar popup edit con nueva implementación (ngOnChanges,input,output)...
-  open_popup_edit(){
-    this.isEdit = true;
-    this.titleText = "EDITAR REGISTRO";
-    this.btnText = "EDITAR"
-
-    const overlay = this.overlay.nativeElement;
-    const popup = this.popup.nativeElement;
-    const title = this.title.nativeElement;
-    const form = this.form.nativeElement;
-
-    this.renderer.addClass(overlay,'active');
-    this.renderer.addClass(popup,'active');
-    this.renderer.addClass(title,'active');
-    this.renderer.addClass(form,'active');
   }
 
 }
