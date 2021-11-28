@@ -7,16 +7,21 @@ import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class CompanySectionComponent implements OnInit {
   @ViewChild('popupAddEdit') popupAddEdit:any; 
+  isOpen:boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  trigger_popup_add(){
-    this.popupAddEdit.open_popup_add();
+  open_popup():void{
+    this.isOpen = true;
   }
-  trigger_popup_edit(){
-    this.popupAddEdit.open_popup_edit();
+
+  close_popup_parent(newValue:boolean){
+    this.isOpen = newValue;
   }
+
+
+  
 }

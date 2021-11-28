@@ -1,8 +1,8 @@
 <div class="main">
     <h2 class="title">Empresas</h2>
     <!---------- btn create ---------->
-    <button class="btn-add" (click)="trigger_popup_add()">Añadir registro</button>
-    <app-company-popup-add #popupAddEdit></app-company-popup-add>
+    <button class="btn-add" (click)="open_popup()">Añadir registro</button>
+    <app-company-popup-add (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" #popupAddEdit></app-company-popup-add>
     
     <!---------- nav search ---------->
     <div class="search-container">
@@ -36,7 +36,7 @@
                         <button class="btn-read --js-read">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" d="M0 0h48v48h-48z"/><path d="M24 9c-10 0-18.54 6.22-22 15 3.46 8.78 12 15 22 15 10.01 0 18.54-6.22 22-15-3.46-8.78-11.99-15-22-15zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg>
                         </button>
-                        <button (click)="trigger_popup_edit()" class="btn-update --js-update">
+                        <button class="btn-update --js-update">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="white" d="M17.864 3.60051C17.4735 3.20999 16.8403 3.20999 16.4498 3.60051L15.0356 5.01472 19.2782 9.25736 20.6924 7.84315C21.0829 7.45263 21.0829 6.81946 20.6924 6.42894L17.864 3.60051zM17.864 10.6716L13.6213 6.42894 4.72185 15.3284C4.53431 15.516 4.42896 15.7703 4.42896 16.0355L4.42896 18.864C4.42895 19.4163 4.87667 19.864 5.42896 19.864H8.25738C8.5226 19.864 8.77695 19.7586 8.96449 19.5711L17.864 10.6716z"/></svg>
                         </button>
                         <button class="btn-delete --js-delete">
