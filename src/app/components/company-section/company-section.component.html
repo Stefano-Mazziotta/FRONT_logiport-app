@@ -1,7 +1,7 @@
 <div class="main">
     <h2 class="title">Empresas</h2>
     <!---------- btn create ---------->
-    <button class="btn-add" (click)="open_popup()">Añadir registro</button>
+    <button class="btn-add" (click)="add_popup()">Añadir registro</button>
     <app-company-popup-add (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" [isEdit]="isEdit"></app-company-popup-add>
     
     <!---------- nav search ---------->

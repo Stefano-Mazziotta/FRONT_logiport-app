@@ -8,8 +8,9 @@ import {Input, Output, OnChanges, EventEmitter} from '@angular/core';
 })
 export class CompanyPopupAddComponent implements OnInit, OnChanges {
   @Input() isOpen!:boolean;
-  @Output() closePopup = new EventEmitter<boolean>();
   @Input() isEdit!:boolean;
+  @Output() closePopup = new EventEmitter<boolean>();
+
   @ViewChild('overlay') overlay!: ElementRef;
   @ViewChild('popup') popup!: ElementRef;
   @ViewChild('title') title!: ElementRef;
@@ -34,6 +35,7 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     }
   }
 
+  // open_popup() -> abre el popup mediante DOM.
   open_popup():void{
 
     if (this.isEdit == false){
@@ -52,13 +54,13 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     const title = this.title.nativeElement;
     const form = this.form.nativeElement;
 
-
     this.renderer.addClass(overlay,'active');
     this.renderer.addClass(popup,'active');
     this.renderer.addClass(title,'active');
     this.renderer.addClass(form,'active');
   }
 
+  // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
   close_popup(){
 
     if(this.clickPopup == false){
