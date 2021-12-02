@@ -1,11 +1,5 @@
 // --- variables --- //
-
-// colors:
-$principal-color: rgb(0, 0, 40);
-$secondary-color: #dce6ef;
-$hover-color: #95A3B3;
-
-
+@import '../../app.component.scss';
 
 //############### main - company structure ###############//
 .main {
@@ -372,7 +366,7 @@ $hover-color: #95A3B3;
             opacity: 0;
             
             &.active{
-                animation: title_entry .8s ease forwards;
+                animation: fade .8s ease forwards;
             }
         }
 
@@ -383,7 +377,7 @@ $hover-color: #95A3B3;
             flex-direction: column;
             opacity: 0;
             &.active{
-                animation: input_entry .8s ease forwards;
+                animation: fade .8s ease forwards;
             }
 
             // popup -> form input styles. //

@@ -1,10 +1,4 @@
-// --- variables --- //
-
-// colors:
-$principal-color: rgb(0, 0, 40);
-$secondary-color: #dce6ef;
-$hover-color: #95A3B3;
-
+@import '../../../app.component.scss';
 
 // -------- popup-create styles -------- //
 .popup-overlay{
@@ -15,7 +9,7 @@ $hover-color: #95A3B3;
     left: 0;
     right: 0;
 
-    background-color: rgb(0,0,0,.5);
+    background-color: rgb(0,0,0,.7);
     z-index: 5;
 
     display: flex;
@@ -27,10 +21,9 @@ $hover-color: #95A3B3;
 
     .popup-container{
         width: 90%;
-        height: 50vh;
         
         padding-top: 20px;
-        padding-bottom: 20px;
+        padding-bottom: 30px;
         background-color: white;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -77,7 +70,7 @@ $hover-color: #95A3B3;
             opacity: 0;
             
             &.active{
-                animation: title_entry .8s ease forwards;
+                animation: fade .8s ease forwards;
             }
         }
 
@@ -88,7 +81,7 @@ $hover-color: #95A3B3;
             flex-direction: column;
             opacity: 0;
             &.active{
-                animation: input_entry .8s ease forwards;
+                animation: fade .8s ease forwards;
             }
 
             // popup -> form input styles. //
@@ -155,7 +148,7 @@ $hover-color: #95A3B3;
 
         .popup-container{
             width: 70%;
-            height: 45vh;
+            // height: 45vh;
             
             .popup__form{
                 .form__btn{
@@ -180,14 +173,3 @@ $hover-color: #95A3B3;
     }
 }
 
-// ############################## Animations ############################## //
-// entrada del título del popup. //
-@keyframes title_entry {
-    from{opacity:0;}
-    to{opacity: 1;}
-}
-// entrada de los inputs. //
-@keyframes input_entry {
-    from{opacity:0;}
-    to{opacity: 1;}
-}

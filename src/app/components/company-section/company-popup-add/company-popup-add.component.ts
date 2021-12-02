@@ -36,7 +36,7 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   }
 
   // open_popup() -> abre el popup mediante DOM.
-  open_popup():void{
+  private open_popup():void{
 
     if (this.isEdit == false){
 
@@ -61,7 +61,7 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   }
 
   // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
-  close_popup(){
+  public close_popup(){
 
     if(this.clickPopup == false){
       
@@ -81,5 +81,4 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     }       
     this.clickPopup = false;
   }
-
 }
