@@ -1,10 +1,10 @@
 <div class="main">
     <h2 class="title">Empresas</h2>
-    <!---------- btn create ---------->
+    <!-------------------- btn create -------------------->
     <button class="btn-add" (click)="add_popup()">Añadir registro</button>
     <app-company-popup-add (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" [isEdit]="isEdit"></app-company-popup-add>
     
-    <!---------- nav search ---------->
+    <!-------------------- nav search -------------------->
     <div class="search-container">
         <input class="search__input" type="text" placeholder="Búsqueda por empresa.">
         <button class="search__btn">
@@ -13,7 +13,7 @@
         </button>
     </div>
 
-    <!---------- table ---------->
+    <!-------------------- table -------------------->
     <div style="overflow-x:auto; margin-bottom:10px;">
         <table class="table-data">
 
@@ -33,7 +33,7 @@
                     <td class="">Los pollos hermanos</td>
                     <td class="">123456789</td>
                     <td class="btn-container">
-                        <button class="btn-read --js-read">
+                        <button (click)="view_popup()" class="btn-read --js-read">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" d="M0 0h48v48h-48z"/><path d="M24 9c-10 0-18.54 6.22-22 15 3.46 8.78 12 15 22 15 10.01 0 18.54-6.22 22-15-3.46-8.78-11.99-15-22-15zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg>
                         </button>
                         <button (click)="edit_popup()" class="btn-update --js-update">
@@ -65,8 +65,13 @@
             </tbody>
         </table>
     </div>
+    
+    
+    <!---------------------- popup read data  ---------------------->
+    <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView"></app-company-popup-view>
+    
 
-    <!----- paginated buttons of table ----->
+    <!-------------------- paginated buttons of table -------------------->
     <div class="paginate-container">
         <button class="paginate__btn active">1</button>
         <button class="paginate__btn">2</button>
@@ -74,8 +79,5 @@
         <button class="paginate__btn">9</button>
     </div>
 
-    <!-- popup read data ?? -->
-
-    <!-- popup read data ?? -->
 
 </div>

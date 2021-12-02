@@ -1,0 +1,13 @@
+// ############################## variables ############################## //
+
+// colors:
+$principal-color: rgb(0, 0, 40);
+$secondary-color: #dce6ef;
+$hover-color: #95A3B3;
+
+// ############################## Animations ############################## //
+// fade animation. //
+@keyframes fade {
+    from{opacity:0;}
+    to{opacity: 1;}
+}

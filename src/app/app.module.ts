@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add/company-popup-add.component';
+import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CompanyPopupAddComponent } from './components/company-section/company-p
     FooterComponent,
     CompanySectionComponent,
     CompanyPopupAddComponent,
+    CompanyPopupViewComponent,
   ],
   imports: [
     BrowserModule,
