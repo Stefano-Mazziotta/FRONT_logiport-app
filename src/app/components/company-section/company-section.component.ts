@@ -1,4 +1,5 @@
 import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Company } from 'src/app/interfaces/company';
 
 @Component({
   selector: 'app-company-section',
@@ -12,10 +13,32 @@ export class CompanySectionComponent implements OnInit {
   
   isOpenView:boolean = false;
 
+  companyList:Company[] = [];
+  
+  // momentaneo ---
+  companyExample = {
+    id: 0,
+    name: "Los pollos hermanos",
+    cuit: 10101010,
+  };
+  companyExampleDos = {
+    id: 1,
+    name: "Bad bunny team",
+    cuit: 102345668,
+  };
+  // momentaneo ---
+
   constructor() { }
 
   ngOnInit(): void {
+    this.companyList.push(this.companyExample);
+    this.companyList.push(this.companyExampleDos);
+    
   }
+
+  private getCompanies():void{
+    
+  };
 
   // add_popup() -> cambia el valor de los inputs-controlers.
   // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
@@ -42,7 +65,4 @@ export class CompanySectionComponent implements OnInit {
   public view_popup():void{
     this.isOpenView = true;
   }
-
-
-
 }
