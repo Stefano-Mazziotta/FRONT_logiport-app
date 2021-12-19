@@ -1,5 +1,7 @@
 import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { timestamp } from 'rxjs/operators';
 import { Company } from 'src/app/interfaces/company';
+import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
   selector: 'app-company-section',
@@ -7,6 +9,12 @@ import { Company } from 'src/app/interfaces/company';
   styleUrls: ['./company-section.component.scss']
 })
 export class CompanySectionComponent implements OnInit {
+  
+  constructor(
+    private _companyService: CompanyService
+    
+  ) { }
+
   @ViewChild('popupAddEdit') popupAddEdit:any; 
   isOpen:boolean = false;
   isEdit:boolean = false;
@@ -14,30 +22,18 @@ export class CompanySectionComponent implements OnInit {
   isOpenView:boolean = false;
 
   companyList:Company[] = [];
-  
-  // momentaneo ---
-  companyExample = {
-    id: 0,
-    name: "Los pollos hermanos",
-    cuit: 10101010,
-  };
-  companyExampleDos = {
-    id: 1,
-    name: "Bad bunny team",
-    cuit: 102345668,
-  };
-  // momentaneo ---
-
-  constructor() { }
 
   ngOnInit(): void {
-    this.companyList.push(this.companyExample);
-    this.companyList.push(this.companyExampleDos);
-    
+    this.getCompanies();
   }
 
   private getCompanies():void{
-    
+    this._companyService.getListCompanies().subscribe( (data) => {
+      this.companyList = data;
+      
+    }, error => {
+      console.log(error);
+    })
   };
 
   // add_popup() -> cambia el valor de los inputs-controlers.

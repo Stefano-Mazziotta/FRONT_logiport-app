@@ -1,5 +1,6 @@
 export interface Company {
-    id?: number;
-    name: string;
-    cuit: number;
+    comID?: number;
+    comRazSoc: string;
+    comCUIT: number;
+    comInsGra: Date;
 }
