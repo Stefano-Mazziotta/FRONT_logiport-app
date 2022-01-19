@@ -21,14 +21,14 @@
 
     .popup-container{
         width: 90%;
-        
+
         padding-top: 20px;
         padding-bottom: 30px;
         background-color: white;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-        /* cuando el popup tenga la clase active, 
+        /* cuando el popup tenga la clase active,
        se le aplican las siguientes propiedades: */
         opacity: 0;
         transition: all .3s ease;
@@ -42,7 +42,7 @@
             margin-bottom:10px;
             padding-right: 20px;
             fill: #dc3545;
-            
+
             display: flex;
             justify-content: flex-end;
 
@@ -58,24 +58,24 @@
         // popup -> title styles.
         .popup__title{
             width: 100%;
-            
+
             margin-bottom: 35px;
             padding-bottom: 10px;
             padding-top: 10px;
-            background-color: $principal-color;    
+            background-color: $principal-color;
 
             text-transform: uppercase;
             text-align: center;
             color: $secondary-color;
             opacity: 0;
-            
+
             &.active{
                 animation: fade .8s ease forwards;
             }
         }
 
         .popup__form{
-            
+
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -104,7 +104,7 @@
                     width: 90%;
 
                     padding: 5px 10px;
-                    
+
                     outline: none;
                     border: 2px solid $hover-color;
                     border-radius: 5px;
@@ -114,6 +114,15 @@
                     &:focus{
                         border: 2px solid $principal-color;
                     }
+                }
+                .form__error{
+                  width: 90%;
+                  margin-top: 3px;
+                  margin-left: 3px;
+
+                  text-align: left;
+                  color: #dc3545;
+                  font-size: 14px;
                 }
             }
             // popup -> form button styles. //
@@ -128,18 +137,23 @@
                 border: none;
                 border-radius: 5px;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                
+
                 letter-spacing: .8px;
                 font-size: 16px;
                 color: white;
-                cursor: pointer;
 
                 transition: all .3s ease;
                 &:hover{
+                    cursor: pointer;
                     background-color: $hover-color;
                 }
+                &:disabled{
+                  cursor:not-allowed;
+                  background-color: rgba($hover-color, $alpha: .5);
+
+                }
             }
-        }    
+        }
     }
 }
 
@@ -148,8 +162,7 @@
 
         .popup-container{
             width: 70%;
-            // height: 45vh;
-            
+
             .popup__form{
                 .form__btn{
                     width: 40%;
@@ -163,7 +176,7 @@
     .popup-overlay{
         .popup-container{
             width: 50%;
-            
+
             .popup__form{
                 .form__btn{
                     width: 30%;

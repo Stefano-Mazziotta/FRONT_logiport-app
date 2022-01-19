@@ -1,4 +1,5 @@
 import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { timestamp } from 'rxjs/operators';
 import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service';
@@ -9,28 +10,35 @@ import { CompanyService } from 'src/app/services/company.service';
   styleUrls: ['./company-section.component.scss']
 })
 export class CompanySectionComponent implements OnInit {
-  
-  constructor(
-    private _companyService: CompanyService
-    
-  ) { }
 
-  @ViewChild('popupAddEdit') popupAddEdit:any; 
+  @ViewChild('popupAddEdit') popupAddEdit:any;
   isOpen:boolean = false;
   isEdit:boolean = false;
-  
-  isOpenView:boolean = false;
 
+  isOpenView:boolean = false;
   companyList:Company[] = [];
+
+  suscription: Subscription | undefined;
+
+  constructor(
+    private _companyService: CompanyService
+
+  ) { }
+
 
   ngOnInit(): void {
     this.getCompanies();
   }
 
-  private getCompanies():void{
+  ngOnDestroy():void{
+    this.suscription?.unsubscribe();
+    console.log("observable cerrado")
+  }
+
+  public getCompanies():void{
     this._companyService.getListCompanies().subscribe( (data) => {
       this.companyList = data;
-      
+
     }, error => {
       console.log(error);
     })
@@ -49,7 +57,7 @@ export class CompanySectionComponent implements OnInit {
     this.isOpen = true;
     this.isEdit = true;
   }
-  
+
   // close_popup_parent(boolean) -> reestablece el valor de isOpen a false.
   // Esto se ejecuta cuando el child component emite el nuevo valor de isOpen.
   // La función encargada de emitir el nuevo valor es close_popup() del child component (popup).
@@ -61,4 +69,21 @@ export class CompanySectionComponent implements OnInit {
   public view_popup():void{
     this.isOpenView = true;
   }
+
+  // insertCompanyEvent(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
+  // consume el servicio insertCompany
+  insertCompanyEvent(company:Company){
+
+    console.log(company);
+    this._companyService.insertCompany( company ).subscribe((data) => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+
+    this.suscription = this._companyService.refresh$.subscribe(()=>{
+      this.getCompanies();
+    })
+  }
+
 }

@@ -2,8 +2,8 @@
     <h2 class="title">Empresas</h2>
     <!-------------------- btn create -------------------->
     <button class="btn-add" (click)="add_popup()">Añadir registro</button>
-    <app-company-popup-add (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" [isEdit]="isEdit"></app-company-popup-add>
-    
+    <app-company-popup-add (isSubmit)="insertCompanyEvent($event)" (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" [isEdit]="isEdit"></app-company-popup-add>
+
     <!-------------------- nav search -------------------->
     <div class="search-container">
         <input class="search__input" type="text" placeholder="Búsqueda por empresa.">
@@ -44,15 +44,15 @@
                         </button>
                     </td>
                 </tr>
-                
+
             </tbody>
         </table>
     </div>
-    
-    
+
+
     <!---------------------- popup read data  ---------------------->
     <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView"></app-company-popup-view>
-    
+
 
     <!-------------------- paginated buttons of table -------------------->
     <div class="paginate-container">
