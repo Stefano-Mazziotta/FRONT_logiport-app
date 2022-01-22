@@ -20,11 +20,14 @@ export class CompanySectionComponent implements OnInit {
 
   suscription: Subscription | undefined;
 
+  currentPage:number = 1;
+  totalItemsPage:number = 7;
+  responsivePagination = true;
+
+
   constructor(
     private _companyService: CompanyService
-
   ) { }
-
 
   ngOnInit(): void {
     this.getCompanies();
@@ -34,15 +37,6 @@ export class CompanySectionComponent implements OnInit {
     this.suscription?.unsubscribe();
     console.log("observable cerrado")
   }
-
-  public getCompanies():void{
-    this._companyService.getListCompanies().subscribe( (data) => {
-      this.companyList = data;
-
-    }, error => {
-      console.log(error);
-    })
-  };
 
   // add_popup() -> cambia el valor de los inputs-controlers.
   // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
@@ -70,8 +64,17 @@ export class CompanySectionComponent implements OnInit {
     this.isOpenView = true;
   }
 
+  public getCompanies():void{
+    this._companyService.getListCompanies().subscribe( (data) => {
+      this.companyList = data;
+
+    }, error => {
+      console.log(error);
+    })
+  };
+
   // insertCompanyEvent(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
-  // consume el servicio insertCompany
+  // consume el servicio insertCompany.
   insertCompanyEvent(company:Company){
 
     console.log(company);

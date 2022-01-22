@@ -3,302 +3,271 @@
 
 //############### main - company structure ###############//
 .main {
-    width: 90%;
-    margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 
-    .title{
-        font-size: 36px;
-        padding-bottom: 5px;
-        margin-bottom: 50px;
+  .title{
+      font-size: 36px;
+      padding-bottom: 5px;
+      margin-bottom: 50px;
 
-        border-bottom: 3px solid $secondary-color;
-        border-radius: 0px 0px 20px 0px;
+      border-bottom: 3px solid $secondary-color;
+      border-radius: 0px 0px 20px 0px;
+  }
+
+  //--- add register button ---//
+  .btn-add{
+    width: 65%;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+
+
+    background-color: $principal-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 16px;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover{
+      transform: scale(1.01);
+      background-color: $hover-color;
+      box-shadow: none;
+    }
+  }
+
+  //---  search nav ---//
+  .search-container{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 75px;
+
+    .search__input{
+      width: 100%;
+
+      border-top: 2px solid $principal-color;
+      border-left: 2px solid $principal-color;
+      border-bottom: 2px solid $principal-color;
+      border-right: none;
+      border-radius: 5px 0px 0px 5px;
+      padding: 5px 10px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      background-color: $secondary-color;
+
+      transition: all .3s ease;
+      &:focus{
+        outline: none;
+        border-top: 2px solid $hover-color;
+        border-left: 2px solid $hover-color;
+        border-bottom: 2px solid $hover-color;
+        border-right: none;
+      }
     }
 
-    //--- add register button ---//
-    .btn-add{
-        width: 65%;
-        padding: 15px 20px;
-        margin-bottom: 25px;
-        
-        
-        background-color: $principal-color;
-        color: white;
-        border: none;
-        border-radius: 5px;
+    .search__btn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
 
-        font-size: 16px;
-        letter-spacing: 1px;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        
-        cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 0px 5px 5px 0px;
+      border: 2px solid $principal-color;
+
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      fill: white;
+      background-color: $principal-color;
+      cursor: pointer;
+
+      transition: all .3s ease;
+
+      .tooltiptext {
+        visibility: hidden;
+        width: 80px;
+        background-color: $secondary-color;
+
+        color: $principal-color;
+        text-align: center;
+        font-weight: 500;
+
+
+        border-radius: 5px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -40px;
+
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: $secondary-color transparent transparent transparent;
+        }
+      }
+
+      &:hover .tooltiptext {
+        visibility: visible;
+      }
+    }
+  }
+
+  //--- table -> thead & tbody ---//
+  .table-data{
+
+    width: 100%;
+    height: 610px;
+
+    padding: 0;
+    margin:0 auto;
+    margin-bottom: 20px;
+
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-radius: 10px;
+
+    thead{
+        width: 100%;
+        border-radius: 10px;
+
+        .table__row-header{
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          width: 100%;
+          background-color: $principal-color;
+          border-radius: 10px 10px 0px 0px;
+          border-bottom: 5px solid white;
+
+          th{
+            width: 210px;
+            padding: 20px;
+            color: white;
+          }
+          th.out-border{
+            border: none;
+          }
+        }
+    }
+
+    tbody{
+      width: 100%;
+
+      .table__row-body{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        color: $principal-color;
+        background-color: $secondary-color;
+        border-bottom: 2px solid white;
+        text-align: center;
+
         transition: all .3s ease;
         &:hover{
-            transform: scale(1.01);
-            background-color: $hover-color;
-            box-shadow: none;
-        }
-    }
-
-    //---  search nav ---//
-    .search-container{
-        width: 95%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 75px;
-
-        .search__input{
-            width: 100%;
-
-            border-top: 2px solid $principal-color;
-            border-left: 2px solid $principal-color;
-            border-bottom: 2px solid $principal-color;
-            border-right: none;
-            border-radius: 5px 0px 0px 5px;
-            padding: 5px 10px;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            background-color: $secondary-color;
-
-            transition: all .3s ease;
-            &:focus{
-                outline: none;
-                border-top: 2px solid $hover-color;
-                border-left: 2px solid $hover-color;
-                border-bottom: 2px solid $hover-color;
-                border-right: none;
-            }
+            background-color: #cbd6df;
         }
 
-        .search__btn{
+        td{
+            width: 210px;
+            padding: 20px;
+        }
+
+        td.btn-container{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          align-items: center;
+
+          .btn-read{
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
 
-            padding: 5px 10px;
-            border-radius: 0px 5px 5px 0px;
-            border: 2px solid $principal-color;
-
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            background-color: $principal-color;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
             fill: white;
-            background-color: $principal-color;
+
+            border:none;
+            border-radius: 4px;
+            padding: 5px;
             cursor: pointer;
-            
-            transition: all .3s ease;            
-
-            .tooltiptext {
-                visibility: hidden;
-                width: 80px;
-                background-color: $secondary-color;
-
-                color: $principal-color;
-                text-align: center;
-                font-weight: 500;
-
-
-                border-radius: 5px;
-                padding: 5px 0;
-                position: absolute;
-                z-index: 1;
-                bottom: 150%;
-                left: 50%;
-                margin-left: -40px;
-                
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    top: 100%;
-                    left: 50%;
-                    margin-left: -5px;
-                    border-width: 5px;
-                    border-style: solid;
-                    border-color: $secondary-color transparent transparent transparent;
-                }
-            }      
-
-            &:hover .tooltiptext {
-                visibility: visible;
-            }
-        }
-    }
-
-    //--- table -> thead & tbody ---//
-    .table-data{
-        
-        width: 100%;
-        padding: 0;
-        margin:0 auto;
-
-        border-collapse: collapse;
-        border-radius: 10px;
-        border-radius: 10px;
-
-        thead{
-            width: 100%;                        
-            border-radius: 10px;
-
-            .table__row-header{
-               
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                
-                width: 100%;
-                background-color: $principal-color;
-                border-radius: 10px 10px 0px 0px;
-                border-bottom: 5px solid white;
-
-                th{
-                    width: 210px;
-                    padding: 20px;
-                    color: white;                   
-                }
-                th.out-border{
-                   border: none; 
-                }
-            }
-        }
-
-        tbody{
-            width: 100%;
-            
-            .table__row-body{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                color: $principal-color;
-                background-color: $secondary-color;
-                border-bottom: 2px solid white;
-                text-align: center;
-                transition: all .3s ease;
-                &:hover{
-                    background-color: #cbd6df;
-                }
- 
-                td{
-                    width: 210px;
-                    padding: 20px;                    
-                }
-
-                td.btn-container{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-evenly;
-                    align-items: center;
-
-                    .btn-read{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        background-color: $principal-color;
-                        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-                        fill: white;
-                        
-                        border:none;
-                        border-radius: 4px;
-                        padding: 5px;
-                        cursor: pointer;
-
-                        transition: all .3s ease;
-                        &:hover{
-                            transform: scale(1.1);
-                            background-color: #08799b;
-                        }
-                    }
-
-                    .btn-update{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        
-                        background-color: #28a745;
-                        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-                        fill: white;
-                        
-                        border: none;
-                        border-radius: 4px;
-                        padding:5px;
-                        cursor: pointer;
-
-                        transition: all .3s ease;
-                        &:hover{
-                            transform: scale(1.1);
-                            background-color: #228e3b;
-                        }
-                    }
-
-                    .btn-delete{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        
-                        background-color: #dc3545;
-                        box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-                        fill: white;
-                        
-                        border: none;
-                        border-radius: 4px;
-                        padding:5px;
-                        cursor: pointer;
-
-                        transition: all .3s ease;
-                        &:hover{
-                            transform: scale(1.1);
-                            background-color: #ad1f2d;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    //--- table -> paginated buttons ---//
-    .paginate-container{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        margin-bottom: 50px;
-
-        .paginate__btn{
-            width: 30px;
-            
-            padding-top: 5px;
-            padding-bottom: 5px;
-            margin-right: 5px;
-            border: none;
-            border-radius: 5px;
-            
-            text-align: center;
-            background-color: $principal-color;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
 
             transition: all .3s ease;
             &:hover{
-                background-color: $hover-color;
+              transform: scale(1.1);
+              background-color: #08799b;
             }
+          }
+
+          .btn-update{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #28a745;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+            fill: white;
+
+            border: none;
+            border-radius: 4px;
+            padding:5px;
+            cursor: pointer;
+
+            transition: all .3s ease;
+            &:hover{
+              transform: scale(1.1);
+              background-color: #228e3b;
+            }
+          }
+
+          .btn-delete{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #dc3545;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+            fill: white;
+
+            border: none;
+            border-radius: 4px;
+            padding:5px;
+            cursor: pointer;
+
+            transition: all .3s ease;
+            &:hover{
+              transform: scale(1.1);
+              background-color: #ad1f2d;
+            }
+          }
         }
-        .paginate__btn.active{
-            background-color: $secondary-color;
-            color: $principal-color;
-            cursor: default;
-        }
-        p{
-            letter-spacing: 1px;
-            margin-right: 15px;
-            margin-left: 10px;
-            font-weight: 600;
-        }
+      }
     }
+  }
+
+  //--- table -> paginated buttons ---//
+  .pagination-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 }
 
 // popup-create styles //
@@ -323,14 +292,14 @@
     .popup-container{
         width: 90%;
         height: 50vh;
-        
+
         padding-top: 20px;
         padding-bottom: 20px;
         background-color: white;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-        /* cuando el popup tenga la clase active, 
+        /* cuando el popup tenga la clase active,
        se le aplican las siguientes propiedades: */
         opacity: 0;
         transition: all .3s ease;
@@ -345,7 +314,7 @@
             padding-right: 20px;
             fill: #dc3545;
             cursor: pointer;
-            
+
             display: flex;
             justify-content: flex-end;
 
@@ -358,24 +327,24 @@
         // popup -> title styles.
         .popup__title{
             width: 100%;
-            
+
             margin-bottom: 35px;
             padding-bottom: 10px;
             padding-top: 10px;
-            background-color: $principal-color;    
+            background-color: $principal-color;
 
             text-transform: uppercase;
             text-align: center;
             color: $secondary-color;
             opacity: 0;
-            
+
             &.active{
                 animation: fade .8s ease forwards;
             }
         }
 
         .popup__form{
-            
+
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -404,7 +373,7 @@
                     width: 90%;
 
                     padding: 5px 10px;
-                    
+
                     outline: none;
                     border: 2px solid $hover-color;
                     border-radius: 5px;
@@ -428,7 +397,7 @@
                 border: none;
                 border-radius: 5px;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                
+
                 letter-spacing: .8px;
                 font-size: 16px;
                 color: white;
@@ -439,7 +408,7 @@
                     background-color: $hover-color;
                 }
             }
-        }    
+        }
     }
 }
 
@@ -447,12 +416,12 @@
 
 // ___ Tablet ___ //
 @media ( min-width: 768px ) {
-    // btn-add adjusted width. 
-    .main{    
+    // btn-add adjusted width.
+    .main{
         .btn-add{
-            width: 30%;               
-        }    
-    }    
+            width: 30%;
+        }
+    }
 }
 // ___ Laptop ___ //
 @media ( min-width: 1024px ){
@@ -465,10 +434,10 @@
 }
 // ___ Laptop L ___ //
 @media ( min-width: 1440px ){
-    // btn-add adjusted width.  
-    .main{    
+    // btn-add adjusted width.
+    .main{
         .btn-add{
-            width: 15%;               
-        }    
-    } 
+            width: 15%;
+        }
+    }
 }
