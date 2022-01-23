@@ -22,15 +22,17 @@ export class CompanySectionComponent implements OnInit {
 
   currentPage:number = 1;
   totalItemsPage:number = 7;
-  responsivePagination = true;
+  responsivePagination:boolean = true;
 
+  isOpenConfirmDelete:boolean = false;
+  deleteCompanyID?:number = undefined;
 
   constructor(
     private _companyService: CompanyService
   ) { }
 
   ngOnInit(): void {
-    this.getCompanies();
+    this.get_companies();
   }
 
   ngOnDestroy():void{
@@ -55,16 +57,17 @@ export class CompanySectionComponent implements OnInit {
   // close_popup_parent(boolean) -> reestablece el valor de isOpen a false.
   // Esto se ejecuta cuando el child component emite el nuevo valor de isOpen.
   // La función encargada de emitir el nuevo valor es close_popup() del child component (popup).
-  public close_popup_parent(newValue:boolean){
-    this.isOpen = newValue;
-    this.isOpenView = newValue;
+  public close_popup_parent(closeValue:boolean){
+    this.isOpen = closeValue;
+    this.isOpenView = closeValue;
+    this.isOpenConfirmDelete = closeValue;
   }
 
   public view_popup():void{
     this.isOpenView = true;
   }
 
-  public getCompanies():void{
+  public get_companies():void{
     this._companyService.getListCompanies().subscribe( (data) => {
       this.companyList = data;
 
@@ -73,9 +76,9 @@ export class CompanySectionComponent implements OnInit {
     })
   };
 
-  // insertCompanyEvent(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
+  // insert_company_event(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
   // consume el servicio insertCompany.
-  insertCompanyEvent(company:Company){
+  insert_company_event(company:Company){
 
     console.log(company);
     this._companyService.insertCompany( company ).subscribe((data) => {
@@ -85,8 +88,52 @@ export class CompanySectionComponent implements OnInit {
     });
 
     this.suscription = this._companyService.refresh$.subscribe(()=>{
-      this.getCompanies();
+      this.get_companies();
     })
   }
 
+  // delete_confirm_company($event-click)
+  // mediante el click obtiene el id del registro,
+  // ejecuta el evento para abrir el popup para confirmación de eliminación.
+  delete_confirm_company(e:any){
+    let row;
+
+    // click en btn
+    if(e.path[2].className == "table__row-body"){
+      row = e.path[2];
+      this.deleteCompanyID = row.childNodes[0].innerHTML;
+    }
+    // click en svg
+    if(e.path[3].className == "table__row-body"){
+      row = e.path[3];
+      this.deleteCompanyID = row.childNodes[0].innerHTML;
+    }
+    //click en path
+    if(e.path[4].className == "table__row-body"){
+      row = e.path[4];
+      this.deleteCompanyID = row.childNodes[0].innerHTML;
+    }
+
+    this.isOpenConfirmDelete = true;
+  }
+
+  // delete_company(boolean)
+  // si se confirma la eliminación envía petición de eliminación al back con el id del registro.
+  delete_company(isDelete:boolean){
+    if(isDelete == true){
+
+      this._companyService.deleteCompany(this.deleteCompanyID).subscribe({
+        next: data => {
+          console.log(data);
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+
+      this.suscription = this._companyService.refresh$.subscribe(()=>{
+        this.get_companies();
+      })
+    }
+  }
 }

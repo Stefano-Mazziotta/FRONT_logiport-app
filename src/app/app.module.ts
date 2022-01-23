@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add/company-popup-add.component';
 import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
+import { CompanyPopupConfirmDeleteComponent } from './components/company-section/company-popup-confirm-delete/company-popup-confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CompanyPopupViewComponent } from './components/company-section/company-
     CompanySectionComponent,
     CompanyPopupAddComponent,
     CompanyPopupViewComponent,
+    CompanyPopupConfirmDeleteComponent,
   ],
   imports: [
     NgxPaginationModule,

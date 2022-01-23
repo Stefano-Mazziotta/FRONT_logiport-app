@@ -28,11 +28,20 @@ export class CompanyService {
 
   insertCompany(company:Company):Observable<any>{
     return this.http.post(this.myAppUrl + this.myApiUrl + 'insert', company)
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      )
-    }
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
+  }
+
+  deleteCompany(companyID?:number):Observable<any>{
+    return this.http.delete(this.myAppUrl + this.myApiUrl + 'delete/' + companyID)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
+  }
 
 }
