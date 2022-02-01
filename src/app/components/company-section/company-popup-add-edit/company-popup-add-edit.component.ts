@@ -5,9 +5,9 @@ import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service'
 
 @Component({
-  selector: 'app-company-popup-add',
-  templateUrl: './company-popup-add.component.html',
-  styleUrls: ['./company-popup-add.component.scss']
+  selector: 'app-company-popup-add-edit',
+  templateUrl: './company-popup-add-edit.component.html',
+  styleUrls: ['./company-popup-add-edit.component.scss']
 })
 export class CompanyPopupAddComponent implements OnInit, OnChanges {
 

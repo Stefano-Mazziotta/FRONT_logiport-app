@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
-import { CompanyPopupAddComponent } from './components/company-section/company-popup-add/company-popup-add.component';
+import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
 import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
 import { CompanyPopupConfirmDeleteComponent } from './components/company-section/company-popup-confirm-delete/company-popup-confirm-delete.component';
 
