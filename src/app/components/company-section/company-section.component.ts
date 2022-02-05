@@ -27,6 +27,12 @@ export class CompanySectionComponent implements OnInit {
   isOpenConfirmDelete:boolean = false;
   deleteCompanyID?:number = undefined;
 
+  companyEdit = {
+    ID: undefined,
+    razonSocial: undefined,
+    CUIT: undefined
+  }
+
   constructor(
     private _companyService: CompanyService
   ) { }
@@ -49,9 +55,32 @@ export class CompanySectionComponent implements OnInit {
 
   // edit_popup() -> cambia el valor de los inputs-controlers.
   // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
-  public edit_popup():void {
+  public edit_popup(e:any):void {
+    let row;
     this.isOpen = true;
     this.isEdit = true;
+
+    // click en btn
+    if(e.path[2].className == 'table__row-body'){
+      row = e.path[2];
+      this.companyEdit.ID = row.childNodes[0].innerHTML;
+      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
+      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+    }
+    //click en svg
+    if(e.path[3].className == 'table__row-body'){
+      row = e.path[3];
+      this.companyEdit.ID = row.childNodes[0].innerHTML;
+      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
+      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+    }
+    // click en path
+    if(e.path[4].className == 'table__row-body'){
+      row = e.path[4];
+      this.companyEdit.ID = row.childNodes[0].innerHTML;
+      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
+      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+    }
   }
 
   // close_popup_parent(boolean) -> reestablece el valor de isOpen a false.
@@ -76,16 +105,31 @@ export class CompanySectionComponent implements OnInit {
     })
   };
 
-  // insert_company_event(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
-  // consume el servicio insertCompany.
-  insert_company_event(company:Company){
+  // insert_or_edit_company_event(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
+  // Si isEdit = false -> consume el servicio insertCompany.
+  // Si isEdit = true -> consume el servicio updateCompany.
+  insert_or_edit_company_event(company:Company){
 
-    console.log(company);
-    this._companyService.insertCompany( company ).subscribe((data) => {
-      console.log(data);
-    }, error => {
-      console.log(error);
-    });
+    if(this.isEdit  == false){
+
+      this._companyService.insertCompany( company ).subscribe((data) => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      });
+    }
+
+    if(this.isEdit == true){
+
+      this._companyService.updateCompany( company, this.companyEdit.ID ).subscribe({
+        next: data => {
+          console.log(data);
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
+    }
 
     this.suscription = this._companyService.refresh$.subscribe(()=>{
       this.get_companies();

@@ -13,6 +13,7 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
 
   @Input() isOpen!:boolean;
   @Input() isEdit!:boolean;
+  @Input() companyEdit:any;
   @Output() closePopup = new EventEmitter<boolean>();
   @Output() isSubmit = new EventEmitter<Company>();
 
@@ -49,17 +50,6 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   // open_popup() -> abre el popup mediante DOM.
   private open_popup():void{
 
-    if (this.isEdit == false){
-
-      this.titleText = "AÑADIR REGISTRO";
-      this.btnText = "AÑADIR";
-    }
-
-    if(this.isEdit == true){
-      this.titleText = "EDITAR REGISTRO";
-      this.btnText = "EDITAR"
-    }
-
     const overlay = this.overlay.nativeElement;
     const popup = this.popup.nativeElement;
     const title = this.title.nativeElement;
@@ -69,6 +59,21 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     this.renderer.addClass(popup,'active');
     this.renderer.addClass(title,'active');
     this.renderer.addClass(form,'active');
+
+    if (this.isEdit == false){
+
+      this.titleText = "AÑADIR REGISTRO";
+      this.btnText = "AÑADIR";
+    }
+
+    if(this.isEdit == true){
+      this.titleText = "EDITAR REGISTRO";
+      this.btnText = "EDITAR"
+
+      form[0].value = this.companyEdit.razonSocial;
+      form[1].value = this.companyEdit.CUIT;
+    }
+
   }
 
   // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
@@ -86,6 +91,9 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       this.renderer.removeClass(title,'active');
       this.renderer.removeClass(form,'active');
 
+      form[0].value = "";
+      form[1].value = "";
+
       this.isOpen = false;
       this.closePopup.emit(this.isOpen);
     }
@@ -96,15 +104,31 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   // obtiene los valores de los inputs los almacena en el objeto Company
   // emite este objeto al componente padre para consumir el servicio insertCompany.
   public onSubmit(){
-    this.company = {
-      comRazSoc: this.addCompanyForm.get('razonSocial')?.value,
-      comCUIT: parseInt(this.addCompanyForm.get('CUIT')?.value),
-      comInsGra: Date.now()
-    };
-    this.isSubmit.emit(this.company);
+    if(this.isEdit == false){
 
-    this.addCompanyForm.reset();
-    this.close_popup();
+      this.company = {
+        comRazSoc: this.addCompanyForm.get('razonSocial')?.value,
+        comCUIT: parseInt(this.addCompanyForm.get('CUIT')?.value),
+        comInsGra: Date.now()
+      };
+      this.isSubmit.emit(this.company);
+
+      this.addCompanyForm.reset();
+      this.close_popup();
+    }
+
+    if(this.isEdit == true){
+
+      this.company = {
+        comRazSoc: this.addCompanyForm.get('razonSocial')?.value,
+        comCUIT: parseInt(this.addCompanyForm.get('CUIT')?.value),
+        comInsGra: Date.now()
+      };
+
+      this.isSubmit.emit(this.company);
+      this.addCompanyForm.reset();
+      this.close_popup();
+    }
   }
 
 }
