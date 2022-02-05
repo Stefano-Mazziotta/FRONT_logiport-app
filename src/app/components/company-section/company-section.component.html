@@ -3,7 +3,7 @@
   <!-------------------- btn create -------------------->
   <button class="btn-add" (click)="add_popup()">Añadir registro</button>
   <app-company-popup-add-edit (isSubmit)="insert_or_edit_company_event($event)" (closePopup)="close_popup_parent($event)"
-    [isOpen]="isOpen" [isEdit]="isEdit" [companyEdit]="companyEdit"></app-company-popup-add-edit>
+    [isOpen]="isOpen" [isEdit]="isEdit" [companyEdit]="company"></app-company-popup-add-edit>
 
   <!-------------------- nav search -------------------->
   <div class="search-container">

@@ -1,6 +1,5 @@
 import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { timestamp } from 'rxjs/operators';
 import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service';
 
@@ -27,10 +26,10 @@ export class CompanySectionComponent implements OnInit {
   isOpenConfirmDelete:boolean = false;
   deleteCompanyID?:number = undefined;
 
-  companyEdit = {
-    ID: undefined,
-    razonSocial: undefined,
-    CUIT: undefined
+  company:Company = {
+    comID: undefined,
+    comRazSoc: '',
+    comCUIT: 0
   }
 
   constructor(
@@ -63,23 +62,23 @@ export class CompanySectionComponent implements OnInit {
     // click en btn
     if(e.path[2].className == 'table__row-body'){
       row = e.path[2];
-      this.companyEdit.ID = row.childNodes[0].innerHTML;
-      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
-      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
     }
     //click en svg
     if(e.path[3].className == 'table__row-body'){
       row = e.path[3];
-      this.companyEdit.ID = row.childNodes[0].innerHTML;
-      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
-      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
     }
     // click en path
     if(e.path[4].className == 'table__row-body'){
       row = e.path[4];
-      this.companyEdit.ID = row.childNodes[0].innerHTML;
-      this.companyEdit.razonSocial = row.childNodes[1].innerHTML;
-      this.companyEdit.CUIT = row.childNodes[2].innerHTML;
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
     }
   }
 
@@ -121,7 +120,13 @@ export class CompanySectionComponent implements OnInit {
 
     if(this.isEdit == true){
 
-      this._companyService.updateCompany( company, this.companyEdit.ID ).subscribe({
+      company = {
+        comID: this.company.comID,
+        comRazSoc: company.comRazSoc,
+        comCUIT: company.comCUIT
+      }
+
+      this._companyService.updateCompany( company ).subscribe({
         next: data => {
           console.log(data);
         },

@@ -12,13 +12,13 @@
     </div>
     <h2 #title class="popup__title">{{ titleText }}</h2>
 
-    <form #form class="popup__form" [formGroup]="addCompanyForm" (ngSubmit)="onSubmit()">
+    <form #form class="popup__form" [formGroup]="CompanyForm" (ngSubmit)="onSubmit()">
       <div class="form__input-container">
         <label class="form__label" for="razSoc">*Razón Social</label>
         <input formControlName="razonSocial" class="form__input" type="text" placeholder="Razón social"
           name="razonSocial" autocomplete="off">
         <span class="form__error"
-          *ngIf="addCompanyForm.get('razonSocial')?.invalid && addCompanyForm.get('razonSocial')?.touched">
+          *ngIf="CompanyForm.get('razonSocial')?.invalid && CompanyForm.get('razonSocial')?.touched">
           Ingrese la <strong>razón social.</strong>
         </span>
       </div>
@@ -26,11 +26,11 @@
         <label class="form__label" for="CUIT">*CUIT</label>
         <input formControlName="CUIT" class="form__input" type="text" placeholder="CUIT" name="CUIT" autocomplete="off"
           maxlength="11">
-        <span class="form__error" *ngIf="addCompanyForm.get('CUIT')?.invalid && addCompanyForm.get('CUIT')?.touched">
+        <span class="form__error" *ngIf="CompanyForm.get('CUIT')?.invalid && CompanyForm.get('CUIT')?.touched">
           Ingrese el <strong>CUIT.</strong>
         </span>
       </div>
-      <button type="submit" class="form__btn" [disabled]="addCompanyForm.invalid">{{ btnText }}</button>
+      <button type="submit" class="form__btn" [disabled]="CompanyForm.invalid">{{ btnText }}</button>
     </form>
   </div>
 </div>

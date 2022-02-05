@@ -26,11 +26,11 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   titleText:string = "";
   btnText:string = "";
 
-  addCompanyForm: FormGroup;
+  CompanyForm: FormGroup;
   company:Company | undefined;
 
   constructor( private renderer: Renderer2, private fb: FormBuilder, private _companyService:CompanyService) {
-    this.addCompanyForm = this.fb.group({
+    this.CompanyForm = this.fb.group({
       razonSocial: ['', Validators.required],
       CUIT: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]]
     })
@@ -70,8 +70,8 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       this.titleText = "EDITAR REGISTRO";
       this.btnText = "EDITAR"
 
-      form[0].value = this.companyEdit.razonSocial;
-      form[1].value = this.companyEdit.CUIT;
+      form[0].value = this.companyEdit.comRazSoc;
+      form[1].value = this.companyEdit.comCUIT;
     }
 
   }
@@ -107,26 +107,24 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     if(this.isEdit == false){
 
       this.company = {
-        comRazSoc: this.addCompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.addCompanyForm.get('CUIT')?.value),
-        comInsGra: Date.now()
+        comRazSoc: this.CompanyForm.get('razonSocial')?.value,
+        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
       };
       this.isSubmit.emit(this.company);
 
-      this.addCompanyForm.reset();
+      this.CompanyForm.reset();
       this.close_popup();
     }
 
     if(this.isEdit == true){
 
       this.company = {
-        comRazSoc: this.addCompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.addCompanyForm.get('CUIT')?.value),
-        comInsGra: Date.now()
+        comRazSoc: this.CompanyForm.get('razonSocial')?.value,
+        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
       };
 
       this.isSubmit.emit(this.company);
-      this.addCompanyForm.reset();
+      this.CompanyForm.reset();
       this.close_popup();
     }
   }

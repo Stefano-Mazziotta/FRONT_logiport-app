@@ -44,8 +44,8 @@ export class CompanyService {
     );
   }
 
-  updateCompany(company:Company,companyID?:number):Observable<any>{
-    return this.http.put(this.myAppUrl + this.myApiUrl + 'update/' + companyID, company)
+  updateCompany(company:Company):Observable<any>{
+    return this.http.put(this.myAppUrl + this.myApiUrl + 'update/' + company.comID, company)
     .pipe(
       tap(() => {
         this._refresh$.next();
