@@ -91,8 +91,33 @@ export class CompanySectionComponent implements OnInit {
     this.isOpenConfirmDelete = closeValue;
   }
 
-  public view_popup():void{
+  public view_popup(e:any):void{
+    let row;
+
     this.isOpenView = true;
+
+    // click en btn
+    if(e.path[2].className == 'table__row-body'){
+      row = e.path[2];
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
+    }
+    //click en svg
+    if(e.path[3].className == 'table__row-body'){
+      row = e.path[3];
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
+    }
+    // click en path
+    if(e.path[4].className == 'table__row-body'){
+      row = e.path[4];
+      this.company.comID = row.childNodes[0].innerHTML;
+      this.company.comRazSoc = row.childNodes[1].innerHTML;
+      this.company.comCUIT = row.childNodes[2].innerHTML;
+    }
+
   }
 
   public get_companies():void{

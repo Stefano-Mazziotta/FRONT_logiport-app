@@ -39,7 +39,7 @@
           <td class="">{{company.comRazSoc}}</td>
           <td class="">{{company.comCUIT}}</td>
           <td class="btn-container">
-            <button (click)="view_popup()" class="btn-read --js-read">
+            <button (click)="view_popup($event)" class="btn-read --js-read">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                 <path fill="none" d="M0 0h48v48h-48z" />
                 <path
@@ -66,7 +66,7 @@
   </div>
 
   <!---------------------- popup read data  ---------------------->
-  <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView"></app-company-popup-view>
+  <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView" [company]="company"></app-company-popup-view>
   <app-company-popup-confirm-delete (closePopup)="close_popup_parent($event)" (isDelete)="delete_company($event)" [isOpenConfirmDelete]="isOpenConfirmDelete"></app-company-popup-confirm-delete>
 
   <!-------------------- paginated buttons of table -------------------->

@@ -21,8 +21,8 @@
 
     .popup-read-container{
         width: 90%;
-        
-        background-color: white;        
+
+        background-color: white;
 
         border-radius: 10px;
         padding-top: 20px;
@@ -32,7 +32,7 @@
 
         opacity: 0;
         transition: all .3s ease;
-        /* cuando el popup tenga la clase active, 
+        /* cuando el popup tenga la clase active,
         se le aplican las siguientes propiedades: */
         &.active{
             opacity: 1;
@@ -44,7 +44,7 @@
             margin-bottom:10px;
             padding-right: 20px;
             fill: #dc3545;
-            
+
             display: flex;
             flex-direction: row-reverse;
 
@@ -71,7 +71,7 @@
             text-align: center;
             opacity: 0;
             background-color: $principal-color;
-            
+
             &.active{
                 animation: fade .8s ease forwards;
             }
@@ -80,12 +80,12 @@
         .registers-container{
             width: 90%;
             margin: 0 auto;
-            
+
             display: flex;
             flex-flow: column wrap;
             justify-content: flex-start;
             align-items: flex-start;
-            
+
             padding-right: 15px;
             padding-left: 15px;
             opacity: 0;
@@ -101,16 +101,16 @@
                 justify-content: space-between;
                 align-items: flex-start;
 
-                margin-bottom: 10px;
+                margin-bottom: 20px;
 
                 .elements__title{
                     width: 100%;
                     border-bottom: 2px solid $secondary-color;
                     margin-bottom: 10px;
-                    
+
                 }
-                
-                .elements__p{  
+
+                .elements__p{
                     font-size: 18px;
                 }
             }
@@ -126,7 +126,7 @@
     .popup-overlay-read{
         .popup-read-container{
             width: 55%;
-            
+
         }
     }
 }
@@ -135,7 +135,7 @@
     .popup-overlay-read{
         .popup-read-container{
             width: 45%;
-            
+
         }
     }
 }
