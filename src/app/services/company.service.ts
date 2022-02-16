@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap} from 'rxjs/operators'
 import { Company } from 'src/app/interfaces/company'
@@ -53,4 +53,12 @@ export class CompanyService {
     );
   }
 
+  searchCompany(companyRazonSocial:string):Observable<any>{
+    return this.http.get(this.myAppUrl + this.myApiUrl + 'search', {
+      params: {
+        comRazonSocial: companyRazonSocial
+      }
+    })
+
+  }
 }

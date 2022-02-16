@@ -7,8 +7,8 @@
 
   <!-------------------- nav search -------------------->
   <div class="search-container">
-    <input class="search__input" type="text" placeholder="Búsqueda por empresa.">
-    <button class="search__btn">
+    <input class="search__input" type="text" placeholder="Buscar por razón social" [(ngModel)]="inputSearchCompany">
+    <button class="search__btn" (click)="search_company()">
       <span class="tooltiptext">Buscar</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
         <path fill="none" d="M0 0h24v24H0V0z" />

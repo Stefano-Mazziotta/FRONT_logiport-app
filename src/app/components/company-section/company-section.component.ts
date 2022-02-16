@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service';
@@ -32,8 +32,11 @@ export class CompanySectionComponent implements OnInit {
     comCUIT: 0
   }
 
+  inputSearchCompany!:string;
+
   constructor(
-    private _companyService: CompanyService
+    private _companyService: CompanyService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -208,6 +211,25 @@ export class CompanySectionComponent implements OnInit {
       this.suscription = this._companyService.refresh$.subscribe(()=>{
         this.get_companies();
       })
+    }
+  }
+
+  // search_company()
+  // obtiene la razón social del input.
+  // ejecuta la petición para realizar la busqueda de empresa y recarga el listCompany con el resultado.
+  search_company(){
+
+    if(this.inputSearchCompany != undefined){
+
+      this._companyService.searchCompany(this.inputSearchCompany).subscribe({
+        next: data => {
+          console.log(data);
+          this.companyList = data;
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
     }
   }
 }
