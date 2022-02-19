@@ -48,14 +48,14 @@ export class CompanySectionComponent implements OnInit {
     console.log("observable cerrado")
   }
 
-  // add_popup() -> cambia el valor de los inputs-controlers.
+  // add_popup() ===> cambia el valor de los inputs-controlers.
   // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
   public add_popup():void{
     this.isOpen = true;
     this.isEdit = false;
   }
 
-  // edit_popup() -> cambia el valor de los inputs-controlers.
+  // edit_popup() ===> cambia el valor de los inputs-controlers.
   // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
   public edit_popup(e:any):void {
     let row;
@@ -85,7 +85,7 @@ export class CompanySectionComponent implements OnInit {
     }
   }
 
-  // close_popup_parent(boolean) -> reestablece el valor de isOpen a false.
+  // close_popup_parent(boolean) ===> reestablece el valor de isOpen a false.
   // Esto se ejecuta cuando el child component emite el nuevo valor de isOpen.
   // La función encargada de emitir el nuevo valor es close_popup() del child component (popup).
   public close_popup_parent(closeValue:boolean){
@@ -132,9 +132,9 @@ export class CompanySectionComponent implements OnInit {
     })
   };
 
-  // insert_or_edit_company_event(company) -> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
-  // Si isEdit = false -> consume el servicio insertCompany.
-  // Si isEdit = true -> consume el servicio updateCompany.
+  // insert_or_edit_company_event(company) ==> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
+  // Si isEdit = false ==> consume el servicio insertCompany.
+  // Si isEdit = true ==> consume el servicio updateCompany.
   insert_or_edit_company_event(company:Company){
 
     if(this.isEdit  == false){
