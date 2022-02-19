@@ -32,7 +32,10 @@ export class CompanySectionComponent implements OnInit {
     comCUIT: 0
   }
 
-  inputSearchCompany!:string;
+  // [(ngModel)]="inputSearchCompany" ===> html
+  // inputSearchCompany!:string;
+
+  @ViewChild('InputSearchCompany') inputSearchCompany!: ElementRef;
 
   constructor(
     private _companyService: CompanyService,
@@ -218,10 +221,12 @@ export class CompanySectionComponent implements OnInit {
   // obtiene la razón social del input.
   // ejecuta la petición para realizar la busqueda de empresa y recarga el listCompany con el resultado.
   search_company(){
+    const inputSearchCompany = this.inputSearchCompany.nativeElement;
+    let valueSearchCompany = inputSearchCompany.value;
 
-    if(this.inputSearchCompany != undefined){
+    if(valueSearchCompany != undefined){
 
-      this._companyService.searchCompany(this.inputSearchCompany).subscribe({
+      this._companyService.searchCompany(valueSearchCompany).subscribe({
         next: data => {
           console.log(data);
           this.companyList = data;
@@ -230,6 +235,18 @@ export class CompanySectionComponent implements OnInit {
           console.log(error);
         }
       });
+    }
+  }
+
+  // reset_filter()
+  // resetea los filtros para mostrar todas las company.
+  reset_filter(){
+    const inputSearchCompany = this.inputSearchCompany.nativeElement;
+    let valueSearchCompany = inputSearchCompany.value;
+
+    if(valueSearchCompany){
+      inputSearchCompany.value = '';
+      this.get_companies();
     }
   }
 }
