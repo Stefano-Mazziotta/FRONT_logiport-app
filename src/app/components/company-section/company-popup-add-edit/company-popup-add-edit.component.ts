@@ -32,12 +32,11 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   constructor( private renderer: Renderer2, private fb: FormBuilder, private _companyService:CompanyService) {
     this.CompanyForm = this.fb.group({
       razonSocial: ['', Validators.required],
-      CUIT: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]]
+      CUIT: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern("^[0-9]*$")]]
     })
   }
 
   ngOnInit(): void {
-
   }
 
   ngOnChanges():void {
@@ -94,25 +93,27 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       form[0].value = "";
       form[1].value = "";
 
+      this.CompanyForm.reset();
+
       this.isOpen = false;
       this.closePopup.emit(this.isOpen);
     }
     this.clickPopup = false;
   }
 
-  // onSubmit() -> al dar click en "añadir" se ejecuta este método.
+  // onSubmit() ===> al dar click en "añadir" se ejecuta este método.
   // obtiene los valores de los inputs los almacena en el objeto Company
   // emite este objeto al componente padre para consumir el servicio insertCompany.
   public onSubmit(){
+
     if(this.isEdit == false){
 
       this.company = {
         comRazSoc: this.CompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
+        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value)
       };
-      this.isSubmit.emit(this.company);
 
-      this.CompanyForm.reset();
+      this.isSubmit.emit(this.company);
       this.close_popup();
     }
 
@@ -120,13 +121,12 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
 
       this.company = {
         comRazSoc: this.CompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
+        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value)
       };
 
       this.isSubmit.emit(this.company);
-      this.CompanyForm.reset();
       this.close_popup();
     }
-  }
 
+  }
 }

@@ -27,7 +27,7 @@
         <input formControlName="CUIT" class="form__input" type="text" placeholder="CUIT" name="CUIT" autocomplete="off"
           maxlength="11">
         <span class="form__error" *ngIf="CompanyForm.get('CUIT')?.invalid && CompanyForm.get('CUIT')?.touched">
-          Ingrese el <strong>CUIT.</strong>
+          Debe ingresar el<strong> CUIT sin letras y carácteres especiales.</strong>
         </span>
       </div>
       <button type="submit" class="form__btn" [disabled]="CompanyForm.invalid">{{ btnText }}</button>
