@@ -127,12 +127,14 @@ export class CompanySectionComponent implements OnInit {
   }
 
   public get_companies():void{
-    this._companyService.getListCompanies().subscribe( (data) => {
-      this.companyList = data;
-
-    }, error => {
-      console.log(error);
-    })
+    this._companyService.getListCompanies().subscribe({
+      next: data => {
+        this.companyList = data;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   };
 
   // insert_or_edit_company_event(company) ==> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
@@ -142,10 +144,13 @@ export class CompanySectionComponent implements OnInit {
 
     if(this.isEdit  == false){
 
-      this._companyService.insertCompany( company ).subscribe((data) => {
-        console.log(data);
-      }, error => {
-        console.log(error);
+      this._companyService.insertCompany( company ).subscribe({
+        next: data => {
+          console.log(data);
+        },
+        error: error =>{
+          console.log(error);
+        }
       });
     }
 
