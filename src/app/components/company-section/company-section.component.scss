@@ -79,7 +79,7 @@
       }
 
       .search__btn {
-        height: 40px;
+        height: 100%;
         width: 20%;
 
         display: flex;
@@ -240,7 +240,7 @@
             transition: all 0.3s ease;
             &:hover {
               transform: scale(1.1);
-              background-color: #08799b;
+              background-color: $hover-color;
             }
           }
 
@@ -444,21 +444,6 @@
 
 // ___ Tablet ___ //
 @media (min-width: 768px) {
-  // btn-add adjusted width.
-  .main {
-    .btn-add {
-      width: 30%;
-    }
-    .search-container{
-      .search__input-container{
-        width: 70%;
-      }
-
-      .search__btn-clean{
-        width: 30%;
-      }
-    }
-  }
 }
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
