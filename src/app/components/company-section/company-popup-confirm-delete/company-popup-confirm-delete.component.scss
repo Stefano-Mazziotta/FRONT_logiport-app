@@ -1,7 +1,7 @@
 @import "../../../app.component.scss";
 
 // popup-read styles //
-.popup-overlay-read {
+.popup-overlay {
   visibility: hidden;
   position: fixed;
   top: 0;
@@ -19,8 +19,8 @@
     visibility: visible;
   }
 
-  .popup-read-container {
-    width: 90%;
+  .popup-container {
+    width: 95%;
 
     background-color: white;
 
@@ -39,7 +39,7 @@
       transform: scale(1);
     }
 
-    .popup-read__close {
+    .popup__close {
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
@@ -58,59 +58,66 @@
     }
 
     // popup -> title styles.
-    .popup-read__title {
+    .popup__title {
       width: 100%;
-      margin-bottom: 25px;
+      margin-bottom: 60px;
       padding-bottom: 10px;
       padding-top: 10px;
+
+      background-color: $principal-color;
 
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
       color: $secondary-color;
       text-transform: uppercase;
       text-align: center;
+      font-size: 21px;
       opacity: 0;
-      background-color: $principal-color;
 
       &.active {
         animation: fade 0.8s ease forwards;
       }
     }
 
-    .registers-container {
+    .buttons-wrap {
       width: 90%;
       margin: 0 auto;
 
       display: flex;
-      flex-flow: column wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
+      flex-flow: row wrap;
+      justify-content: center;
 
-      padding-right: 15px;
-      padding-left: 15px;
       opacity: 0;
       &.active {
         animation: fade 0.8s ease forwards;
       }
 
-      .registers__elements {
-        width: 100%;
+      button{
+        width: 40%;
+        padding: 5px 10px;
+        margin-left: 5px;
+        margin-right: 5px;
 
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: space-between;
-        align-items: flex-start;
+        border: none;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
-        margin-bottom: 20px;
-
-        .elements__title {
-          width: 100%;
-          border-bottom: 2px solid $secondary-color;
-          margin-bottom: 10px;
+        font-size: 18px;
+        color: white;
+        cursor: pointer;
+        transition: .3s ease all;
+      }
+      button.delete{
+        background-color: #dc3545;
+        &:hover{
+          background-color: #ad1f2d;
         }
-
-        .elements__p {
-          font-size: 18px;
+      }
+      button.cancel{
+        background-color: $principal-color;
+        color: white;
+        &:hover{
+          background-color: $hover-color;
         }
       }
     }
@@ -121,24 +128,24 @@
 
 // ___ Tablet ___ //
 @media (min-width: 768px) {
-  .popup-overlay-read {
-    .popup-read-container {
+  .popup-overlay {
+    .popup-container {
       width: 55%;
     }
   }
 }
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
-  .popup-overlay-read {
-    .popup-read-container {
+  .popup-overlay {
+    .popup-container {
       width: 45%;
     }
   }
 }
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
-  .popup-overlay-read {
-    .popup-read-container {
+  .popup-overlay {
+    .popup-container {
       width: 35%;
     }
   }
