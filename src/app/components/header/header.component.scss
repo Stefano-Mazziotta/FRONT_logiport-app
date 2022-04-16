@@ -64,6 +64,14 @@ header {
           transform:scale(1.1);
         }
       }
+      .link.active{
+        color: grey;
+        border: 2px solid grey;
+        cursor: default;
+        &:hover{
+          transform: scale(1);
+        }
+      }
     }
 
   }

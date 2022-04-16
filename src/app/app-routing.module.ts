@@ -1,7 +1,14 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompanySectionComponent } from './components/company-section/company-section.component';
+import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: 'empresas', component: CompanySectionComponent},
+  {path: 'lanchas', component: BoatSectionComponent},
+  {path: '',   redirectTo: '/empresas', pathMatch: 'full'},
+  {path: '**', component: BoatSectionComponent} // 404 not found
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

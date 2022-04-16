@@ -12,6 +12,9 @@ import { CompanySectionComponent } from './components/company-section/company-se
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
 import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
 import { CompanyPopupConfirmDeleteComponent } from './components/company-section/company-popup-confirm-delete/company-popup-confirm-delete.component';
+import { BoatSectionComponent } from './components/boat-section/boat-section.component';
+import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
+import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { CompanyPopupConfirmDeleteComponent } from './components/company-section
     CompanyPopupAddComponent,
     CompanyPopupViewComponent,
     CompanyPopupConfirmDeleteComponent,
+    BoatSectionComponent,
+    MotorAbmComponent,
+    GeneratorAbmComponent,
   ],
   imports: [
     NgxPaginationModule,
