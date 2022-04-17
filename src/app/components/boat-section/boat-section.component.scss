@@ -1,0 +1,176 @@
+// --- variables --- //
+@import "../../app.component.scss";
+
+//############### main - company structure ###############//
+.main {
+  width: 90%;
+  margin: 0 auto;
+
+  .title {
+    font-size: 36px;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+
+    border-bottom: 3px solid $secondary-color;
+    border-radius: 0px 0px 20px 0px;
+
+    &.sub{
+      font-size: 24px;
+    }
+  }
+
+  .addmenu-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 50px;
+
+    //--- add register button ---//
+    .btn {
+      width: 100%;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+
+      background-color: $principal-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+
+      font-size: 16px;
+      letter-spacing: 1px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+      cursor: pointer;
+      transition: all 0.3s ease;
+      &:hover {
+        transform: scale(1.01);
+        background-color: $hover-color;
+        box-shadow: none;
+      }
+    }
+
+    .links-container{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .filtermenu-container{
+    margin-bottom: 25px;
+
+    .filtermenu__select{
+      width: 100%;
+      padding: 5px 5px;
+      margin-bottom: 10px;
+
+      border: none;
+      border-right: 5px solid $principal-color;
+      border-radius: 3px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      background-color: $principal-color;
+
+      font-size: 16px;
+      color: white;
+
+      cursor: pointer;
+
+      transition: all .3s ease;
+      &:hover{
+        background-color: $hover-color;
+        border-right: 5px solid $hover-color;
+        color: white;
+      }
+    }
+
+    .filtermenu__input{
+      width: 100%;
+      padding: 5px 5px;
+
+      outline: none;
+      border: 1px solid $principal-color;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+      font-size: 16px;
+
+      &:focus{
+        border: 2px solid $hover-color;
+      }
+    }
+  }
+
+  .btnfilter-container{
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    .btnfilter__btn{
+      padding: 5px 15px;
+      margin-left:10px;
+
+      border: none;
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+      background-color: $principal-color;
+
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+
+      transition: all .3s ease;
+      &:hover{
+        background-color: $hover-color;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1024px){
+  .main{
+
+    .addmenu-container{
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .btn{
+        width: 25%;
+        &.link{
+          width: 100%;
+        }
+      }
+      .links-container{
+       width: 25%;
+      }
+    }
+
+    .filtermenu-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .filtermenu__select{
+        width: 40%;
+        margin-bottom: 0;
+      }
+      .filtermenu__input{
+        width: 40%;
+      }
+
+    }
+  }
+}
+@media (min-width: 1440px){
+  .main{
+    .addmenu-container{
+      .btn{
+        width: 15%;
+      }
+      .links-container{
+       width: 15%;
+      }
+    }
+
+  }
+}
