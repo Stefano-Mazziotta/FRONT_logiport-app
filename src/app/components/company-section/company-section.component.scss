@@ -13,13 +13,16 @@
 
     border-bottom: 3px solid $secondary-color;
     border-radius: 0px 0px 20px 0px;
+    &.sub{
+      font-size: 24px;
+    }
   }
 
   //--- add register button ---//
   .btn-add {
     width: 100%;
     padding: 15px 20px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 
     background-color: $principal-color;
     color: white;

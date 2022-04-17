@@ -61,12 +61,12 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
 
     if (this.isEdit == false){
 
-      this.titleText = "AÑADIR REGISTRO";
+      this.titleText = "AÑADIR EMPRESA";
       this.btnText = "AÑADIR";
     }
 
     if(this.isEdit == true){
-      this.titleText = "EDITAR REGISTRO";
+      this.titleText = "EDITAR EMPRESA";
       this.btnText = "EDITAR"
 
       form[0].value = this.companyEdit.comRazSoc;

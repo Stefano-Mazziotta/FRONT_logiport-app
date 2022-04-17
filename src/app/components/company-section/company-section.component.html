@@ -1,11 +1,12 @@
 <div class="main">
   <h2 class="title">Empresas</h2>
   <!-------------------- btn create -------------------->
-  <button class="btn-add" (click)="add_popup()">Añadir registro</button>
+  <button class="btn-add" (click)="add_popup()">Añadir empresa</button>
   <app-company-popup-add-edit (isSubmit)="insert_or_edit_company_event($event)" (closePopup)="close_popup_parent($event)"
     [isOpen]="isOpen" [isEdit]="isEdit" [companyEdit]="company"></app-company-popup-add-edit>
 
   <!-------------------- nav search -------------------->
+  <h3 class="title sub">Filtro</h3>
   <div class="search-container">
     <div class="search__input-container">
       <input class="search__input" type="text" placeholder="Buscar por razón social"  #InputSearchCompany>
@@ -22,6 +23,7 @@
   </div>
 
   <!-------------------- table -------------------->
+  <h3 class="title sub">Resultados</h3>
   <div style="overflow-x:auto; margin-bottom:10px;">
     <table class="table-data">
 
