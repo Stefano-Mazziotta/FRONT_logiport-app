@@ -3,3 +3,4 @@ export interface Company {
     comRazSoc: string;
     comCUIT: number;
 }
+

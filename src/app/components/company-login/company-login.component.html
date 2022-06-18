@@ -1,0 +1,25 @@
+<div class="main">
+    <h2 class="title sub">Busque y seleccione una empresa</h2>
+    
+    <div class="search-container">
+        <i class='far fa-building'></i>
+        <span #crossResetSelect (click)="resetSelectCompany()" class="cross hidden">x</span>
+        <input #searchInput class="search__input" type="text" placeholder="Razón social" (keyup)="searchCompany($event)" maxlength="25" >
+        <div #resultWrap class="result-wrap">
+            <ul *ngFor="let company of companies" >
+                <li (click)="selectCompany($event)">{{company.comRazSoc}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div *ngIf="companySelected != null" class="addmenu-container">
+        <h2 class="title profile-company">{{companySelected.comRazSoc}}</h2>
+        <button class="btn">Lanchas</button>
+        <div class="links-container">
+          <a class="btn link" href="">Generadores</a>
+          <a class="btn link" href="">Motores</a>
+        </div>
+    </div>
+
+
+</div>

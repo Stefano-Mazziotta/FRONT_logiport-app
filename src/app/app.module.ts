@@ -15,6 +15,7 @@ import { CompanyPopupConfirmDeleteComponent } from './components/company-section
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
+import { CompanyLoginComponent } from './components/company-login/company-login.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.
     BoatSectionComponent,
     MotorAbmComponent,
     GeneratorAbmComponent,
+    CompanyLoginComponent,
   ],
   imports: [
     NgxPaginationModule,
