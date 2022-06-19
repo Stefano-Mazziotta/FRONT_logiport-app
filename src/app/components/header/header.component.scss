@@ -3,7 +3,7 @@
 // #################### header #################### //
 header {
   width: 100%;
-  height: 260px;
+  height: 75px;
   background-color: $principal-color;
   margin-bottom: 40px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 1.9px 2.5px;
@@ -19,9 +19,10 @@ header {
     // logo styles
     .logo-container {
       width: 100%;
-      // padding: 10px;
+      margin-bottom: 25px;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       text-decoration: none;
       color: white;
@@ -32,78 +33,32 @@ header {
       }
       .logo-title {
         font-size: 48px;
+        margin-left: 25px;
+        margin-right: 25px;
+      }
+      .logo-svg{
+        filter: brightness(0) invert(1);
+        width: 25px;
+        height: 25px;
+
       }
     }
-
-    // nav styles
-    .nav-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .link {
-        width: 90%;
-        display: block;
-
-        margin-bottom:20px;
-        padding: 5px;
-        border: 3px solid white;
-        border-radius: 5px;
-
-        color: white;
-        font-size: 18px;
-        font-weight: 500;
-        text-align: center;
-        text-decoration: none;
-
-        transition: all 0.3s ease;
-        &:hover {
-          color: $secondary-color;
-          border: 3px solid $secondary-color;
-          transform:scale(1.03);
-        }
-      }
-      .link.active{
-        color: grey;
-        border: 2px solid grey;
-        cursor: default;
-        &:hover{
-          transform: scale(1);
-        }
-      }
-    }
-
   }
 }
 
 @media (min-width: 1024px) {
   //sarch-nav adjusted width
   header{
-    height: 100px;
     .main {
       width: 90%;
       margin: 0 auto;
-
-      flex-direction: row;
-      align-items: center;
       .logo-container{
-        width: 50%;
-        justify-content: flex-start;
-      }
-      .nav-container{
-        width: 75%;
-        flex-direction: row;
-        justify-content: center;
-
-        .link{
-          width: 100%;
-          margin-left: 25px;
-          margin-bottom: 0;
+        justify-content: space-between;
+        .logo-svg{
+          width: 50px;
+          height: 50px;
         }
       }
-
-
     }
   }
 }
