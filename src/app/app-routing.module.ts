@@ -6,10 +6,10 @@ import { CompanyLoginComponent } from './components/company-login/company-login.
 
 const routes: Routes = [
   {path: 'empresas', component: CompanySectionComponent},
-  {path: 'lanchas', component: BoatSectionComponent},
   {path: 'login-empresa', component: CompanyLoginComponent},
-  {path: '',   redirectTo: '/empresas', pathMatch: 'full'},
-  {path: '**', component: BoatSectionComponent} // 404 not found
+  {path: ':companyName/lanchas', component: BoatSectionComponent}, 
+  {path: '',   redirectTo: '/home', pathMatch: 'full'},
+  // {path: '**', component: BoatSectionComponent} // 404 not found
 ];
 
 @NgModule({

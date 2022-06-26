@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boat-section',
@@ -10,36 +11,20 @@ import { CompanyService } from 'src/app/services/company.service';
 export class BoatSectionComponent implements OnInit {
 
   constructor(
-    private _companyService: CompanyService
+    private _router: Router,
   ) {
   }
 
-  companies:Company[] = [];
+  companySelected: Company | null = null;
 
   ngOnInit(): void {
-  }
-
-  public searchCompany(event: any){
-    let searchValue = event.target.value;
-    if(searchValue.length >= 3){
-
-      this._companyService.searchCompany(searchValue)
-        .subscribe({
-          next: result => {
-            this.companies = result;
-            this.processSearchResult(result);
-          },
-          error: error => {
-            console.log(error);
-          }
-        })
-        return;
-    }
-    this.companies = [];
-  }
-
-  private processSearchResult(result: Company[]){
-
+    let company = localStorage.getItem("companySelected");
+    if(company != null && company != ""){
+      this.companySelected = JSON.parse(company);
+      console.log(this.companySelected);
+      return;
+    } 
+    this._router.navigateByUrl('/login-empresa');
 
   }
 

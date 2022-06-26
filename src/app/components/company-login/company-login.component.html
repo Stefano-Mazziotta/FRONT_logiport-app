@@ -14,7 +14,7 @@
 
     <div *ngIf="companySelected != null" class="addmenu-container">
         <h2 class="title profile-company">{{companySelected.comRazSoc}}</h2>
-        <button class="btn">Lanchas</button>
+        <a class="btn link" [routerLink]="['../', companySelected.comRazSoc, 'lanchas']">Lanchas</a> 
         <div class="links-container">
           <a class="btn link" href="">Generadores</a>
           <a class="btn link" href="">Motores</a>

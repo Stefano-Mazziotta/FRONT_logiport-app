@@ -1,23 +1,10 @@
 <section class="main">
 
   <!-- ======== Buttons ======== -->
-  <h2 class="title">Lanchas</h2>
-  <div class="search-container">
-    <i class='far fa-building'></i>
-    <input class="search__input" type="text" placeholder="Buscar y seleccionar empresa" (keyup)="searchCompany($event)" maxlength="25" >
-    <div class="result-wrap">
-      <ul *ngFor="let company of companies" >
-        <li>{{company.comRazSoc}}</li>
-      </ul>
-    </div>
-  </div>
+  <h2 class="title">Lanchas <i class="fa-solid fa-ship"></i></h2>
 
   <div class="addmenu-container">
     <button class="btn">Añadir lancha</button>
-    <div class="links-container">
-      <a class="btn link" href="">Generadores</a>
-      <a class="btn link" href="">Motores</a>
-    </div>
   </div>
   <!-- ======== Filtros ======== -->
   <h3 class="title sub">Filtros</h3>
