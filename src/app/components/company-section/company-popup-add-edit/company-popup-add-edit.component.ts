@@ -69,8 +69,8 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       this.titleText = "EDITAR EMPRESA";
       this.btnText = "EDITAR"
 
-      form[0].value = this.companyEdit.comRazSoc;
-      form[1].value = this.companyEdit.comCUIT;
+      form[0].value = this.companyEdit.RazonSocial;
+      form[1].value = this.companyEdit.CUIT;
     }
 
   }
@@ -109,8 +109,13 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     if(this.isEdit == false){
 
       this.company = {
-        comRazSoc: this.CompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value)
+        IdCompany: null,
+        RazonSocial: this.CompanyForm.get('razonSocial')?.value,
+        CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
+        IsDeleted: 0,
+        TimeSave: null,
+        TimeLastUpdate: null,
+        TimeDeleted: null
       };
 
       this.isSubmit.emit(this.company);
@@ -120,8 +125,13 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
     if(this.isEdit == true){
 
       this.company = {
-        comRazSoc: this.CompanyForm.get('razonSocial')?.value,
-        comCUIT: parseInt(this.CompanyForm.get('CUIT')?.value)
+        IdCompany: null,
+        RazonSocial: this.CompanyForm.get('razonSocial')?.value,
+        CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
+        IsDeleted: 0,
+        TimeSave: null,
+        TimeLastUpdate: null,
+        TimeDeleted: null
       };
 
       this.isSubmit.emit(this.company);

@@ -40,9 +40,9 @@
 
         <tr class="table__row-body"
           *ngFor="let company of companyList | paginate: { itemsPerPage: 7, currentPage: currentPage}">
-          <td class="">{{company.comID}}</td>
-          <td class="">{{company.comRazSoc}}</td>
-          <td class="">{{company.comCUIT}}</td>
+          <td>{{ company.IdCompany }}</td>
+          <td>{{ company.RazonSocial }}</td>
+          <td>{{ company.CUIT }}</td>
           <td class="btn-container">
             <button (click)="view_popup($event)" class="btn-read --js-read">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">

@@ -57,9 +57,9 @@ export class CompanyPopupViewComponent implements OnInit, OnChanges {
     this.renderer.addClass(dataContainer,'active');
 
     // cambiar los valores de los <p> correspondientes a cada info. de la company.
-    this.renderer.setProperty(idCompanyParaph, 'innerHTML', this.company.comID);
-    this.renderer.setProperty(razSocialCompanyParaph, 'innerHTML', this.company.comRazSoc);
-    this.renderer.setProperty(CUITCompanyParaph, 'innerHTML', this.company.comCUIT);
+    this.renderer.setProperty(idCompanyParaph, 'innerHTML', this.company.IdCompany);
+    this.renderer.setProperty(razSocialCompanyParaph, 'innerHTML', this.company.RazonSocial);
+    this.renderer.setProperty(CUITCompanyParaph, 'innerHTML', this.company.CUIT);
   }
 
   // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.

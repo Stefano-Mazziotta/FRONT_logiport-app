@@ -24,12 +24,16 @@ export class CompanySectionComponent implements OnInit {
   responsivePagination:boolean = true;
 
   isOpenConfirmDelete:boolean = false;
-  deleteCompanyID?:number = undefined;
+  deleteCompanyID:number | null = null;
 
   company:Company = {
-    comID: undefined,
-    comRazSoc: '',
-    comCUIT: 0
+    IdCompany: null,
+    RazonSocial: null,
+    CUIT: null,
+    IsDeleted: null,
+    TimeSave: null,
+    TimeLastUpdate: null,
+    TimeDeleted: null
   }
 
   // [(ngModel)]="inputSearchCompany" ===> html
@@ -68,23 +72,23 @@ export class CompanySectionComponent implements OnInit {
     // click en btn
     if(e.path[2].className == 'table__row-body'){
       row = e.path[2];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
     //click en svg
     if(e.path[3].className == 'table__row-body'){
       row = e.path[3];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
     // click en path
     if(e.path[4].className == 'table__row-body'){
       row = e.path[4];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
   }
 
@@ -105,23 +109,23 @@ export class CompanySectionComponent implements OnInit {
     // click en btn
     if(e.path[2].className == 'table__row-body'){
       row = e.path[2];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
     //click en svg
     if(e.path[3].className == 'table__row-body'){
       row = e.path[3];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
     // click en path
     if(e.path[4].className == 'table__row-body'){
       row = e.path[4];
-      this.company.comID = row.childNodes[0].innerHTML;
-      this.company.comRazSoc = row.childNodes[1].innerHTML;
-      this.company.comCUIT = row.childNodes[2].innerHTML;
+      this.company.IdCompany = row.childNodes[0].innerHTML;
+      this.company.RazonSocial = row.childNodes[1].innerHTML;
+      this.company.CUIT = row.childNodes[2].innerHTML;
     }
 
   }
@@ -157,9 +161,13 @@ export class CompanySectionComponent implements OnInit {
     if(this.isEdit == true){
 
       company = {
-        comID: this.company.comID,
-        comRazSoc: company.comRazSoc,
-        comCUIT: company.comCUIT
+        IdCompany: this.company.IdCompany,
+        RazonSocial: company.RazonSocial,
+        CUIT: company.CUIT,
+        IsDeleted: 0,
+        TimeSave: null,
+        TimeDeleted: null,
+        TimeLastUpdate: null
       }
 
       this._companyService.updateCompany( company ).subscribe({
@@ -205,7 +213,7 @@ export class CompanySectionComponent implements OnInit {
   // delete_company(boolean)
   // si se confirma la eliminación envía petición de eliminación al back con el id del registro.
   delete_company(isDelete:boolean){
-    if(isDelete == true){
+    if(isDelete == true && this.deleteCompanyID){
 
       this._companyService.deleteCompany(this.deleteCompanyID).subscribe({
         next: data => {

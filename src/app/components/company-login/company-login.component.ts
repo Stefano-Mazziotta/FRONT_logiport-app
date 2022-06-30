@@ -36,7 +36,7 @@ export class CompanyLoginComponent implements OnInit {
     const resultWrap = this.resultWrap.nativeElement;
 
     if(this.companySelected != null){
-      searchInput.value = this.companySelected.comRazSoc;
+      searchInput.value = this.companySelected.RazonSocial;
       searchInput.disabled = true;
 
       this.renderer.addClass(resultWrap, 'hidden');
@@ -71,12 +71,12 @@ export class CompanyLoginComponent implements OnInit {
     const crossResetSelect = this.crossResetSelect.nativeElement;
     const resultWrap = this.resultWrap.nativeElement;
     
-    let company = this.companies.find( elem => elem.comRazSoc == companyName );
+    let company = this.companies.find( elem => elem.RazonSocial == companyName );
     if(company != null){
       this.companySelected = company;
       localStorage.setItem('companySelected', JSON.stringify(this.companySelected));
     
-      searchInput.value = this.companySelected.comRazSoc;
+      searchInput.value = this.companySelected.RazonSocial;
       searchInput.disabled = true;
 
       this.renderer.addClass(resultWrap, 'hidden');

@@ -9,11 +9,8 @@ import { Company } from 'src/app/interfaces/company'
 })
 export class CompanyService {
 
-  // http://logiport.app.local/Back_logiport-app/index.php/company/list ---> list companies
-  // http://logiport.app.local/Back_logiport-app/index.php/company/insert ---> insert company
-
-  private myAppUrl = 'http://logiport.app.local/Back_logiport-app/';
-  private myApiUrl = 'index.php/company/'; // /list?limit=10
+  private myAppUrl = 'http://localhost:8080/';
+  private myApiUrl = 'api/companies/';
 
   private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
@@ -23,11 +20,11 @@ export class CompanyService {
   }
 
   getListCompanies():Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl + 'list');
+    return this.http.get(this.myAppUrl + this.myApiUrl);
   }
 
   insertCompany(company:Company):Observable<any>{
-    return this.http.post(this.myAppUrl + this.myApiUrl + 'insert', company)
+    return this.http.post(this.myAppUrl + this.myApiUrl, company)
     .pipe(
       tap(() => {
         this._refresh$.next();
@@ -36,7 +33,7 @@ export class CompanyService {
   }
 
   deleteCompany(companyID?:number):Observable<any>{
-    return this.http.delete(this.myAppUrl + this.myApiUrl + 'delete/' + companyID)
+    return this.http.delete(this.myAppUrl + this.myApiUrl + companyID)
     .pipe(
       tap(() => {
         this._refresh$.next();
@@ -45,7 +42,7 @@ export class CompanyService {
   }
 
   updateCompany(company:Company):Observable<any>{
-    return this.http.put(this.myAppUrl + this.myApiUrl + 'update/' + company.comID, company)
+    return this.http.put(this.myAppUrl + this.myApiUrl + company.IdCompany, company)
     .pipe(
       tap(() => {
         this._refresh$.next();
@@ -54,11 +51,11 @@ export class CompanyService {
   }
 
   searchCompany(companyRazonSocial:string):Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl + 'search', {
+    return this.http.get(this.myAppUrl + this.myApiUrl ,{
       params: {
-        comRazonSocial: companyRazonSocial
+        RazonSocial: companyRazonSocial
       }
-    })
+    });
 
   }
 }
