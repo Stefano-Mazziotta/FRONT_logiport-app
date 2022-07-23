@@ -11,11 +11,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
 import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
-import { CompanyPopupConfirmDeleteComponent } from './components/company-section/company-popup-confirm-delete/company-popup-confirm-delete.component';
+import { PopupConfirmDeleteComponent } from './components/popup-confirm-delete/popup-confirm-delete.component';
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 import { CompanyLoginComponent } from './components/company-login/company-login.component';
+import { BoatPopupAddEditComponent } from './components/boat-section/boat-popup-add-edit/boat-popup-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,12 @@ import { CompanyLoginComponent } from './components/company-login/company-login.
     CompanySectionComponent,
     CompanyPopupAddComponent,
     CompanyPopupViewComponent,
-    CompanyPopupConfirmDeleteComponent,
+    PopupConfirmDeleteComponent,
     BoatSectionComponent,
     MotorAbmComponent,
     GeneratorAbmComponent,
     CompanyLoginComponent,
+    BoatPopupAddEditComponent,
   ],
   imports: [
     NgxPaginationModule,

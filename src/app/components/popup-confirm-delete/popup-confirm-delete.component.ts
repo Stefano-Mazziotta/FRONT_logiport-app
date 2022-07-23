@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-company-popup-confirm-delete',
-  templateUrl: './company-popup-confirm-delete.component.html',
-  styleUrls: ['./company-popup-confirm-delete.component.scss']
+  selector: 'app-popup-confirm-delete',
+  templateUrl: './popup-confirm-delete.component.html',
+  styleUrls: ['./popup-confirm-delete.component.scss']
 })
-export class CompanyPopupConfirmDeleteComponent implements OnInit {
+export class PopupConfirmDeleteComponent implements OnInit {
   @Input() isOpenConfirmDelete!:boolean;
   @Output() closePopup = new EventEmitter<boolean>();
   @Output() isDelete = new EventEmitter<boolean>();
@@ -46,9 +46,6 @@ export class CompanyPopupConfirmDeleteComponent implements OnInit {
     if(e.path[0].className != "popup-overlay active"){
       this.clickPopup = true;
     }
-    if(e.path[0].nodeName == "svg"){
-      this.clickPopup = false;
-    }
     if(e.path[0].nodeName == "BUTTON"){
       this.clickPopup = false;
     }
@@ -70,6 +67,7 @@ export class CompanyPopupConfirmDeleteComponent implements OnInit {
     }
     this.clickPopup = false;
   }
+  
   is_delete(){
     this.isDelete.emit(true);
   }
