@@ -1,0 +1,12 @@
+<div #overlay class="popup-overlay" (click)="close_popup($event)">
+  <div #popup class="popup-container">
+
+    <h2 #title class="popup__title">¿DESEAS ELIMINAR EL REGISTRO?</h2>
+
+    <div #buttonsWrap class="buttons-wrap">
+      <button class="cancel">Cancelar</button>
+      <button class="delete" (click)="is_delete()">Eliminar</button>
+    </div>
+
+  </div>
+</div>
