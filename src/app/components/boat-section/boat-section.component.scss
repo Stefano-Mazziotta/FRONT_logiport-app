@@ -133,11 +133,159 @@
     }
 
   }
+
+  //--- table -> thead & tbody ---//
+  .table-data {
+    width: 100%;
+    max-height: 610px;
+
+    padding: 0;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    border-collapse: collapse;
+    border-radius: 10px;
+    border-radius: 10px;
+
+    thead {
+      width: 100%;
+      border-radius: 10px;
+
+      .table__row-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+        background-color: $principal-color;
+        border-radius: 10px 10px 0px 0px;
+        border-bottom: 5px solid white;
+
+        th {
+          width: 210px;
+          padding: 20px;
+          color: white;
+        }
+        th.out-border {
+          border: none;
+        }
+      }
+    }
+
+    tbody {
+      width: 100%;
+
+      .table__row-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        color: $principal-color;
+        background-color: $secondary-color;
+        border-bottom: 2px solid white;
+        text-align: center;
+
+        transition: all 0.3s ease;
+        &:hover {
+          background-color: #cbd6df;
+        }
+
+        td {
+          width: 210px;
+          padding: 20px;
+        }
+
+        td.btn-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          align-items: center;
+
+          .btn-read {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: $principal-color;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+            fill: white;
+
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+            &:hover {
+              transform: scale(1.1);
+              background-color: $hover-color;
+            }
+          }
+
+          .btn-update {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #28a745;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+            fill: white;
+
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+            &:hover {
+              transform: scale(1.1);
+              background-color: #228e3b;
+            }
+          }
+
+          .btn-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #dc3545;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+            fill: white;
+
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+            &:hover {
+              transform: scale(1.1);
+              background-color: #ad1f2d;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //--- table -> paginated buttons ---//
+  .pagination-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 768px){
+  .main{
+    width: 80%;
+  }
 }
 
 @media (min-width: 1024px){
   .main{
-
+    width: 70%;
     .addmenu-container{
       flex-direction: row;
       justify-content: space-between;
@@ -171,9 +319,10 @@
 }
 @media (min-width: 1440px){
   .main{
+    width: 60%;
     .addmenu-container{
       .btn{
-        width: 15%;
+        width: 20%;
       }
       .links-container{
        width: 15%;
