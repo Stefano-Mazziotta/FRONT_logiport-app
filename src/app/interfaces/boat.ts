@@ -1,0 +1,25 @@
+export interface Boat {
+    IdBoat: number | null;
+    IdCompany: number | null,
+    BoatName: string | null,
+    Enrollment: string | null,
+    DistinguishingMark: string | null, 
+    HullMaterial: string | null,
+    BoatType: string | null,
+    Service: string | null,
+    SpecificExploitation: string | null,
+    EnrollmentDate: number | null,
+    ConstructionDate: number | null,
+    NAT: number | null,
+    NAN: number | null,
+    Eslora: number | null,
+    Manga: number | null,
+    Puntal: number | null,
+    PeopleTransported: number | null,
+    BoatPower: string | null,
+    ElectricPower: string | null,
+    IsDeleted: number | null,
+    TimeSave: number | null,
+    TimeDeleted: number | null,
+    TimeLastUpdate: number | null
+}
