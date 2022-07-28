@@ -5,6 +5,7 @@ $principal-color: rgb(0, 0, 40);
 $secondary-color: #dce6ef;
 $light-blue:#4c7ca7;
 $hover-color: rgb(45, 48, 85);
+$success-color: #28a745;
 $error-color: #b1161b;
 
 // ############################## Animations ############################## //
@@ -12,4 +13,8 @@ $error-color: #b1161b;
 @keyframes fade {
     from{opacity:0;}
     to{opacity: 1;}
+}
+@keyframes fade_out {
+    from{opacity:1;}
+    to{opacity: 0;}
 }
