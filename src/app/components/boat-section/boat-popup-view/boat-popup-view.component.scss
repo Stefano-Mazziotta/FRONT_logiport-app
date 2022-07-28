@@ -22,7 +22,7 @@
   .popup-read-container {
     width: 90%;
     max-height: 95vh;
-    overflow: scroll;
+    overflow-y: scroll;
 
     background-color: white;
 
@@ -126,7 +126,13 @@
 @media (min-width: 768px) {
   .popup-overlay-read {
     .popup-read-container {
-      width: 55%;
+      .registers-container{
+        flex-flow: row wrap;
+        justify-content: space-between;
+        .registers__elements{
+          width: 45%;
+        }
+      }
     }
   }
 }
@@ -134,15 +140,15 @@
 @media (min-width: 1024px) {
   .popup-overlay-read {
     .popup-read-container {
-      width: 45%;
+      .registers-container{
+        .registers__elements{
+          width: 30%;
+        }
+      }      
     }
   }
 }
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
-  .popup-overlay-read {
-    .popup-read-container {
-      width: 35%;
-    }
-  }
+  
 }
