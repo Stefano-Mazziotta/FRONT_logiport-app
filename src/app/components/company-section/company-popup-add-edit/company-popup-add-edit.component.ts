@@ -106,37 +106,17 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
   // emite este objeto al componente padre para consumir el servicio insertCompany.
   public onSubmit(){
 
-    if(this.isEdit == false){
+    this.company = {
+      IdCompany: null,
+      RazonSocial: this.CompanyForm.get('razonSocial')?.value,
+      CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
+      IsDeleted: 0,
+      TimeSave: null,
+      TimeLastUpdate: null,
+      TimeDeleted: null
+    };
 
-      this.company = {
-        IdCompany: null,
-        RazonSocial: this.CompanyForm.get('razonSocial')?.value,
-        CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
-        IsDeleted: 0,
-        TimeSave: null,
-        TimeLastUpdate: null,
-        TimeDeleted: null
-      };
-
-      this.isSubmit.emit(this.company);
-      this.close_popup();
-    }
-
-    if(this.isEdit == true){
-
-      this.company = {
-        IdCompany: null,
-        RazonSocial: this.CompanyForm.get('razonSocial')?.value,
-        CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
-        IsDeleted: 0,
-        TimeSave: null,
-        TimeLastUpdate: null,
-        TimeDeleted: null
-      };
-
-      this.isSubmit.emit(this.company);
-      this.close_popup();
-    }
-
+    this.isSubmit.emit(this.company);
+    this.close_popup();
   }
 }
