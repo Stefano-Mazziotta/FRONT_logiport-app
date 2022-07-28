@@ -1,0 +1,252 @@
+@import "../../../app.component.scss";
+
+// -------- popup-create styles -------- //
+.popup-overlay {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgb(0, 0, 0, 0.7);
+  z-index: 5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.active {
+    visibility: visible;
+  }
+
+  .popup-container {
+    width: 90%;
+    max-height: 95vh;
+    overflow: scroll;
+
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    /* cuando el popup tenga la clase active,
+       se le aplican las siguientes propiedades: */
+    opacity: 0;
+    transition: all 0.3s ease;
+    &.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .popup__close {
+      width: 100%;
+      margin-bottom: 10px;
+      padding-right: 20px;
+      fill: #dc3545;
+
+      display: flex;
+      justify-content: flex-end;
+
+      transition: all 0.3s ease;
+      &:hover {
+        fill: #ad1f2d;
+      }
+      svg {
+        cursor: pointer;
+      }
+    }
+
+    // popup -> title styles.
+    .popup__title {
+      width: 100%;
+
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      background-color: $principal-color;
+
+      text-transform: uppercase;
+      text-align: center;
+      color: $secondary-color;
+      opacity: 0;
+
+      &.active {
+        animation: fade 0.8s ease forwards;
+      }
+    }
+
+    .popup__form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      &.active {
+        animation: fade 0.8s ease forwards;
+      }
+      .form-flex{
+        display: flex;
+        flex-direction: column;
+
+        .form__label-input{
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+          padding-left: 5px;
+          
+          position: relative;
+          top: 3px;
+
+          font-size: 14px;
+          opacity: 0;
+
+          &.show{
+            animation: fade 0.3s ease forwards;
+          }
+          &.out{
+            animation: fade_out 0.3s ease forwards;
+            animation-play-state: inherit;
+          }
+        }
+
+        // popup -> form input styles. //
+        .form__input-container {
+          width: 100%;
+  
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+  
+          .input-wrap{
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 8px;
+  
+            .input-info{
+              width: 2%;
+              border-radius: 3px 0px 0px 3px;
+              box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+              background-color: $principal-color;
+  
+              &.success{
+                background-color: $success-color;
+              }
+              &.error{
+                background-color: $error-color;
+              }
+            }
+            .form__input{
+              width: 98%;
+              padding: 8px;
+  
+              outline: none;
+              border: none;
+              border-radius: 0px 3px 3px 0px;
+  
+              box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+              background-color: $secondary-color;
+              font-size: 14px;
+  
+              transition: .3s all ease-in-out;
+  
+              &:focus {
+                background-color: #e9e9e9;
+              }
+            }
+          }
+
+          .form__error {
+            width: 90%;
+            margin-top: -8px;
+            margin-left: 3px;
+  
+            text-align: left;
+            color: $error-color;
+            font-size: 14px;
+
+            opacity: 0;
+            &.show{
+              animation: fade 0.3s ease forwards;
+            }
+          }
+        }
+      }
+
+      // popup -> form button styles. //
+      .form__btn {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        padding: 10px;
+
+        background-color: $principal-color;
+        border: none;
+        border-radius: 5px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        letter-spacing: 0.8px;
+        font-size: 16px;
+        color: white;
+
+        transition: all 0.3s ease;
+        &:hover {
+          cursor: pointer;
+          background-color: $hover-color;
+        }
+        &:disabled {
+          cursor: not-allowed;
+          background-color: rgba($hover-color, $alpha: 0.5);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .popup-overlay {
+    .popup-container {
+      width: 70%;
+    }
+  }
+}
+
+@media (min-width: 1024px){
+  .popup-overlay {
+    .popup-container {
+      width: 90%;
+      overflow: auto;
+
+      .popup__form {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .form-flex{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+  
+          // popup -> form input styles. //
+          .form__input-container {
+            width: 25%;
+          }
+        }
+
+        .form__btn{
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .popup-overlay {
+    .popup-container {
+      width: 75%;
+    }
+  }
+}
