@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, 
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Boat } from 'src/app/interfaces/boat';
 import { Company } from 'src/app/interfaces/company';
-import UtilsDate from 'src/app/utility/utilsDate';
+import UtilsDate from 'src/app/utils/utilsDate';
 
 @Component({
   selector: 'app-boat-popup-add-edit',
