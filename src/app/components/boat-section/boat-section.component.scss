@@ -127,8 +127,12 @@
       cursor: pointer;
 
       transition: all .3s ease;
-      &:hover{
+      &:hover &:enabled{
         background-color: $hover-color;
+      }
+      &:disabled{
+        cursor: auto;
+        opacity: .5;
       }
     }
 

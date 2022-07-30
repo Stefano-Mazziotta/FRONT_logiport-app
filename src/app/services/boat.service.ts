@@ -58,10 +58,11 @@ export class BoatService {
     );
   }
 
-  searchBoat(companyRazonSocial:string):Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl ,{
+  searchBoat(boatName:string, idCompanySelected:number):Observable<Boat[]>{
+    return this.http.get<Boat[]>(this.myAppUrl + this.myApiUrl ,{
       params: {
-        RazonSocial: companyRazonSocial
+        IdCompany: idCompanySelected,
+        BoatName: boatName
       }
     });
 

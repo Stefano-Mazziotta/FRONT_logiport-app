@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Boat } from 'src/app/interfaces/boat';
 import { BoatService } from 'src/app/services/boat.service';
 import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-boat-section',
@@ -53,10 +54,16 @@ export class BoatSectionComponent implements OnInit {
 
   suscription: Subscription | undefined;
 
+  boatFilterForm: FormGroup;
+
   constructor(
     private _router: Router,
     private _boatService: BoatService,
+    private fb: FormBuilder,
   ) {
+    this.boatFilterForm = this.fb.group({
+      boatNameFilter: ['', Validators.required]
+    })
   }
 
   ngOnInit(): void {
@@ -217,6 +224,31 @@ export class BoatSectionComponent implements OnInit {
         }
       });
     }
+  }
+
+  public searchBoat():void{
+
+    if (this.companySelected?.IdCompany != null) {
+      let idCompanySelected:number = this.companySelected.IdCompany;
+      let boatName = this.boatFilterForm.get('boatNameFilter')?.value;
+
+      if(boatName){
+        this._boatService.searchBoat(boatName,idCompanySelected).subscribe({
+          next: data => {
+            this.boatList = data;
+            this.existBoats = this.boatList.length > 0;
+          },
+          error: error => {
+            console.log(error);
+          }
+        })
+      }
+    }    
+  }
+
+  public resetFilter():void{
+    this.get_boats();
+    this.boatFilterForm.reset();
   }
 
 }
