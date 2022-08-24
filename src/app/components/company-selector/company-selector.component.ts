@@ -3,11 +3,11 @@ import { Company } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
-  selector: 'app-company-login',
-  templateUrl: './company-login.component.html',
-  styleUrls: ['./company-login.component.scss']
+  selector: 'app-company-selector',
+  templateUrl: './company-selector.component.html',
+  styleUrls: ['./company-selector.component.scss']
 })
-export class CompanyLoginComponent implements OnInit {
+export class CompanySelectorComponent implements OnInit {
 
   constructor(
     private _companyService: CompanyService,

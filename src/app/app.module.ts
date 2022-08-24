@@ -16,7 +16,7 @@ import { CompanyPopupViewComponent } from './components/company-section/company-
 
 import { PopupConfirmDeleteComponent } from './components/popup-confirm-delete/popup-confirm-delete.component';
 
-import { CompanyLoginComponent } from './components/company-login/company-login.component';
+import { CompanySelectorComponent } from './components/company-selector/company-selector.component';
 
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { BoatPopupAddEditComponent } from './components/boat-section/boat-popup-add-edit/boat-popup-add-edit.component';
@@ -39,7 +39,7 @@ import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
     BoatSectionComponent,
     MotorAbmComponent,
     GeneratorAbmComponent,
-    CompanyLoginComponent,
+    CompanySelectorComponent,
     BoatPopupAddEditComponent,
     BoatPopupViewComponent,
     TimestampToDatePipe,

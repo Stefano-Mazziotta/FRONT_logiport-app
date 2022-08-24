@@ -68,7 +68,7 @@ export class BoatSectionComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.companySelected === null) {
-      this._router.navigateByUrl('/login-empresa');
+      this._router.navigateByUrl('/seleccionar-empresa');
     }
     
     this.get_boats();
