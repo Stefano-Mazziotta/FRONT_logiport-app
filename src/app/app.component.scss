@@ -1,14 +1,21 @@
-// ############################## variables ############################## //
+// ############################## Colors ############################## //
+$principal-color-blue: #000028;
+$color-blue-2: #141442;
+$color-blue-3: #000075;
+$color-blue-4: #232375;
+$color-blue-5: #0000C2;
 
-// colors:
-$principal-color: rgb(0, 0, 40);
-$secondary-color: #dce6ef;
 $light-blue:#4c7ca7;
+
+$secondary-color: #dce6ef;
+
 $hover-color: rgb(45, 48, 85);
+
 $success-color: #28a745;
 $error-color: #b1161b;
 
 // ############################## Animations ############################## //
+
 // fade animation. //
 @keyframes fade {
     from{opacity:0;}

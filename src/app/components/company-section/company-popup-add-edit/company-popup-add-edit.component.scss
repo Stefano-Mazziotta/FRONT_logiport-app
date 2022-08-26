@@ -62,7 +62,7 @@
       margin-bottom: 35px;
       padding-bottom: 10px;
       padding-top: 10px;
-      background-color: $principal-color;
+      background-color: $principal-color-blue;
 
       text-transform: uppercase;
       text-align: center;
@@ -110,7 +110,7 @@
           box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
           &:focus {
-            border: 2px solid $principal-color;
+            border: 2px solid $principal-color-blue;
           }
         }
         .form__error {
@@ -131,7 +131,7 @@
         margin-top: 35px;
         padding: 10px;
 
-        background-color: $principal-color;
+        background-color: $principal-color-blue;
         border: none;
         border-radius: 5px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

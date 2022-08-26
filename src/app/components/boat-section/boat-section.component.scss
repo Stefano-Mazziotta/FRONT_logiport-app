@@ -36,7 +36,7 @@
       padding: 15px 20px;
       margin-bottom: 10px;
 
-      background-color: $principal-color;
+      background-color:$principal-color-blue;
       color: white;
       border: none;
       border-radius: 5px;
@@ -69,10 +69,10 @@
       margin-bottom: 10px;
 
       border: none;
-      border-right: 5px solid $principal-color;
+      border-right: 5px solid$principal-color-blue;
       border-radius: 3px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-      background-color: $principal-color;
+      background-color:$principal-color-blue;
 
       font-size: 16px;
       color: white;
@@ -120,7 +120,7 @@
       border: none;
       border-radius: 5px;
       box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-      background-color: $principal-color;
+      background-color:$principal-color-blue;
 
       font-size: 18px;
       color: white;
@@ -161,7 +161,7 @@
         align-items: center;
 
         width: 100%;
-        background-color: $principal-color;
+        background-color:$principal-color-blue;
         border-radius: 10px 10px 0px 0px;
         border-bottom: 5px solid white;
 
@@ -184,7 +184,7 @@
         justify-content: space-between;
         align-items: center;
 
-        color: $principal-color;
+        color:$principal-color-blue;
         background-color: $secondary-color;
         border-bottom: 2px solid white;
         text-align: center;
@@ -210,7 +210,7 @@
             justify-content: center;
             align-items: center;
 
-            background-color: $principal-color;
+            background-color:$principal-color-blue;
             box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
             fill: white;
 

@@ -64,7 +64,7 @@
             top: 8px;
             right: 10px;
 
-            color: $principal-color;
+            color: $principal-color-blue;
             font-size: 21px;
         }
         .cross{
@@ -111,7 +111,7 @@
                 li {
                     font-size: 14px;
                     padding: 5px;
-                    color: $principal-color;
+                    color: $principal-color-blue;
                     border: 2px solid $secondary-color;
                     border-top: none;
                     cursor: pointer;
@@ -139,7 +139,7 @@
             padding: 15px 20px;
             margin-bottom: 10px;
 
-            background-color: $principal-color;
+            background-color: $principal-color-blue;
             color: white;
             border: none;
             border-radius: 5px;
