@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
@@ -26,12 +25,13 @@ import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
+import { NavBottomMobileComponent } from './components/nav-bottom-mobile/nav-bottom-mobile.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     CompanySectionComponent,
     CompanyPopupAddComponent,
     CompanyPopupViewComponent,
@@ -43,6 +43,8 @@ import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
     BoatPopupAddEditComponent,
     BoatPopupViewComponent,
     TimestampToDatePipe,
+    NavBottomMobileComponent,
+    HomeComponent,
   ],
   imports: [
     NgxPaginationModule,
