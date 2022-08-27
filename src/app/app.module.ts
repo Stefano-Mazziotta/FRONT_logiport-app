@@ -7,7 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderMobileComponent } from './components/header-mobile/header-mobile.component';
 
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
@@ -27,11 +27,12 @@ import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
 import { NavBottomMobileComponent } from './components/nav-bottom-mobile/nav-bottom-mobile.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoaderDirective } from './directives/loader/loader.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderMobileComponent,
     CompanySectionComponent,
     CompanyPopupAddComponent,
     CompanyPopupViewComponent,
@@ -45,6 +46,7 @@ import { HomeComponent } from './components/home/home.component';
     TimestampToDatePipe,
     NavBottomMobileComponent,
     HomeComponent,
+    LoaderDirective,
   ],
   imports: [
     NgxPaginationModule,
