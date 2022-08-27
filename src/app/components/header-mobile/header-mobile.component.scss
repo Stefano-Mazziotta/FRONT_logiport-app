@@ -25,12 +25,10 @@ header {
       align-items: center;
 
       text-decoration: none;
-      color: $light-blue;
+      color: $secondary-color;
 
       transition: all 0.3s ease;
-      &:hover {
-        color: $color-blue-4;
-      }
+      
       .logo-title {
         font-size: 32px;
         
@@ -39,7 +37,7 @@ header {
       
         width: 30px; 
         height: 30px;
-        filter: invert(47%) sepia(73%) saturate(324%) hue-rotate(167deg) brightness(83%) contrast(89%);
+        filter: invert(93%) sepia(5%) saturate(468%) hue-rotate(174deg) brightness(102%) contrast(88%);
       }
     }
   }
