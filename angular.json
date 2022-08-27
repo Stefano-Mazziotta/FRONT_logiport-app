@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "logiport-app"
+  "defaultProject": "logiport-app",
+  "cli": {
+    "analytics": false
+  }
 }
