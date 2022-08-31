@@ -28,7 +28,7 @@ import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
 import { NavBottomMobileComponent } from './components/app-mobile/nav-bottom-mobile/nav-bottom-mobile.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoaderDirective } from './directives/loader/loader.directive';
-import { NavSidebarDesktopComponent } from './components/nav-sidebar-desktop/nav-sidebar-desktop.component';
+import { NavSidebarDesktopComponent } from './components/app-desktop/nav-sidebar-desktop/nav-sidebar-desktop.component';
 import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
 
