@@ -2,9 +2,9 @@
 
 .main{
     width: 90%;
-    height: 100vh;
 
     margin-top: 10px;
+    margin-bottom: 50px;
 
     margin-left: auto;
     margin-right: auto;
@@ -12,12 +12,11 @@
     color: $principal-color-blue;
 
     .section-title{
-        font-size: 28px;
+        font-size: 36px;
         padding-bottom: 5px;
         margin-bottom: 25px;
 
         border-bottom: 3px solid $secondary-color;
-        border-radius: 0px 0px 20px 0px;
     }
 
     .menu-wrap{
@@ -37,11 +36,38 @@
             margin-bottom: 25px;
             background-color: $principal-color-blue;            
             border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            box-shadow: $box-shadow-btn;
             
             color: $secondary-color;
             text-decoration: none;            
         }
     }
     
+}
+
+// ___ Laptop ___ //
+@media screen and (min-width: 1024px) {
+
+    .main{
+        width: 90%;
+        margin-bottom: 0;
+        .menu-wrap{
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        
+            .menu__item{
+                width: 200px;
+                height: 175px;
+                transition: all ease .3s;
+                font-size: 24px;
+                
+
+                &:hover{
+                    background-color: $hover-color;
+                }
+            }
+        }
+    }
+
 }
