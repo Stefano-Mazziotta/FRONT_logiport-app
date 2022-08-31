@@ -7,7 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderMobileComponent } from './components/header-mobile/header-mobile.component';
+import { HeaderMobileComponent } from './components/app-mobile/header-mobile/header-mobile.component';
 
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
