@@ -25,7 +25,7 @@ import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
-import { NavBottomMobileComponent } from './components/nav-bottom-mobile/nav-bottom-mobile.component';
+import { NavBottomMobileComponent } from './components/app-mobile/nav-bottom-mobile/nav-bottom-mobile.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoaderDirective } from './directives/loader/loader.directive';
 import { NavSidebarDesktopComponent } from './components/nav-sidebar-desktop/nav-sidebar-desktop.component';
