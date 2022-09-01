@@ -31,6 +31,7 @@ import { LoaderDirective } from './directives/loader/loader.directive';
 import { NavSidebarDesktopComponent } from './components/app-desktop/nav-sidebar-desktop/nav-sidebar-desktop.component';
 import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AppMobileComponent } from './components/app-mobile/app-mobile.component
     NavSidebarDesktopComponent,
     AppDesktopComponent,
     AppMobileComponent,
+    LoginComponent,
   ],
   imports: [
     NgxPaginationModule,
