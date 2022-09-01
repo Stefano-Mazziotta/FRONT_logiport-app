@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company';
 import { Router } from '@angular/router';
 import { Boat } from 'src/app/interfaces/boat';
-import { BoatService } from 'src/app/services/boat.service';
+import { BoatService } from 'src/app/services/boat/boat.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
