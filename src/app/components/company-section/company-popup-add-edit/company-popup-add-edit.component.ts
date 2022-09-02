@@ -2,7 +2,7 @@ import { Component,  OnInit, Renderer2, ViewChild, ElementRef } from '@angular/c
 import {Input, Output, OnChanges, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Company } from 'src/app/interfaces/company';
-import { CompanyService } from 'src/app/services/company.service'
+import { CompanyService } from 'src/app/services/company/company.service'
 
 @Component({
   selector: 'app-company-popup-add-edit',

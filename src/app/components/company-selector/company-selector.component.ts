@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Company } from 'src/app/interfaces/company';
-import { CompanyService } from 'src/app/services/company.service';
+import { CompanyService } from 'src/app/services/company/company.service';
 
 @Component({
   selector: 'app-company-selector',
