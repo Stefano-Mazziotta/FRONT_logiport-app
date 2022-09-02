@@ -19,14 +19,15 @@
         color: $secondary-color;
         
         transition: all ease .3s;
-        &:hover{
-            filter: invert(46%) sepia(31%) saturate(708%) hue-rotate(167deg) brightness(93%) contrast(87%);
-        }
         
         .logo-title{
             font-size: 24px;
             margin-left: 10px;
             margin-right: 10px;
+
+            &:hover{
+                cursor:default;
+            }
         }
 
         .logo-svg{
