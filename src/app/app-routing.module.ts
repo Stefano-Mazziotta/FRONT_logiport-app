@@ -5,15 +5,41 @@ import { BoatSectionComponent } from './components/boat-section/boat-section.com
 import { CompanySelectorComponent } from './components/company-selector/company-selector.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserGuardGuard } from './guards/userGuard/user-guard.guard';
 
 const routes: Routes = [
-  {path: 'empresas', component: CompanySectionComponent},
-  {path: 'seleccionar-empresa', component: CompanySelectorComponent},
-  {path: ':companyName/lanchas', component: BoatSectionComponent},
-  {path: 'inicio', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: '',   redirectTo: '/inicio', pathMatch: 'full'},
-  // {path: '**', component: BoatSectionComponent} // 404 not found
+  {
+    path: 'empresas', 
+    component: CompanySectionComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'seleccionar-empresa', 
+    component: CompanySelectorComponent,
+    canActivate: [UserGuardGuard],
+    
+  },
+  {
+    path: ':companyName/lanchas', 
+    component: BoatSectionComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'inicio', 
+    component: HomeComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'login', 
+    component: LoginComponent
+  },
+  // {
+  //   path: '404',   
+  //   redirectTo: '/404', 
+  //   pathMatch: 'full',
+  //   // canActivate: [UserGuardGuard],
+  // },
+  // {path: '**', redirectTo: '/404', component: LoginComponent} // 404 not found
 ];
 
 @NgModule({
