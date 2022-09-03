@@ -1,12 +1,12 @@
 <!-- ----- nav ----- -->
 <nav class="nav-container">
 
-    <a class="link-container" routerLink="/inicio" routerLinkActive="active">
+    <a class="link-container" *ngIf="(existToken$ | async)" routerLink="/inicio" routerLinkActive="active">
         <i class="link__icon fa-solid fa-house"></i>
         <p class="link__description">Inicio</p>        
     </a>
     
-    <a class="link-container" routerLink="/cuenta" routerLinkActive="active">
+    <a class="link-container" *ngIf="(existToken$ | async)" routerLink="/cuenta" routerLinkActive="active">
         <i class="link__icon  fa-solid fa-user"></i>
         <p class="link__description">Cuenta</p>
     </a>

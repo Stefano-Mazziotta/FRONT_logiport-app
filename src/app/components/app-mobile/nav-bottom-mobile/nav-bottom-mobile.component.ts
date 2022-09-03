@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-nav-bottom-mobile',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBottomMobileComponent implements OnInit {
 
-  constructor() { }
+  existToken$:Observable<boolean>;
 
-  ngOnInit(): void {
+  constructor(_userService: UserService) { 
+    this.existToken$ = _userService.existToken;
   }
+
+  ngOnInit():void {}
 
 }
