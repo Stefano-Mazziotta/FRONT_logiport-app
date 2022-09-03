@@ -11,3 +11,16 @@
     -moz-box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
+.toast-container {
+    
+    .ngx-toastr{
+        width: 325px;
+        transition: all ease .3s;
+
+        &:hover{
+            cursor: default;
+        }
+    }    
+}
+  

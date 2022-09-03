@@ -69,7 +69,11 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        preventDuplicates: true,
+      }
+    ),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
