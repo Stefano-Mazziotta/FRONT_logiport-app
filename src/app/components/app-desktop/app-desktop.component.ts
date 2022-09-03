@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-app-desktop',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppDesktopComponent implements OnInit {
 
-  constructor() { }
+  existToken$:Observable<boolean>;
+
+  constructor(_userService:UserService) {
+    this.existToken$ = _userService.existToken;
+  }
 
   ngOnInit(): void {
   }

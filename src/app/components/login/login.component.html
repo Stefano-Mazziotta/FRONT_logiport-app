@@ -1,25 +1,30 @@
 <section class="main">
     
-   
-        <form class="login-container" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="logo-container">
+        <img class="logo__escudo" src="../../../assets/svg/escudo.svg" alt="">
+        <h1 class="logo__title">LOGIPORT</h1>
+    </div>
+    
+    <form class="login-container" [formGroup]="loginForm" (ngSubmit)="onLogin()">
 
-            <div class="input-wrap">
-                <label for="">Usuario</label>
-                <div class="input-container">
-                    <div class="input__decorator"></div>
-                    <input type="text" formControlName="username" placeholder="Usuario">
-                </div>
+        <div class="input-wrap">
+            <label for="">Usuario</label>
+            <div class="input-container">
+                <div class="input__decorator"></div>
+                <input type="text" formControlName="username" placeholder="Usuario">
             </div>
+        </div>
 
-            <div class="input-wrap">
-                <label for="">Contraseña</label>
-                <div class="input-container">
-                    <div class="input__decorator"></div>
-                    <input type="password" formControlName="password" placeholder="Contraseña">
-                </div>
+        <div class="input-wrap">
+            <label for="">Contraseña</label>
+            <div class="input-container">
+                <div class="input__decorator"></div>
+                <input type="password" formControlName="password" placeholder="Contraseña">
             </div>
+        </div>
 
-            <input class="login__btn" type="submit" value="Ingresar" [disabled]="loginForm.invalid">
+        <input class="login__btn" type="submit" value="Ingresar" [disabled]="loginForm.invalid">
 
-        </form>
+    </form>
+
 </section>

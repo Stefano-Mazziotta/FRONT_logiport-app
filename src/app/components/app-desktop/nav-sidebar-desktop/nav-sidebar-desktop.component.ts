@@ -9,12 +9,6 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class NavSidebarDesktopComponent implements OnInit {
 
-  existToken$:Observable<boolean>;
-
-  constructor(_userService:UserService) {
-    this.existToken$ = _userService.existToken;
-  }
-
   ngOnInit(): void {
   }
 
