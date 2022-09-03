@@ -33,13 +33,15 @@ const routes: Routes = [
     path: 'login', 
     component: LoginComponent
   },
-  // {
-  //   path: '404',   
-  //   redirectTo: '/404', 
-  //   pathMatch: 'full',
-  //   // canActivate: [UserGuardGuard],
-  // },
-  // {path: '**', redirectTo: '/404', component: LoginComponent} // 404 not found
+  {
+    path: '',   
+    redirectTo: '/login', 
+    pathMatch: 'full',
+  },
+  {
+    path: '**', 
+    redirectTo: '/login',
+  }
 ];
 
 @NgModule({
