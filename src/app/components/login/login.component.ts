@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       username,
       password
     }
-
+    
     this._userService.login(userDTO).subscribe({
       next: response => {
         const accessToken = response.data.accessToken;
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.toastr.error('Usuario o contraseña invalido.', 'Error');
         }
 
-        if (error.status === 500) {
+        if (error.status != 401) {
           this.toastr.error('Ah ocurrido un error.', 'Error');
         }
 
