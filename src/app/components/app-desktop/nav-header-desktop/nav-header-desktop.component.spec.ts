@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavSidebarDesktopComponent } from './nav-sidebar-desktop.component';
+import { NavHeaderDesktopComponent } from './nav-header-desktop.component';
 
 describe('NavSidebarDesktopComponent', () => {
-  let component: NavSidebarDesktopComponent;
-  let fixture: ComponentFixture<NavSidebarDesktopComponent>;
+  let component: NavHeaderDesktopComponent;
+  let fixture: ComponentFixture<NavHeaderDesktopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavSidebarDesktopComponent ]
+      declarations: [ NavHeaderDesktopComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavSidebarDesktopComponent);
+    fixture = TestBed.createComponent(NavHeaderDesktopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

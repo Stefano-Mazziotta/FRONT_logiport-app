@@ -1,0 +1,78 @@
+@import "./../../../app.component.scss";
+
+.main{
+    width: 100%;
+    background-color: $principal-color-blue;
+
+    margin-bottom: 30px;
+    .nav-container {
+    
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+        margin-left: auto;
+        margin-right: auto;
+
+        text-decoration: none;
+    
+        .logo-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+    
+            padding: 10px;
+    
+            color: $secondary-color;
+            
+            transition: all ease .3s;
+            
+            .logo-title{
+                font-size: 24px;
+                margin-left: 10px;
+                margin-right: 10px;
+    
+                &:hover{
+                    cursor:default;
+                }
+            }
+    
+            .logo-svg{
+                width: 50px;
+                height: 50px;
+                filter: invert(93%) sepia(6%) saturate(456%) hue-rotate(177deg) brightness(101%) contrast(88%);
+            }
+        }
+    
+        .link-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+    
+            padding: 10px;
+    
+            color: $secondary-color;
+    
+            transition: all ease .3s;
+    
+            &:hover {
+                background-color: $color-blue-2;
+            }
+    
+            &.active {
+                cursor: default;
+                background-color: $color-blue-2;
+                color: $light-blue;
+            }
+    
+            .link__description {
+                margin-left: 5px;
+    
+            }
+    
+        }
+    }
+}

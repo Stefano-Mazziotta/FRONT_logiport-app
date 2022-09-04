@@ -1,40 +1,7 @@
-@import "./../../app.component.scss";
-
-.desktop-app-container{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
 
 
-    .nav-sidebar{
-        width: 20%;
-    }
-
-    .app-container{
-        &.app{
-            width: 80%;   
-        }
-        &.login{
-            width: 100%;
-        }
-    }
-}
-
-// laptop L
-@media screen and (min-width: 1440px) {
 
 
-    .desktop-app-container{
-        
-        .nav-sidebar{
-            width: 15%;
-        }
 
-        .app-container{
-            &.app{
-                width: 85%;
-            }
-        }
-    }
-}
+    
 

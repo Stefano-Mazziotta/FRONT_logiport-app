@@ -33,7 +33,7 @@ import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
 import { NavBottomMobileComponent } from './components/app-mobile/nav-bottom-mobile/nav-bottom-mobile.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoaderDirective } from './directives/loader/loader.directive';
-import { NavSidebarDesktopComponent } from './components/app-desktop/nav-sidebar-desktop/nav-sidebar-desktop.component';
+import { NavHeaderDesktopComponent } from './components/app-desktop/nav-header-desktop/nav-header-desktop.component';
 import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
 import { LoginComponent } from './components/login/login.component';
@@ -56,7 +56,7 @@ import { LoginComponent } from './components/login/login.component';
     NavBottomMobileComponent,
     HomeComponent,
     LoaderDirective,
-    NavSidebarDesktopComponent,
+    NavHeaderDesktopComponent,
     AppDesktopComponent,
     AppMobileComponent,
     LoginComponent,
