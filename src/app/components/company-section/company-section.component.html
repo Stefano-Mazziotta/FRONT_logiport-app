@@ -1,16 +1,20 @@
 <div class="main">
-  <h2 class="title">Empresas</h2>
+
+  <h2 class="title"> <a class="icon-back" routerLink="/inicio"><i class="fa-solid fa-arrow-left"></i></a>Empresas</h2>
   <!-------------------- btn create -------------------->
   <button class="btn-add" (click)="add_popup()">Añadir empresa</button>
-  <app-company-popup-add-edit (isSubmit)="insert_or_edit_company_event($event)" (closePopup)="close_popup_parent($event)"
-    [isOpen]="isOpen" [isEdit]="isEdit" [companyEdit]="company"></app-company-popup-add-edit>
+  <app-company-popup-add-edit (isSubmit)="insert_or_edit_company_event($event)"
+    (closePopup)="close_popup_parent($event)" [isOpen]="isOpen" [isEdit]="isEdit" [companyEdit]="company">
+  </app-company-popup-add-edit>
 
   <!-------------------- nav search -------------------->
   <h3 class="title sub">Filtro</h3>
-  <div class="filtermenu-container">
-      <input class="search__input" type="text" placeholder="Buscar por razón social"  #InputSearchCompany>
+
+  <div class="input-container">
+    <div class="input__decorator"></div>
+    <input class="search__input" type="text" placeholder="Buscar por razón social" #InputSearchCompany>
   </div>
-  
+
   <div class="btnfilter-container">
     <button class="btnfilter__btn" (click)="search_company()"><i class="fa-solid fa-magnifying-glass"></i></button>
     <button class="btnfilter__btn" (click)="reset_filter()"><i class="fa-solid fa-rotate"></i></button>
@@ -18,12 +22,12 @@
 
   <!-------------------- table -------------------->
   <h3 class="title sub">Resultados</h3>
-  <div style="overflow-x:auto; margin-bottom:10px;">
+  <p *ngIf="!existCompanies"> No se han encontrado empresas.</p>
+  <div *ngIf="existCompanies" style="overflow-x:auto; margin-bottom:10px;">
     <table class="table-data">
 
       <thead>
         <tr class="table__row-header">
-          <th>ID</th>
           <th>Razón Social</th>
           <th>CUIT</th>
           <th class="out-border">Action</th>
@@ -34,7 +38,6 @@
 
         <tr class="table__row-body"
           *ngFor="let company of companyList | paginate: { itemsPerPage: 7, currentPage: currentPage}">
-          <td>{{ company.IdCompany }}</td>
           <td>{{ company.RazonSocial }}</td>
           <td>{{ company.CUIT }}</td>
           <td class="btn-container">
@@ -65,12 +68,14 @@
   </div>
 
   <!---------------------- popup read data  ---------------------->
-  <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView" [company]="company"></app-company-popup-view>
-  <app-popup-confirm-delete (closePopup)="close_popup_parent($event)" (isDelete)="delete_company($event)" [isOpenConfirmDelete]="isOpenConfirmDelete"></app-popup-confirm-delete>
+  <app-company-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView" [company]="company">
+  </app-company-popup-view>
+  <app-popup-confirm-delete (closePopup)="close_popup_parent($event)" (isDelete)="delete_company($event)"
+    [isOpenConfirmDelete]="isOpenConfirmDelete"></app-popup-confirm-delete>
 
   <!-------------------- paginated buttons of table -------------------->
 
-  <div class="pagination-wrap">
+  <div *ngIf="existCompanies" class="pagination-wrap">
     <pagination-controls class="pagination-buttons" (pageChange)="currentPage = $event"
       [responsive]="responsivePagination" previousLabel="Anterior" nextLabel="Siguiente">
     </pagination-controls>

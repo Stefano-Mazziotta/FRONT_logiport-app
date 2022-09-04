@@ -36,8 +36,7 @@ export class CompanySectionComponent implements OnInit {
     TimeDeleted: null
   }
 
-  // [(ngModel)]="inputSearchCompany" ===> html
-  // inputSearchCompany!:string;
+  existCompanies: boolean = false;
 
   @ViewChild('InputSearchCompany') inputSearchCompany!: ElementRef;
 
@@ -134,6 +133,7 @@ export class CompanySectionComponent implements OnInit {
     this._companyService.getListCompanies().subscribe({
       next: data => {
         this.companyList = data;
+        this.existCompanies = this.companyList.length > 0;
       },
       error: error => {
         console.log(error);
