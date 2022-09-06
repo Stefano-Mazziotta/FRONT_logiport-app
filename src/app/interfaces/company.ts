@@ -1,10 +1,45 @@
-export interface Company {
-    IdCompany: number | null;
-    RazonSocial: string | null;
-    CUIT: number | null;
-    IsDeleted: number | null;
+export interface ICompany {
+    IdCompany: string;
+    RazonSocial: string;
+    CUIT: number;
+    IsDeleted: number;
     TimeSave: number | null;
     TimeLastUpdate: number | null;
     TimeDeleted: number | null;
 }
+
+export interface ICreateCompanyDTO {
+    razonSocial: string,
+    cuit: string
+}
+
+export interface IUpdateCompanyDTO {
+    idCompany: string,
+    razonSocial: string,
+    cuit: string
+}
+
+export interface ISearchCompanyDTO {
+    razonSocial: string
+}
+
+interface IResponse {
+    status: number,
+    type: string,
+    message: string,
+    data: ICompany | ICompany[] | null
+}
+
+export interface IResponseListCompany extends IResponse {
+    data: ICompany[]
+}
+
+export interface IResponseOneCompany extends IResponse {
+    data: ICompany
+}
+
+export interface IResponseNullData extends IResponse {
+    data: null
+}
+
 
