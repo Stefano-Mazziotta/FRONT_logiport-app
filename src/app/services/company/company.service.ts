@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, retry, tap} from 'rxjs/operators'
-import { Company } from 'src/app/interfaces/company'
+import { Observable } from 'rxjs';
+import { ICompany, ICreateCompanyDTO, IUpdateCompanyDTO, ISearchCompanyDTO, IResponseListCompany, IResponseOneCompany, IResponseNullData } from 'src/app/interfaces/company'
 
 @Injectable({
   providedIn: 'root'
@@ -12,48 +11,32 @@ export class CompanyService {
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/companies/';
 
-  private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
-  get refresh$(){
-    return this._refresh$;
+  getListCompanies(): Observable<IResponseListCompany> {
+    return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl);
   }
 
-  getListCompanies():Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl);
+  getCompanyById(idCompany: string): Observable<IResponseOneCompany> {
+    return this.http.get<IResponseOneCompany>(this.myAppUrl + this.myApiUrl + idCompany);
   }
 
-  insertCompany(company:Company):Observable<any>{
-    return this.http.post(this.myAppUrl + this.myApiUrl, company)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  insertCompany(company: ICreateCompanyDTO): Observable<IResponseNullData> {
+    return this.http.post<IResponseNullData>(this.myAppUrl + this.myApiUrl, company);
   }
 
-  deleteCompany(companyID?:number):Observable<any>{
-    return this.http.delete(this.myAppUrl + this.myApiUrl + companyID)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  deleteCompany(idCompany: string): Observable<IResponseNullData> {
+    return this.http.delete<IResponseNullData>(this.myAppUrl + this.myApiUrl + idCompany);
   }
 
-  updateCompany(company:Company):Observable<any>{
-    return this.http.put(this.myAppUrl + this.myApiUrl + company.IdCompany, company)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  updateCompany(company: IUpdateCompanyDTO): Observable<IResponseNullData> {
+    return this.http.put<IResponseNullData>(this.myAppUrl + this.myApiUrl + company.idCompany, company);
   }
 
-  searchCompany(companyRazonSocial:string):Observable<any>{
-    return this.http.get(this.myAppUrl + this.myApiUrl ,{
+  searchCompany(searchCompanyDTO: ISearchCompanyDTO): Observable<IResponseListCompany> {
+    return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl, {
       params: {
-        RazonSocial: companyRazonSocial
+        ... searchCompanyDTO
       }
     });
 
