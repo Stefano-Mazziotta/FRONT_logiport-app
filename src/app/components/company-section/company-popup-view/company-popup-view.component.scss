@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   &.active {
     visibility: visible;
   }
@@ -32,8 +33,8 @@
 
     opacity: 0;
     transition: all 0.3s ease;
-    /* cuando el popup tenga la clase active,
-        se le aplican las siguientes propiedades: */
+
+    // cuando el popup tenga la clase active, se le aplican las siguientes propiedades:
     &.active {
       opacity: 1;
       transform: scale(1);
@@ -43,17 +44,18 @@
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
-      fill: #dc3545;
 
       display: flex;
       flex-direction: row-reverse;
 
-      transition: all 0.3s ease;
-      &:hover {
-        fill: #ad1f2d;
-      }
       svg {
+        fill: $principal-color-blue;
         cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          fill: $error-color;
+        }
       }
     }
 
@@ -89,6 +91,7 @@
       padding-right: 15px;
       padding-left: 15px;
       opacity: 0;
+
       &.active {
         animation: fade 0.8s ease forwards;
       }
@@ -127,6 +130,7 @@
     }
   }
 }
+
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
   .popup-overlay-read {
@@ -135,6 +139,7 @@
     }
   }
 }
+
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
   .popup-overlay-read {

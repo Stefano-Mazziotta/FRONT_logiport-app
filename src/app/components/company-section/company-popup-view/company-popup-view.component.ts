@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Renderer2, ViewChild, ElementRef } from '@angular/core';
-import {OnChanges, Input, Output, EventEmitter} from '@angular/core';
-import { Company } from 'src/app/interfaces/company';
+import { OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { ICompany } from 'src/app/interfaces/company';
 
 @Component({
   selector: 'app-company-popup-view',
@@ -10,76 +10,68 @@ import { Company } from 'src/app/interfaces/company';
 })
 export class CompanyPopupViewComponent implements OnInit, OnChanges {
 
-  @Input() isOpenView!:boolean;
-  @Input() company!:Company;
+  @Input() isOpenView!: boolean;
+  @Input() company: ICompany = {
+    IdCompany: "",
+    RazonSocial: "",
+    CUIT: 0,
+    IsDeleted: 0,
+    TimeDeleted: 0,
+    TimeLastUpdate: 0,
+    TimeSave: 0
+  };
 
-  @Output() closePopup = new EventEmitter<boolean>();
+  @Output() eventClosePopup = new EventEmitter<boolean>();
 
-  @ViewChild('overlay') overlay!: ElementRef;
-  @ViewChild('popup') popup!: ElementRef;
-  @ViewChild('title') title!: ElementRef;
-  @ViewChild('dataContainer') dataContainer!: ElementRef;
+  @ViewChild('overlay') $overlay!: ElementRef;
+  @ViewChild('popup') $popup!: ElementRef;
+  @ViewChild('title') $title!: ElementRef;
+  @ViewChild('dataContainer') $dataContainer!: ElementRef;
 
-  @ViewChild('idCompany') idCompany!: ElementRef;
-  @ViewChild('razSocialCompany') razSocialCompany!: ElementRef;
-  @ViewChild('CUITCompany') CUITCompany!: ElementRef;
-
-  clickPopup:boolean = false;
+  clickPopup: boolean = false;
 
   constructor(private renderer: Renderer2) { }
 
-  ngOnInit():void{
+  ngOnInit(): void {
 
   }
 
-  ngOnChanges():void{
-    if (this.isOpenView == true){
-      this.open_popup();
+  ngOnChanges(): void {
+    if (this.isOpenView == true) {
+      this.openPopup();
     }
   }
 
-  // open_popup() -> abre el popup mediante DOM y setea la info correspondiente.
-  private open_popup():void{
-    // acceder a cada elemento [html] del componente.
-    const overlay = this.overlay.nativeElement;
-    const popup = this.popup.nativeElement;
-    const title = this.title.nativeElement;
-    const dataContainer = this.dataContainer.nativeElement;
+  private openPopup(): void {
 
-    const idCompanyParaph = this.idCompany.nativeElement;
-    const razSocialCompanyParaph = this.razSocialCompany.nativeElement;
-    const CUITCompanyParaph = this.CUITCompany.nativeElement;
+    const $overlay = this.$overlay.nativeElement;
+    const $popup = this.$popup.nativeElement;
+    const $title = this.$title.nativeElement;
+    const $dataContainer = this.$dataContainer.nativeElement;
 
-    // agrega la clase '.active' para mostrar el modal view-company.
-    this.renderer.addClass(overlay,'active');
-    this.renderer.addClass(popup,'active');
-    this.renderer.addClass(title,'active');
-    this.renderer.addClass(dataContainer,'active');
+    this.renderer.addClass($overlay, 'active');
+    this.renderer.addClass($popup, 'active');
+    this.renderer.addClass($title, 'active');
+    this.renderer.addClass($dataContainer, 'active');
 
-    // cambiar los valores de los <p> correspondientes a cada info. de la company.
-    this.renderer.setProperty(idCompanyParaph, 'innerHTML', this.company.IdCompany);
-    this.renderer.setProperty(razSocialCompanyParaph, 'innerHTML', this.company.RazonSocial);
-    this.renderer.setProperty(CUITCompanyParaph, 'innerHTML', this.company.CUIT);
   }
 
-  // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
-  public close_popup(){
+  public closePopup() {
 
-    if(this.clickPopup == false){
+    if (this.clickPopup == false) {
 
-      const overlay = this.overlay.nativeElement;
-      const popup = this.popup.nativeElement;
-      const title = this.title.nativeElement;
-      const dataContainer = this.dataContainer.nativeElement;
+      const $overlay = this.$overlay.nativeElement;
+      const $popup = this.$popup.nativeElement;
+      const $title = this.$title.nativeElement;
+      const $dataContainer = this.$dataContainer.nativeElement;
 
-
-      this.renderer.removeClass(overlay,'active')
-      this.renderer.removeClass(popup,'active')
-      this.renderer.removeClass(title,'active');
-      this.renderer.removeClass(dataContainer,'active');
+      this.renderer.removeClass($overlay, 'active')
+      this.renderer.removeClass($popup, 'active')
+      this.renderer.removeClass($title, 'active');
+      this.renderer.removeClass($dataContainer, 'active');
 
       this.isOpenView = false;
-      this.closePopup.emit(this.isOpenView);
+      this.eventClosePopup.emit(this.isOpenView);
     }
     this.clickPopup = false;
   }

@@ -1,7 +1,7 @@
-<div #overlay (click)="close_popup()" class="popup-overlay-read">
+<div #overlay (click)="closePopup()" class="popup-overlay-read">
   <div #popup (click)="clickPopup = true" class="popup-read-container">
     <div class="popup-read__close">
-      <svg (click)="close_popup()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
+      <svg (click)="closePopup()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
         <switch>
           <g>
             <path
@@ -12,17 +12,14 @@
     </div>
     <h2 #title class="popup-read__title">Más detalles</h2>
     <div #dataContainer class="registers-container">
+      
       <div class="registers__elements">
-        <h3 class="elements__title">ID</h3>
-        <p #idCompany class="elements__p">1</p>
-      </div>
-      <div #dataContainer class="registers__elements">
         <h3 class="elements__title">RAZÓN SOCIAL</h3>
-        <p #razSocialCompany class="elements__p">Lorem ipsum dolor sit amet consectetur </p>
+        <p class="elements__p">{{ company.RazonSocial }}</p>
       </div>
-      <div #dataContainer class="registers__elements">
+      <div class="registers__elements">
         <h3 class="elements__title">CUIT</h3>
-        <p #CUITCompany class="elements__p">146554645674</p>
+        <p #CUITCompany class="elements__p">{{company.CUIT}}</p>
       </div>
     </div>
 
