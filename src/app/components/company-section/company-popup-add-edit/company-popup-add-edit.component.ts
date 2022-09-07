@@ -1,8 +1,7 @@
-import { Component,  OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import {Input, Output, OnChanges, EventEmitter} from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Company } from 'src/app/interfaces/company';
-import { CompanyService } from 'src/app/services/company/company.service'
+import { ICompany, ICreateCompanyDTO, IUpdateCompanyDTO } from 'src/app/interfaces/company';
 
 @Component({
   selector: 'app-company-popup-add-edit',
@@ -11,112 +10,121 @@ import { CompanyService } from 'src/app/services/company/company.service'
 })
 export class CompanyPopupAddComponent implements OnInit, OnChanges {
 
-  @Input() isOpen!:boolean;
-  @Input() isEdit!:boolean;
-  @Input() companyEdit:any;
-  @Output() closePopup = new EventEmitter<boolean>();
-  @Output() isSubmit = new EventEmitter<Company>();
+  @Input() isOpen!: boolean;
+  @Input() isEdit!: boolean;
+  @Input() companyToUpdate: ICompany | null = null;
 
-  @ViewChild('overlay') overlay!: ElementRef;
-  @ViewChild('popup') popup!: ElementRef;
-  @ViewChild('title') title!: ElementRef;
-  @ViewChild('form') form!: ElementRef;
+  @Output() eventClosePopup = new EventEmitter<boolean>();
+  @Output() eventCreateSubmit = new EventEmitter<ICreateCompanyDTO>();
+  @Output() eventUpdateSubmit = new EventEmitter<IUpdateCompanyDTO>();
 
-  clickPopup:boolean = false;
-  titleText:string = "";
-  btnText:string = "";
+  @ViewChild('overlay') $overlay!: ElementRef;
+  @ViewChild('popup') $popup!: ElementRef;
+  @ViewChild('title') $title!: ElementRef;
+  @ViewChild('form') $form!: ElementRef;
 
-  CompanyForm: FormGroup;
-  company:Company | undefined;
+  clickPopup: boolean = false;
+  titleText: string = "";
+  btnText: string = "";
 
-  constructor( private renderer: Renderer2, private fb: FormBuilder, private _companyService:CompanyService) {
-    this.CompanyForm = this.fb.group({
+  companyForm: FormGroup;
+  company: ICompany | null = null;
+
+  constructor(private renderer: Renderer2, private fb: FormBuilder) {
+    this.companyForm = this.fb.group({
       razonSocial: ['', Validators.required],
       CUIT: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern("^[0-9]*$")]]
     })
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
-  ngOnChanges():void {
+  public ngOnChanges(): void {
 
-    if(this.isOpen == true){
-      this.open_popup();
+    if (this.isOpen == true) {
+      this.openPopup();
     }
   }
 
-  // open_popup() -> abre el popup mediante DOM.
-  private open_popup():void{
+  private openPopup(): void {
 
-    const overlay = this.overlay.nativeElement;
-    const popup = this.popup.nativeElement;
-    const title = this.title.nativeElement;
-    const form = this.form.nativeElement;
+    const $overlay = this.$overlay.nativeElement;
+    const $popup = this.$popup.nativeElement;
+    const $title = this.$title.nativeElement;
+    const $form = this.$form.nativeElement;
 
-    this.renderer.addClass(overlay,'active');
-    this.renderer.addClass(popup,'active');
-    this.renderer.addClass(title,'active');
-    this.renderer.addClass(form,'active');
+    this.renderer.addClass($overlay, 'active');
+    this.renderer.addClass($popup, 'active');
+    this.renderer.addClass($title, 'active');
+    this.renderer.addClass($form, 'active');
 
-    if (this.isEdit == false){
+    if (this.isEdit == false) {
 
       this.titleText = "AÑADIR EMPRESA";
       this.btnText = "AÑADIR";
     }
 
-    if(this.isEdit == true){
+    if (this.isEdit == true && this.companyToUpdate) {
       this.titleText = "EDITAR EMPRESA";
       this.btnText = "EDITAR"
 
-      form[0].value = this.companyEdit.RazonSocial;
-      form[1].value = this.companyEdit.CUIT;
+      this.companyForm.get('razonSocial')?.setValue(this.companyToUpdate.RazonSocial);
+      this.companyForm.get('CUIT')?.setValue(this.companyToUpdate.CUIT);  
+
     }
 
   }
 
-  // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
-  public close_popup(){
+  public closePopup(): void {
 
-    if(this.clickPopup == false){
+    if (this.clickPopup == false) {
 
-      const overlay = this.overlay.nativeElement;
-      const popup = this.popup.nativeElement;
-      const title = this.title.nativeElement;
-      const form = this.form.nativeElement;
+      const $overlay = this.$overlay.nativeElement;
+      const $popup = this.$popup.nativeElement;
+      const $title = this.$title.nativeElement;
+      const $form = this.$form.nativeElement;
 
-      this.renderer.removeClass(overlay,'active')
-      this.renderer.removeClass(popup,'active')
-      this.renderer.removeClass(title,'active');
-      this.renderer.removeClass(form,'active');
+      this.renderer.removeClass($overlay, 'active')
+      this.renderer.removeClass($popup, 'active')
+      this.renderer.removeClass($title, 'active');
+      this.renderer.removeClass($form, 'active');
 
-      form[0].value = "";
-      form[1].value = "";
-
-      this.CompanyForm.reset();
+      this.companyForm.reset();
 
       this.isOpen = false;
-      this.closePopup.emit(this.isOpen);
+      this.eventClosePopup.emit(this.isOpen);
     }
+    
     this.clickPopup = false;
   }
 
-  // onSubmit() ===> al dar click en "añadir" se ejecuta este método.
-  // obtiene los valores de los inputs los almacena en el objeto Company
-  // emite este objeto al componente padre para consumir el servicio insertCompany.
-  public onSubmit(){
+  public onSubmit(): void {
 
-    this.company = {
-      IdCompany: null,
-      RazonSocial: this.CompanyForm.get('razonSocial')?.value,
-      CUIT: parseInt(this.CompanyForm.get('CUIT')?.value),
-      IsDeleted: 0,
-      TimeSave: null,
-      TimeLastUpdate: null,
-      TimeDeleted: null
-    };
+    const razonSocial = this.companyForm.get('razonSocial')?.value;
+    const cuit = this.companyForm.get('CUIT')?.value;
 
-    this.isSubmit.emit(this.company);
-    this.close_popup();
+    if (this.isEdit && this.companyToUpdate) {
+
+      const idCompany = this.companyToUpdate.IdCompany;
+
+      const updateCompanyDto: IUpdateCompanyDTO = {
+        idCompany,
+        razonSocial,
+        cuit
+      }
+
+      this.eventUpdateSubmit.emit(updateCompanyDto);
+      this.closePopup();
+      return;
+    }
+
+    const createCompanyDto: ICreateCompanyDTO = {
+      razonSocial,
+      cuit
+    }
+
+    this.eventCreateSubmit.emit(createCompanyDto);
+    this.closePopup();
   }
 }

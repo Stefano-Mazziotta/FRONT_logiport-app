@@ -1,7 +1,7 @@
-<div #overlay (click)="close_popup()" class="popup-overlay">
+<div #overlay (click)="closePopup()" class="popup-overlay">
   <div #popup (click)="clickPopup = true" class="popup-container">
     <div class="popup__close">
-      <svg (click)="close_popup()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
+      <svg (click)="closePopup()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
         <switch>
           <g>
             <path
@@ -12,25 +12,33 @@
     </div>
     <h2 #title class="popup__title">{{ titleText }}</h2>
 
-    <form #form class="popup__form" [formGroup]="CompanyForm" (ngSubmit)="onSubmit()">
+    <form #form class="popup__form" [formGroup]="companyForm" (ngSubmit)="onSubmit()">
       <div class="form__input-container">
-        <label class="form__label" for="razSoc">*Razón Social</label>
-        <input formControlName="razonSocial" class="form__input" type="text" placeholder="Razón social"
-          name="razonSocial" autocomplete="off">
+        <label class="form__label" for="razSoc">Razón social</label>
+        <div class="input-wrap">
+          <div class="input__decorator" [class.success]="companyForm.get('razonSocial')?.valid"
+          [class.error]="companyForm.get('razonSocial')?.invalid && companyForm.get('razonSocial')?.touched"></div>
+          <input formControlName="razonSocial" class="form__input" type="text" placeholder="* Razón social"
+            name="razonSocial" autocomplete="off" maxlength="60">
+        </div>
         <span class="form__error"
-          *ngIf="CompanyForm.get('razonSocial')?.invalid && CompanyForm.get('razonSocial')?.touched">
-          Ingrese la <strong>razón social.</strong>
+          *ngIf="companyForm.get('razonSocial')?.invalid && companyForm.get('razonSocial')?.touched">
+          Este campo es <strong>obligatorio.</strong>
         </span>
       </div>
       <div class="form__input-container">
-        <label class="form__label" for="CUIT">*CUIT</label>
-        <input formControlName="CUIT" class="form__input" type="text" placeholder="CUIT" name="CUIT" autocomplete="off"
-          maxlength="11">
-        <span class="form__error" *ngIf="CompanyForm.get('CUIT')?.invalid && CompanyForm.get('CUIT')?.touched">
-          Debe ingresar el<strong> CUIT sin letras y carácteres especiales.</strong>
+        <label class="form__label" for="CUIT">CUIT</label>
+        <div class="input-wrap">
+          <div class="input__decorator" [class.success]="companyForm.get('CUIT')?.valid"
+          [class.error]="companyForm.get('CUIT')?.invalid && companyForm.get('CUIT')?.touched"></div>
+          <input formControlName="CUIT" class="form__input" type="text" placeholder="* CUIT" name="CUIT" autocomplete="off"
+            maxlength="11">
+        </div>
+        <span class="form__error" *ngIf="companyForm.get('CUIT')?.invalid && companyForm.get('CUIT')?.touched">
+          Ingrese un<strong> CUIT válido.</strong>
         </span>
       </div>
-      <button type="submit" class="form__btn" [disabled]="CompanyForm.invalid">{{ btnText }}</button>
+      <button type="submit" class="form__btn" [disabled]="companyForm.invalid || companyForm.untouched">{{ btnText }}</button>
     </form>
   </div>
 </div>
