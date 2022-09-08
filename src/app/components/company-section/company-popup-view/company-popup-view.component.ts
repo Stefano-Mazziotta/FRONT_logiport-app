@@ -42,6 +42,14 @@ export class CompanyPopupViewComponent implements OnInit, OnChanges {
     }
   }
 
+  private removeClass(element: ElementRef, className: string): void {
+    this.renderer.removeClass(element, className);
+  }
+
+  private addClass(element: ElementRef, className: string): void {
+    this.renderer.addClass(element, className);
+  }
+
   private openPopup(): void {
 
     const $overlay = this.$overlay.nativeElement;
@@ -49,10 +57,10 @@ export class CompanyPopupViewComponent implements OnInit, OnChanges {
     const $title = this.$title.nativeElement;
     const $dataContainer = this.$dataContainer.nativeElement;
 
-    this.renderer.addClass($overlay, 'active');
-    this.renderer.addClass($popup, 'active');
-    this.renderer.addClass($title, 'active');
-    this.renderer.addClass($dataContainer, 'active');
+    this.addClass($overlay, 'active');
+    this.addClass($popup, 'active');
+    this.addClass($title, 'active');
+    this.addClass($dataContainer, 'active');
 
   }
 
@@ -65,18 +73,15 @@ export class CompanyPopupViewComponent implements OnInit, OnChanges {
       const $title = this.$title.nativeElement;
       const $dataContainer = this.$dataContainer.nativeElement;
 
-      this.renderer.removeClass($overlay, 'active')
-      this.renderer.removeClass($popup, 'active')
-      this.renderer.removeClass($title, 'active');
-      this.renderer.removeClass($dataContainer, 'active');
+      this.removeClass($overlay, 'active')
+      this.removeClass($popup, 'active')
+      this.removeClass($title, 'active');
+      this.removeClass($dataContainer, 'active');
 
       this.isOpenView = false;
       this.eventClosePopup.emit(this.isOpenView);
     }
     this.clickPopup = false;
   }
-
-
-
 
 }
