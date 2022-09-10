@@ -13,32 +13,29 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  getListCompanies(): Observable<IResponseListCompany> {
+  public getAllCompanies(): Observable<IResponseListCompany> {
     return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl);
   }
 
-  getCompanyById(idCompany: string): Observable<IResponseOneCompany> {
+  public getCompanyById(idCompany: string): Observable<IResponseOneCompany> {
     return this.http.get<IResponseOneCompany>(this.myAppUrl + this.myApiUrl + idCompany);
   }
 
-  insertCompany(company: ICreateCompanyDTO): Observable<IResponseNullData> {
+  public createCompany(company: ICreateCompanyDTO): Observable<IResponseNullData> {
     return this.http.post<IResponseNullData>(this.myAppUrl + this.myApiUrl, company);
   }
 
-  deleteCompany(idCompany: string): Observable<IResponseNullData> {
+  public deleteCompany(idCompany: string): Observable<IResponseNullData> {
     return this.http.delete<IResponseNullData>(this.myAppUrl + this.myApiUrl + idCompany);
   }
 
-  updateCompany(company: IUpdateCompanyDTO): Observable<IResponseNullData> {
+  public updateCompany(company: IUpdateCompanyDTO): Observable<IResponseNullData> {
     return this.http.put<IResponseNullData>(this.myAppUrl + this.myApiUrl + company.idCompany, company);
   }
 
-  searchCompany(searchCompanyDTO: ISearchCompanyDTO): Observable<IResponseListCompany> {
-    return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl, {
-      params: {
-        ... searchCompanyDTO
-      }
-    });
-
+  public searchCompany(searchCompanyDTO: ISearchCompanyDTO): Observable<IResponseListCompany> {
+    const razonSocial = searchCompanyDTO;
+    return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl + `?razonSocial=${razonSocial}`);
   }
+
 }
