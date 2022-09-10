@@ -1,7 +1,16 @@
-import { Component, Input, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Company } from 'src/app/interfaces/company';
+
+import {
+  ICompany,
+  ICreateCompanyDTO,
+  ISearchCompanyDTO,
+  IUpdateCompanyDTO
+} from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
+
+import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-section',
@@ -10,256 +19,227 @@ import { CompanyService } from 'src/app/services/company/company.service';
 })
 export class CompanySectionComponent implements OnInit {
 
-  @ViewChild('popupAddEdit') popupAddEdit:any;
-  isOpen:boolean = false;
-  isEdit:boolean = false;
+  @ViewChild('popupAddEdit') popupAddEdit: any;
+  isOpen: boolean = false;
+  isEdit: boolean = false;
 
-  isOpenView:boolean = false;
-  companyList:Company[] = [];
+  isOpenView: boolean = false;
+  companyList: ICompany[] = [];
 
-  suscription: Subscription | undefined;
+  getCompaniesSubscription: Subscription | undefined;
+  getCompanyByIdSubscription: Subscription | undefined;
+  createCompanySubscription: Subscription | undefined;
+  updateCompanySubscription: Subscription | undefined;
+  deleteCompanySubscription: Subscription | undefined;
+  searchCompanySubscription: Subscription | undefined;
 
-  currentPage:number = 1;
-  totalItemsPage:number = 7;
-  responsivePagination:boolean = true;
+  currentPage: number = 1;
+  totalItemsPage: number = 7;
+  responsivePagination: boolean = true;
 
-  isOpenConfirmDelete:boolean = false;
-  deleteCompanyID:number | null = null;
+  isOpenConfirmDelete: boolean = false;
+  idCompanyDelete: string | null = null;
 
-  company:Company = {
-    IdCompany: null,
-    RazonSocial: null,
-    CUIT: null,
-    IsDeleted: null,
-    TimeSave: null,
-    TimeLastUpdate: null,
-    TimeDeleted: null
-  }
+  company:ICompany = {
+    IdCompany: "",
+    RazonSocial: "",
+    CUIT: 0,
+    IsDeleted: 0,
+    TimeDeleted: 0,
+    TimeLastUpdate: 0,
+    TimeSave: 0
+  };;
 
   existCompanies: boolean = false;
 
-  @ViewChild('InputSearchCompany') inputSearchCompany!: ElementRef;
+  @ViewChild('razonSocialFilter') $razonSocialFilter!: ElementRef;
 
   constructor(
     private _companyService: CompanyService,
-    private renderer: Renderer2
+    private _companyErrorNotification: CompanyErrorNotificationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.get_companies();
+    this.getCompanies();
   }
 
-  ngOnDestroy():void{
-    this.suscription?.unsubscribe();
-    console.log("observable cerrado")
+  ngOnDestroy(): void {
+    this.getCompaniesSubscription?.unsubscribe();
+    this.getCompanyByIdSubscription?.unsubscribe();
+    this.updateCompanySubscription?.unsubscribe();
+    this.deleteCompanySubscription?.unsubscribe();
+    this.searchCompanySubscription?.unsubscribe();
   }
 
-  // add_popup() ===> cambia el valor de los inputs-controlers.
-  // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
-  public add_popup():void{
+  private getCompanies(): Subscription {
+    return this._companyService.getAllCompanies().subscribe({
+      next: response => {
+        this.companyList = response.data;
+        this.existCompanies = this.companyList.length > 0;
+      },
+      error: error => {
+        const { status } = error;
+        this._companyErrorNotification.getAll(status);
+      }
+    });
+  };
+
+  private getCompanyById(idCompany: string): Subscription {
+    return this._companyService.getCompanyById(idCompany).subscribe({
+      next: response => {
+        this.company = { ...response.data };
+      },
+      error: error => {
+        this._companyErrorNotification.getById();
+      }
+    });
+  }
+
+  private createCompany(createCompanyDto: ICreateCompanyDTO): Subscription {
+    return this._companyService.createCompany(createCompanyDto).subscribe({
+      next: response => {
+        this.getCompaniesSubscription = this.getCompanies();
+        this.toastr.success("Empresa creada.", "Enhorabuena!");
+      },
+      error: error => {
+        const { status } = error;
+        this._companyErrorNotification.create();           
+      }
+    });
+  }
+
+  private updateCompany(companyDto: IUpdateCompanyDTO): Subscription {
+    return this._companyService.updateCompany(companyDto).subscribe({
+      next: response => {
+        this.getCompaniesSubscription = this.getCompanies();
+        this.toastr.success("Empresa actualizada.", "Enhorabuena!");
+      },
+      error: error => {
+        this._companyErrorNotification.update();          
+      }
+    });
+  }
+
+  private getIdCompanyClicked(click: MouseEvent | any): string | null {
+    let idCompanyClicked = null;
+
+    const elements: HTMLElement[] = click.path;
+    const row = elements.find(element => 
+      element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
+    );
+
+    if (row) {
+      idCompanyClicked = row.childNodes[0].textContent;
+    }
+
+    return idCompanyClicked;
+  }
+
+  private getFilterParams(): ISearchCompanyDTO {
+
+    const $razonSocialFilter = this.$razonSocialFilter.nativeElement;
+    const paramRazonSocial = $razonSocialFilter.value;
+
+    return paramRazonSocial;
+  }
+
+  public popupAddInit(): void {
     this.isOpen = true;
     this.isEdit = false;
   }
 
-  // edit_popup() ===> cambia el valor de los inputs-controlers.
-  // Esto ejecuta el ciclo de vida ngOnChanges del child component (popup-add-edit)
-  public edit_popup(e:any):void {
-    let row;
-    this.isOpen = true;
-    this.isEdit = true;
+  public popupUpdateInit(click: MouseEvent): void {
 
-    // click en btn
-    if(e.path[2].className == 'table__row-body'){
-      row = e.path[2];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
+    const idCompanyClicked = this.getIdCompanyClicked(click);
+
+    if (idCompanyClicked) {
+
+      this.getCompanyByIdSubscription = this.getCompanyById(idCompanyClicked);
+      this.isEdit = true;
+      this.isOpen = true;
     }
-    //click en svg
-    if(e.path[3].className == 'table__row-body'){
-      row = e.path[3];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
-    }
-    // click en path
-    if(e.path[4].className == 'table__row-body'){
-      row = e.path[4];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
-    }
+
   }
 
-  // close_popup_parent(boolean) ===> reestablece el valor de isOpen a false.
-  // Esto se ejecuta cuando el child component emite el nuevo valor de isOpen.
-  // La función encargada de emitir el nuevo valor es close_popup() del child component (popup).
-  public close_popup_parent(closeValue:boolean){
+  public popupViewInit(click: MouseEvent): void {
+
+    const idCompanyClicked = this.getIdCompanyClicked(click);
+
+    if (idCompanyClicked) {
+      this.getCompanyByIdSubscription = this.getCompanyById(idCompanyClicked);
+      this.isOpenView = true;
+    }
+
+  }
+
+  public closeEvent(closeValue: boolean): void {
     this.isOpen = closeValue;
     this.isOpenView = closeValue;
     this.isOpenConfirmDelete = closeValue;
   }
 
-  public view_popup(e:any):void{
-    let row;
-
-    this.isOpenView = true;
-
-    // click en btn
-    if(e.path[2].className == 'table__row-body'){
-      row = e.path[2];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
-    }
-    //click en svg
-    if(e.path[3].className == 'table__row-body'){
-      row = e.path[3];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
-    }
-    // click en path
-    if(e.path[4].className == 'table__row-body'){
-      row = e.path[4];
-      this.company.IdCompany = row.childNodes[0].innerHTML;
-      this.company.RazonSocial = row.childNodes[1].innerHTML;
-      this.company.CUIT = row.childNodes[2].innerHTML;
-    }
-
+  public createSubmit(company: ICreateCompanyDTO) {
+    this.createCompanySubscription = this.createCompany(company);
   }
 
-  public get_companies():void{
-    this._companyService.getListCompanies().subscribe({
-      next: data => {
-        this.companyList = data;
-        this.existCompanies = this.companyList.length > 0;
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
-  };
+  public updateSubmit(company: IUpdateCompanyDTO) {
+    this.updateCompanySubscription = this.updateCompany(company);
+  }
 
-  // insert_or_edit_company_event(company) ==> se ejecuta cuando se dispara onSubmit del componente hijo [company-popup-add.components.ts]
-  // Si isEdit = false ==> consume el servicio insertCompany.
-  // Si isEdit = true ==> consume el servicio updateCompany.
-  insert_or_edit_company_event(company:Company){
+  public deleteConfirm(click: MouseEvent): void {
 
-    if(this.isEdit  == false){
+    const idCompanyClicked = this.getIdCompanyClicked(click);
 
-      this._companyService.insertCompany( company ).subscribe({
-        next: data => {
-          console.log(data);
-        },
-        error: error =>{
-          console.log(error);
-        }
-      });
+    if (idCompanyClicked) {
+      this.idCompanyDelete = idCompanyClicked;
+      this.isOpenConfirmDelete = true;
+      return;
     }
 
-    if(this.isEdit == true){
+    this.isOpenConfirmDelete = false;
+  }
 
-      company = {
-        IdCompany: this.company.IdCompany,
-        RazonSocial: company.RazonSocial,
-        CUIT: company.CUIT,
-        IsDeleted: 0,
-        TimeSave: null,
-        TimeDeleted: null,
-        TimeLastUpdate: null
-      }
+  public deleteCompany(isDelete: boolean): void {
+    if (isDelete == true && this.idCompanyDelete) {
 
-      this._companyService.updateCompany( company ).subscribe({
-        next: data => {
-          console.log(data);
+      this.deleteCompanySubscription = this._companyService.deleteCompany(this.idCompanyDelete).subscribe({
+        next: response => {
+          this.toastr.success("Empresa eliminada.","Enhorabuena!")
+          this.getCompaniesSubscription = this.getCompanies();          
         },
         error: error => {
-          console.log(error);
+          this._companyErrorNotification.delete();
         }
       });
     }
-
-    this.suscription = this._companyService.refresh$.subscribe(()=>{
-      this.get_companies();
-    })
   }
 
-  // delete_confirm_company($event-click)
-  // mediante el click obtiene el id del registro,
-  // ejecuta el evento para abrir el popup para confirmación de eliminación.
-  delete_confirm_company(e:any){
-    let row;
+  public searchCompany(): void {
 
-    // click en btn
-    if(e.path[2].className == "table__row-body"){
-      row = e.path[2];
-      this.deleteCompanyID = row.childNodes[0].innerHTML;
-    }
-    // click en svg
-    if(e.path[3].className == "table__row-body"){
-      row = e.path[3];
-      this.deleteCompanyID = row.childNodes[0].innerHTML;
-    }
-    //click en path
-    if(e.path[4].className == "table__row-body"){
-      row = e.path[4];
-      this.deleteCompanyID = row.childNodes[0].innerHTML;
-    }
+    const filterParams = this.getFilterParams();
 
-    this.isOpenConfirmDelete = true;
-  }
+    if (filterParams) {
 
-  // delete_company(boolean)
-  // si se confirma la eliminación envía petición de eliminación al back con el id del registro.
-  delete_company(isDelete:boolean){
-    if(isDelete == true && this.deleteCompanyID){
-
-      this._companyService.deleteCompany(this.deleteCompanyID).subscribe({
-        next: data => {
-          console.log(data);
+      this.searchCompanySubscription = this._companyService.searchCompany(filterParams).subscribe({
+        next: response => {
+          console.log(response);
+          this.companyList = response.data;
+          this.existCompanies = this.companyList.length > 0;
         },
         error: error => {
-          console.log(error);
-        }
-      });
-
-      this.suscription = this._companyService.refresh$.subscribe(()=>{
-        this.get_companies();
-      })
-    }
-  }
-
-  // search_company()
-  // obtiene la razón social del input.
-  // ejecuta la petición para realizar la busqueda de empresa y recarga el listCompany con el resultado.
-  search_company(){
-    const inputSearchCompany = this.inputSearchCompany.nativeElement;
-    let valueSearchCompany = inputSearchCompany.value;
-
-    if(valueSearchCompany != undefined){
-
-      this._companyService.searchCompany(valueSearchCompany).subscribe({
-        next: data => {
-          console.log(data);
-          this.companyList = data;
-        },
-        error: error => {
-          console.log(error);
+          const { status } = error;
+          this._companyErrorNotification.search(status);
         }
       });
     }
   }
 
-  // reset_filter()
-  // resetea los filtros para mostrar todas las company.
-  reset_filter(){
-    const inputSearchCompany = this.inputSearchCompany.nativeElement;
-    let valueSearchCompany = inputSearchCompany.value;
-
-    if(valueSearchCompany){
-      inputSearchCompany.value = '';
-      this.get_companies();
-    }
+  public resetFilter(): void {
+    
+    const $razonSocialFilter = this.$razonSocialFilter.nativeElement;
+    $razonSocialFilter.value = '';
+    this.getCompaniesSubscription = this.getCompanies();    
   }
+
 }
