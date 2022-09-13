@@ -3,9 +3,7 @@ import { Subscription } from 'rxjs';
 
 import {
   ICompany,
-  ICreateCompanyDTO,
   ISearchCompanyDTO,
-  IUpdateCompanyDTO
 } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
 
@@ -24,6 +22,7 @@ export class CompanySectionComponent implements OnInit {
   isEdit: boolean = false;
 
   isOpenView: boolean = false;
+  // isOpenPopupAddEdit: boolean = false;
   companyList: ICompany[] = [];
 
   getCompaniesSubscription: Subscription | undefined;
@@ -37,6 +36,7 @@ export class CompanySectionComponent implements OnInit {
   totalItemsPage: number = 7;
   responsivePagination: boolean = true;
 
+  isOpenCreateUpdateModal: boolean = false;
   isOpenConfirmDelete: boolean = false;
   idCompanyDelete: string | null = null;
 
@@ -48,9 +48,14 @@ export class CompanySectionComponent implements OnInit {
     TimeDeleted: 0,
     TimeLastUpdate: 0,
     TimeSave: 0
-  };;
+  };
 
+  isLoading:boolean = false;
   existCompanies: boolean = false;
+
+  idCompanyClicked: string = "";
+
+ 
 
   @ViewChild('razonSocialFilter') $razonSocialFilter!: ElementRef;
 
@@ -67,56 +72,37 @@ export class CompanySectionComponent implements OnInit {
   ngOnDestroy(): void {
     this.getCompaniesSubscription?.unsubscribe();
     this.getCompanyByIdSubscription?.unsubscribe();
-    this.updateCompanySubscription?.unsubscribe();
     this.deleteCompanySubscription?.unsubscribe();
     this.searchCompanySubscription?.unsubscribe();
   }
 
   private getCompanies(): Subscription {
+    this.isLoading = true;
     return this._companyService.getAllCompanies().subscribe({
       next: response => {
+        this.isLoading = false;
         this.companyList = response.data;
         this.existCompanies = this.companyList.length > 0;
       },
       error: error => {
         const { status } = error;
+        this.isLoading = false;
         this._companyErrorNotification.getAll(status);
       }
     });
   };
 
   private getCompanyById(idCompany: string): Subscription {
+    // quitarlo de aqui
+    this.isLoading = true;
     return this._companyService.getCompanyById(idCompany).subscribe({
       next: response => {
         this.company = { ...response.data };
+        this.isLoading = false;
       },
       error: error => {
+        this.isLoading = false;
         this._companyErrorNotification.getById();
-      }
-    });
-  }
-
-  private createCompany(createCompanyDto: ICreateCompanyDTO): Subscription {
-    return this._companyService.createCompany(createCompanyDto).subscribe({
-      next: response => {
-        this.getCompaniesSubscription = this.getCompanies();
-        this.toastr.success("Empresa creada.", "Enhorabuena!");
-      },
-      error: error => {
-        const { status } = error;
-        this._companyErrorNotification.create();           
-      }
-    });
-  }
-
-  private updateCompany(companyDto: IUpdateCompanyDTO): Subscription {
-    return this._companyService.updateCompany(companyDto).subscribe({
-      next: response => {
-        this.getCompaniesSubscription = this.getCompanies();
-        this.toastr.success("Empresa actualizada.", "Enhorabuena!");
-      },
-      error: error => {
-        this._companyErrorNotification.update();          
       }
     });
   }
@@ -144,25 +130,24 @@ export class CompanySectionComponent implements OnInit {
     return paramRazonSocial;
   }
 
-  public popupAddInit(): void {
-    this.isOpen = true;
+  public openCreateModal(): void {
+    this. isOpenCreateUpdateModal = true;
     this.isEdit = false;
   }
 
-  public popupUpdateInit(click: MouseEvent): void {
+  public openUpdateModal(click: MouseEvent): void {
 
     const idCompanyClicked = this.getIdCompanyClicked(click);
 
     if (idCompanyClicked) {
-
-      this.getCompanyByIdSubscription = this.getCompanyById(idCompanyClicked);
+      this.idCompanyClicked = idCompanyClicked;
       this.isEdit = true;
-      this.isOpen = true;
+      this.isOpenCreateUpdateModal = true;
     }
 
   }
 
-  public popupViewInit(click: MouseEvent): void {
+  public openViewModal(click: MouseEvent): void {
 
     const idCompanyClicked = this.getIdCompanyClicked(click);
 
@@ -173,18 +158,12 @@ export class CompanySectionComponent implements OnInit {
 
   }
 
-  public closeEvent(closeValue: boolean): void {
-    this.isOpen = closeValue;
-    this.isOpenView = closeValue;
-    this.isOpenConfirmDelete = closeValue;
-  }
-
-  public createSubmit(company: ICreateCompanyDTO) {
-    this.createCompanySubscription = this.createCompany(company);
-  }
-
-  public updateSubmit(company: IUpdateCompanyDTO) {
-    this.updateCompanySubscription = this.updateCompany(company);
+  public closeModal(isSendRequest: boolean = false): void {
+    
+    if (isSendRequest) this.getCompaniesSubscription = this.getCompanies();    
+    this. isOpenCreateUpdateModal = false;
+    this.isOpenView = false;
+    this.isOpenConfirmDelete = false; 
   }
 
   public deleteConfirm(click: MouseEvent): void {
@@ -202,13 +181,15 @@ export class CompanySectionComponent implements OnInit {
 
   public deleteCompany(isDelete: boolean): void {
     if (isDelete == true && this.idCompanyDelete) {
-
+      this.isLoading = true;
       this.deleteCompanySubscription = this._companyService.deleteCompany(this.idCompanyDelete).subscribe({
         next: response => {
-          this.toastr.success("Empresa eliminada.","Enhorabuena!")
           this.getCompaniesSubscription = this.getCompanies();          
+          this.toastr.success("Empresa eliminada.","Enhorabuena!")
+          this.isLoading = false;
         },
         error: error => {
+          this.isLoading = false;
           this._companyErrorNotification.delete();
         }
       });
@@ -220,15 +201,16 @@ export class CompanySectionComponent implements OnInit {
     const filterParams = this.getFilterParams();
 
     if (filterParams) {
-
+      this.isLoading = true;
       this.searchCompanySubscription = this._companyService.searchCompany(filterParams).subscribe({
         next: response => {
-          console.log(response);
           this.companyList = response.data;
           this.existCompanies = this.companyList.length > 0;
+          this.isLoading = false;
         },
-        error: error => {
+        error: error => {          
           const { status } = error;
+          this.isLoading = false;
           this._companyErrorNotification.search(status);
         }
       });
@@ -239,6 +221,7 @@ export class CompanySectionComponent implements OnInit {
     
     const $razonSocialFilter = this.$razonSocialFilter.nativeElement;
     $razonSocialFilter.value = '';
+    
     this.getCompaniesSubscription = this.getCompanies();    
   }
 

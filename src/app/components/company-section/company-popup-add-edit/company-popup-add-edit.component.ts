@@ -1,112 +1,105 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+  Input,
+  Output,
+  OnChanges,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
 import { ICompany, ICreateCompanyDTO, IUpdateCompanyDTO } from 'src/app/interfaces/company';
+import { CompanyService } from 'src/app/services/company/company.service';
+import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-popup-add-edit',
   templateUrl: './company-popup-add-edit.component.html',
   styleUrls: ['./company-popup-add-edit.component.scss']
 })
-export class CompanyPopupAddComponent implements OnInit, OnChanges {
+export class CompanyPopupAddComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() isOpen!: boolean;
   @Input() isEdit!: boolean;
-  @Input() companyToUpdate: ICompany | null = null;
+  @Input() idCompanyClicked: string | null = null;
 
-  @Output() eventClosePopup = new EventEmitter<boolean>();
-  @Output() eventCreateSubmit = new EventEmitter<ICreateCompanyDTO>();
-  @Output() eventUpdateSubmit = new EventEmitter<IUpdateCompanyDTO>();
-
-  @ViewChild('overlay') $overlay!: ElementRef;
-  @ViewChild('popup') $popup!: ElementRef;
-  @ViewChild('title') $title!: ElementRef;
-  @ViewChild('form') $form!: ElementRef;
+  @Output() closeModalEvent = new EventEmitter<boolean>();
 
   clickPopup: boolean = false;
   titleText: string = "";
   btnText: string = "";
 
-  companyForm: FormGroup;
-  company: ICompany | null = null;
+  isLoading = false;
 
-  constructor(private renderer: Renderer2, private fb: FormBuilder) {
+  companyForm: FormGroup;
+
+  createCompanySubscription: Subscription | undefined;
+  updateCompanySubscription: Subscription | undefined;
+  getCompanyByIdSubscription: Subscription | undefined;
+
+  constructor(
+    private renderer: Renderer2,
+    private fb: FormBuilder,
+    private _companyService: CompanyService,
+    private _companyErrorNotification: CompanyErrorNotificationService,
+    private toastr: ToastrService
+  ) {
+
     this.companyForm = this.fb.group({
       razonSocial: ['', Validators.required],
       CUIT: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern("^[0-9]*$")]]
-    })
+    });
+
   }
 
   public ngOnInit(): void {
+
+    if (this.isEdit && this.idCompanyClicked) {
+      this.getCompanyByIdSubscription = this.getCompanyById(this.idCompanyClicked);
+
+      this.titleText = "EDITAR EMPRESA";
+      this.btnText = "EDITAR"
+      return;
+    }
+
+    this.titleText = "AÑADIR EMPRESA";
+    this.btnText = "AÑADIR";
   }
 
   public ngOnChanges(): void {
-
-    if (this.isOpen == true) {
-      this.openPopup();
-    }
   }
 
-  private openPopup(): void {
-
-    const $overlay = this.$overlay.nativeElement;
-    const $popup = this.$popup.nativeElement;
-    const $title = this.$title.nativeElement;
-    const $form = this.$form.nativeElement;
-
-    this.renderer.addClass($overlay, 'active');
-    this.renderer.addClass($popup, 'active');
-    this.renderer.addClass($title, 'active');
-    this.renderer.addClass($form, 'active');
-
-    if (this.isEdit == false) {
-
-      this.titleText = "AÑADIR EMPRESA";
-      this.btnText = "AÑADIR";
-    }
-
-    if (this.isEdit == true && this.companyToUpdate) {
-      this.titleText = "EDITAR EMPRESA";
-      this.btnText = "EDITAR"
-
-      this.companyForm.get('razonSocial')?.setValue(this.companyToUpdate.RazonSocial);
-      this.companyForm.get('CUIT')?.setValue(this.companyToUpdate.CUIT);  
-
-    }
-
+  public ngOnDestroy(): void {
+    this.createCompanySubscription?.unsubscribe();
+    this.updateCompanySubscription?.unsubscribe();
+    this.getCompanyByIdSubscription?.unsubscribe(); 
   }
 
-  public closePopup(): void {
+  public closePopup(isSendRequest: boolean = false): void {
 
-    if (this.clickPopup == false) {
-
-      const $overlay = this.$overlay.nativeElement;
-      const $popup = this.$popup.nativeElement;
-      const $title = this.$title.nativeElement;
-      const $form = this.$form.nativeElement;
-
-      this.renderer.removeClass($overlay, 'active')
-      this.renderer.removeClass($popup, 'active')
-      this.renderer.removeClass($title, 'active');
-      this.renderer.removeClass($form, 'active');
+    if (this.clickPopup == false && !this.isLoading) {
 
       this.companyForm.reset();
-
-      this.isOpen = false;
-      this.eventClosePopup.emit(this.isOpen);
+      this.closeModalEvent.emit(isSendRequest);
     }
-    
+
     this.clickPopup = false;
   }
 
   public onSubmit(): void {
 
+    const idCompany = this.idCompanyClicked;
     const razonSocial = this.companyForm.get('razonSocial')?.value;
     const cuit = this.companyForm.get('CUIT')?.value;
 
-    if (this.isEdit && this.companyToUpdate) {
-
-      const idCompany = this.companyToUpdate.IdCompany;
+    if (this.isEdit && idCompany) {
 
       const updateCompanyDto: IUpdateCompanyDTO = {
         idCompany,
@@ -114,8 +107,7 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
         cuit
       }
 
-      this.eventUpdateSubmit.emit(updateCompanyDto);
-      this.closePopup();
+      this.updateCompanySubscription = this.updateCompany(updateCompanyDto);
       return;
     }
 
@@ -124,7 +116,56 @@ export class CompanyPopupAddComponent implements OnInit, OnChanges {
       cuit
     }
 
-    this.eventCreateSubmit.emit(createCompanyDto);
-    this.closePopup();
+    this.createCompanySubscription = this.createCompany(createCompanyDto);
   }
+
+  private createCompany(createCompanyDto: ICreateCompanyDTO): Subscription {
+    this.isLoading = true;
+    return this._companyService.createCompany(createCompanyDto).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.closePopup(true);
+        this.toastr.success("Empresa creada.", "Enhorabuena!");
+      },
+      error: error => {
+        const { status } = error;
+
+        this.isLoading = false;
+        this._companyErrorNotification.create();
+      }
+    });
+  }
+
+  private updateCompany(companyDto: IUpdateCompanyDTO): Subscription {
+    this.isLoading = true;
+    return this._companyService.updateCompany(companyDto).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.closePopup(true);
+        this.toastr.success("Empresa actualizada.", "Enhorabuena!");
+      },
+      error: error => {
+        this.isLoading = false;
+        this._companyErrorNotification.update();
+      }
+    });
+  }
+
+  private getCompanyById(idCompany: string): Subscription {
+    this.isLoading = true;
+    return this._companyService.getCompanyById(idCompany).subscribe({
+      next: response => {
+        this.companyForm.get('razonSocial')?.setValue(response.data.RazonSocial);
+        this.companyForm.get('CUIT')?.setValue(response.data.CUIT);
+        this.isLoading = false;
+      },
+      error: error => {
+        this.isLoading = false;
+        this.closePopup();
+        this._companyErrorNotification.getById();
+      }
+    });
+  }
+
+
 }

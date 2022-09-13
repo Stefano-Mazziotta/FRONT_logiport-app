@@ -39,8 +39,11 @@ export class CompanyErrorNotificationService {
   }
 
   public getById(): void {
-    const internalError = this.notificationInternalError
-    this.toastr.error(internalError.message, internalError.title);
+    const notification = {
+      title: "Error.",
+      message: "Error al obtener la empresa.",
+    }
+    this.toastr.error(notification.message, notification.title);
   }
 
   public create(): void {

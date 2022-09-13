@@ -1,4 +1,4 @@
-// ############################## Colors ############################## //
+// ############################## variables ############################## //
 $principal-color-blue: #000028;
 $color-blue-2: #141442;
 $color-blue-3: #000075;
@@ -32,6 +32,13 @@ $radius-3: 3px;
     to{opacity: 0;}
 }
 
+@keyframes spinner {
+    from{transform: rotate(0);}
+    to{transform: rotate(360deg);}
+}
+
+
+// ############################## global styles ##############################
 h1,h2,h3,h4,p{
     cursor: default;
 }

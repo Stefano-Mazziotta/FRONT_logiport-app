@@ -1,6 +1,24 @@
 // --- variables --- //
 @import "../../app.component.scss";
 
+.loader-container{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($principal-color-blue, .8);
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .loader-animation{
+    font-size: 64px;
+    color: $secondary-color;
+    animation: spinner 1.5s ease infinite;
+  }
+}
+
 //############### main - company structure ###############//
 .main {
   width: 90%;
