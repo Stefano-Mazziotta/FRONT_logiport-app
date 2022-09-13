@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Renderer2, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { CompanyService } from 'src/app/services/company/company.service';
+import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
 import { ICompany } from 'src/app/interfaces/company';
 
 @Component({
@@ -8,10 +11,17 @@ import { ICompany } from 'src/app/interfaces/company';
   templateUrl: './company-popup-view.component.html',
   styleUrls: ['./company-popup-view.component.scss']
 })
-export class CompanyPopupViewComponent implements OnInit, OnChanges {
+export class CompanyPopupViewComponent implements OnInit, OnDestroy {
 
-  @Input() isOpenView!: boolean;
-  @Input() company: ICompany = {
+  @Input() isOpenModalView!: boolean;
+  @Input() idCompanyClicked!: string;
+
+  @Output() closeModalEvent = new EventEmitter<void>();
+
+  isLoading: boolean = false;
+  clickPopup: boolean = false;
+
+  company: ICompany = {
     IdCompany: "",
     RazonSocial: "",
     CUIT: 0,
@@ -21,67 +31,42 @@ export class CompanyPopupViewComponent implements OnInit, OnChanges {
     TimeSave: 0
   };
 
-  @Output() eventClosePopup = new EventEmitter<boolean>();
+  getCompanyByIdSubscription:Subscription | undefined;
 
-  @ViewChild('overlay') $overlay!: ElementRef;
-  @ViewChild('popup') $popup!: ElementRef;
-  @ViewChild('title') $title!: ElementRef;
-  @ViewChild('dataContainer') $dataContainer!: ElementRef;
-
-  clickPopup: boolean = false;
-
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private _companyService: CompanyService,
+    private _companyErrorNotification: CompanyErrorNotificationService
+  ) { }
 
   ngOnInit(): void {
-
+    this.getCompanyByIdSubscription = this.getCompanyById(this.idCompanyClicked);
+  }
+  
+  ngOnDestroy():void{
+    this.getCompanyByIdSubscription?.unsubscribe();
   }
 
-  ngOnChanges(): void {
-    if (this.isOpenView == true) {
-      this.openPopup();
-    }
-  }
+  public closeModal() {
 
-  private removeClass(element: ElementRef, className: string): void {
-    this.renderer.removeClass(element, className);
-  }
-
-  private addClass(element: ElementRef, className: string): void {
-    this.renderer.addClass(element, className);
-  }
-
-  private openPopup(): void {
-
-    const $overlay = this.$overlay.nativeElement;
-    const $popup = this.$popup.nativeElement;
-    const $title = this.$title.nativeElement;
-    const $dataContainer = this.$dataContainer.nativeElement;
-
-    this.addClass($overlay, 'active');
-    this.addClass($popup, 'active');
-    this.addClass($title, 'active');
-    this.addClass($dataContainer, 'active');
-
-  }
-
-  public closePopup() {
-
-    if (this.clickPopup == false) {
-
-      const $overlay = this.$overlay.nativeElement;
-      const $popup = this.$popup.nativeElement;
-      const $title = this.$title.nativeElement;
-      const $dataContainer = this.$dataContainer.nativeElement;
-
-      this.removeClass($overlay, 'active')
-      this.removeClass($popup, 'active')
-      this.removeClass($title, 'active');
-      this.removeClass($dataContainer, 'active');
-
-      this.isOpenView = false;
-      this.eventClosePopup.emit(this.isOpenView);
+    if (this.clickPopup == false && !this.isLoading) {
+      this.closeModalEvent.emit();
     }
     this.clickPopup = false;
+  }
+
+  private getCompanyById(idCompany: string): Subscription {
+    this.isLoading = true;
+    return this._companyService.getCompanyById(idCompany).subscribe({
+      next: response => {
+        this.company = response.data;
+        this.isLoading = false;
+      },
+      error: error => {
+        this.isLoading = false;
+        this.closeModal();
+        this._companyErrorNotification.getById();
+      }
+    });
   }
 
 }

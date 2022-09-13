@@ -75,9 +75,14 @@
     </table>
   </div>
 
-  <!---------------------- popup read data  ---------------------->
-  <app-company-popup-view (eventClosePopup)="closeModal($event)" [isOpenView]="isOpenView" [company]="company">
+  <!---------------------- modal view  ---------------------->
+  <app-company-popup-view 
+    *ngIf="isOpenViewModal"
+    (closeModalEvent)="closeModal()"
+    [idCompanyClicked]="idCompanyClicked">
   </app-company-popup-view>
+
+  <!---------------------- modal confirm delete  ---------------------->
   <app-popup-confirm-delete (closePopup)="closeModal($event)" (isDelete)="deleteCompany($event)"
     [isOpenConfirmDelete]="isOpenConfirmDelete"></app-popup-confirm-delete>
 

@@ -16,28 +16,23 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./company-section.component.scss']
 })
 export class CompanySectionComponent implements OnInit {
-
-  @ViewChild('popupAddEdit') popupAddEdit: any;
-  isOpen: boolean = false;
-  isEdit: boolean = false;
-
-  isOpenView: boolean = false;
-  // isOpenPopupAddEdit: boolean = false;
-  companyList: ICompany[] = [];
-
-  getCompaniesSubscription: Subscription | undefined;
-  getCompanyByIdSubscription: Subscription | undefined;
-  createCompanySubscription: Subscription | undefined;
-  updateCompanySubscription: Subscription | undefined;
+  
+  getCompaniesSubscription: Subscription | undefined;  
   deleteCompanySubscription: Subscription | undefined;
   searchCompanySubscription: Subscription | undefined;
-
+ 
+  companyList: ICompany[] = [];
+  
   currentPage: number = 1;
   totalItemsPage: number = 7;
   responsivePagination: boolean = true;
 
   isOpenCreateUpdateModal: boolean = false;
+  isEdit: boolean = false;
+
   isOpenConfirmDelete: boolean = false;
+  isOpenViewModal: boolean = false;
+
   idCompanyDelete: string | null = null;
 
   company:ICompany = {
@@ -53,9 +48,7 @@ export class CompanySectionComponent implements OnInit {
   isLoading:boolean = false;
   existCompanies: boolean = false;
 
-  idCompanyClicked: string = "";
-
- 
+  idCompanyClicked: string = ""; 
 
   @ViewChild('razonSocialFilter') $razonSocialFilter!: ElementRef;
 
@@ -71,7 +64,6 @@ export class CompanySectionComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.getCompaniesSubscription?.unsubscribe();
-    this.getCompanyByIdSubscription?.unsubscribe();
     this.deleteCompanySubscription?.unsubscribe();
     this.searchCompanySubscription?.unsubscribe();
   }
@@ -92,21 +84,6 @@ export class CompanySectionComponent implements OnInit {
       }
     });
   };
-
-  private getCompanyById(idCompany: string): Subscription {
-    // quitarlo de aqui
-    this.isLoading = true;
-    return this._companyService.getCompanyById(idCompany).subscribe({
-      next: response => {
-        this.company = { ...response.data };
-        this.isLoading = false;
-      },
-      error: error => {
-        this.isLoading = false;
-        this._companyErrorNotification.getById();
-      }
-    });
-  }
 
   private getIdCompanyClicked(click: MouseEvent | any): string | null {
     let idCompanyClicked = null;
@@ -153,8 +130,8 @@ export class CompanySectionComponent implements OnInit {
     const idCompanyClicked = this.getIdCompanyClicked(click);
 
     if (idCompanyClicked) {
-      this.getCompanyByIdSubscription = this.getCompanyById(idCompanyClicked);
-      this.isOpenView = true;
+      this.idCompanyClicked = idCompanyClicked;
+      this.isOpenViewModal = true;
     }
 
   }
@@ -163,7 +140,7 @@ export class CompanySectionComponent implements OnInit {
     
     if (isSendRequest) this.getCompaniesSubscription = this.getCompanies();    
     this. isOpenCreateUpdateModal = false;
-    this.isOpenView = false;
+    this.isOpenViewModal = false;
     this.isOpenConfirmDelete = false; 
   }
 
