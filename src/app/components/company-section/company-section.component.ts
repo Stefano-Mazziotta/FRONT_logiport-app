@@ -87,6 +87,7 @@ export class CompanySectionComponent implements OnInit {
       error: error => {
         const { status } = error;
         this.isLoading = false;
+        this.existCompanies = false;
         this._companyErrorNotification.getAll(status);
       }
     });
@@ -211,6 +212,7 @@ export class CompanySectionComponent implements OnInit {
         error: error => {          
           const { status } = error;
           this.isLoading = false;
+          this.existCompanies = false;
           this._companyErrorNotification.search(status);
         }
       });

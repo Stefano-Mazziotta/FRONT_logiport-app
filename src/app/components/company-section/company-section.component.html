@@ -1,7 +1,3 @@
-<div *ngIf="isLoading" class="loader-container">
-  <i class="fa-solid fa-circle-notch loader-animation"></i>
-</div>
-
 <div class="main">
 
   <h2 class="title"> <a class="icon-back" routerLink="/inicio"><i class="fa-solid fa-arrow-left"></i></a>Empresas</h2>
@@ -30,8 +26,11 @@
 
   <!-------------------- table -------------------->
   <h3 class="title sub">Resultados</h3>
-  <p *ngIf="!existCompanies"> No se han encontrado empresas.</p>
-  <div *ngIf="existCompanies" style="overflow-x:auto; margin-bottom:10px;">
+  <div *ngIf="isLoading" class="loader-container">
+    <i class="fa-solid fa-circle-notch loader-animation"></i>
+  </div>
+  <p *ngIf="!existCompanies && !isLoading"> No se han encontrado empresas.</p>
+  <div *ngIf="existCompanies && !isLoading" style="overflow-x:auto; margin-bottom:10px;">
     <table class="table-data">
 
       <thead>
@@ -84,7 +83,7 @@
 
   <!-------------------- paginated buttons of table -------------------->
 
-  <div *ngIf="existCompanies" class="pagination-wrap">
+  <div *ngIf="existCompanies && !isLoading" class="pagination-wrap">
     <pagination-controls class="pagination-buttons" (pageChange)="currentPage = $event"
       [responsive]="responsivePagination" previousLabel="Anterior" nextLabel="Siguiente">
     </pagination-controls>
