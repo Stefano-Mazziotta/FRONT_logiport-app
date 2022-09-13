@@ -20,8 +20,8 @@
   </div>
 
   <div class="btnfilter-container">
-    <button class="btnfilter__btn" (click)="searchCompany()"><i class="fa-solid fa-magnifying-glass"></i></button>
-    <button class="btnfilter__btn" (click)="resetFilter()"><i class="fa-solid fa-rotate"></i></button>
+    <button class="btnfilter__btn" [disabled]="isLoading" (click)="searchCompany()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button class="btnfilter__btn" [disabled]="isLoading" (click)="resetFilter()"><i class="fa-solid fa-rotate"></i></button>
   </div>
 
   <!-------------------- table -------------------->
