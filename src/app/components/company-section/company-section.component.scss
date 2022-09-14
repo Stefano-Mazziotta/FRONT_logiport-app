@@ -271,12 +271,17 @@
 
 // ############################## Responsive ############################## //
 // ___ Tablet ___ //
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+  .main{
+    width: 80%;
+  }
+}
 
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
 
   .main {
+    width: 70%;
     .title {
       .icon-back {
         transition: ease all .3s;
@@ -302,14 +307,10 @@
 // ___ Laptop L ___ //
 @media (min-width: 1440px) {
 
-  // btn-add adjusted width.
   .main {
-    .btn-add {
-      width: 15%;
-    }
-
+    width: 60%;
     .input-container {
-      width: 30%;
+      width: 40%;
     }
   }
 }
