@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  Renderer2,
   Input,
   Output,
   OnChanges,
@@ -25,7 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() isEdit!: boolean;
+  @Input() isUpdate!: boolean;
   @Input() idCompanyClicked: string | null = null;
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
@@ -43,7 +42,6 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
   getCompanyByIdSubscription: Subscription | undefined;
 
   constructor(
-    private renderer: Renderer2,
     private fb: FormBuilder,
     private _companyService: CompanyService,
     private _companyErrorNotification: CompanyErrorNotificationService,
@@ -59,7 +57,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
 
   public ngOnInit(): void {
 
-    if (this.isEdit && this.idCompanyClicked) {
+    if (this.isUpdate && this.idCompanyClicked) {
       this.getCompanyByIdSubscription = this.getCompanyById(this.idCompanyClicked);
 
       this.titleText = "EDITAR EMPRESA";
@@ -97,7 +95,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
     const razonSocial = this.companyForm.get('razonSocial')?.value;
     const cuit = this.companyForm.get('CUIT')?.value;
 
-    if (this.isEdit && idCompany) {
+    if (this.isUpdate && idCompany) {
 
       const updateCompanyDto: IUpdateCompanyDTO = {
         idCompany,

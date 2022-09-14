@@ -28,7 +28,7 @@ export class CompanySectionComponent implements OnInit {
   responsivePagination: boolean = true;
 
   isOpenCreateUpdateModal: boolean = false;
-  isEdit: boolean = false;
+  isUpdate: boolean = false;
 
   isOpenConfirmDelete: boolean = false;
   isOpenViewModal: boolean = false;
@@ -110,7 +110,7 @@ export class CompanySectionComponent implements OnInit {
 
   public openCreateModal(): void {
     this. isOpenCreateUpdateModal = true;
-    this.isEdit = false;
+    this.isUpdate = false;
   }
 
   public openUpdateModal(click: MouseEvent): void {
@@ -119,7 +119,7 @@ export class CompanySectionComponent implements OnInit {
 
     if (idCompanyClicked) {
       this.idCompanyClicked = idCompanyClicked;
-      this.isEdit = true;
+      this.isUpdate = true;
       this.isOpenCreateUpdateModal = true;
     }
 
