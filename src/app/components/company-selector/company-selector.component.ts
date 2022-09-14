@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Company } from 'src/app/interfaces/company';
+import { ICompany } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
 
 @Component({
@@ -18,8 +18,8 @@ export class CompanySelectorComponent implements OnInit {
   @ViewChild('crossResetSelect') crossResetSelect!: ElementRef;
   @ViewChild('resultWrap') resultWrap!: ElementRef;
 
-  companies: Company[] = [];
-  companySelected: Company | null = null;
+  companies: ICompany[] = [];
+  companySelected: ICompany | null = null;
 
 
   ngOnInit(): void {    
@@ -51,7 +51,7 @@ export class CompanySelectorComponent implements OnInit {
       this._companyService.searchCompany(searchValue)
         .subscribe({
           next: result => {
-            this.companies = result;
+            this.companies = result.data;
           },
           error: error => {
             console.log(error);
