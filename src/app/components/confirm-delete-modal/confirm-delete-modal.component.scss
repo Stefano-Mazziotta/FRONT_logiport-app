@@ -72,7 +72,19 @@
       button.delete{
         background-color: $error-color;
         &:hover{
-          background-color: #8d1116;
+          background-color: $hover-error-color;
+        }
+        
+        &:disabled{
+          opacity: .5;
+        }
+        &:disabled:hover{
+          background-color: $error-color;
+          cursor: default;
+        }
+
+        .loader-animation{
+          animation: spinner 1.5s ease infinite;
         }
       }
       button.cancel{

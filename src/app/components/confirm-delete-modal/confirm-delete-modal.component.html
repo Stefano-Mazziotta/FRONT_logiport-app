@@ -5,7 +5,7 @@
 
     <div class="buttons-wrap">
       <button class="cancel" (click)="closeModal()">Cancelar</button>
-      <button class="delete" (click)="delete()">Eliminar</button>
+      <button [disabled]="isLoading" class="delete" (click)="delete()">Eliminar <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i></button>
     </div>
 
   </div>
