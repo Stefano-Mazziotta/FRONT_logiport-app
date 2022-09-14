@@ -1,0 +1,12 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div (click)="clickModal = true" class="modal-container">
+
+    <h2 class="modal__title">¿DESEAS ELIMINAR EL REGISTRO?</h2>
+
+    <div class="buttons-wrap">
+      <button class="cancel" (click)="closeModal()">Cancelar</button>
+      <button class="delete" (click)="delete()">Eliminar</button>
+    </div>
+
+  </div>
+</div>

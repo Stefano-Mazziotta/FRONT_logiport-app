@@ -16,6 +16,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./company-section.component.scss']
 })
 export class CompanySectionComponent implements OnInit {
+
+  section:string = "company";
   
   getCompaniesSubscription: Subscription | undefined;  
   deleteCompanySubscription: Subscription | undefined;
@@ -30,10 +32,11 @@ export class CompanySectionComponent implements OnInit {
   isOpenCreateUpdateModal: boolean = false;
   isUpdate: boolean = false;
 
-  isOpenConfirmDelete: boolean = false;
+  isOpenConfirmDeleteModal: boolean = false;
   isOpenViewModal: boolean = false;
 
-  idCompanyDelete: string | null = null;
+  idCompanyClicked: string = ""; 
+  isLoading:boolean = false;
 
   company:ICompany = {
     IdCompany: "",
@@ -44,11 +47,9 @@ export class CompanySectionComponent implements OnInit {
     TimeLastUpdate: 0,
     TimeSave: 0
   };
-
-  isLoading:boolean = false;
+  
   existCompanies: boolean = false;
-
-  idCompanyClicked: string = ""; 
+  
 
   @ViewChild('razonSocialFilter') $razonSocialFilter!: ElementRef;
 
@@ -136,43 +137,26 @@ export class CompanySectionComponent implements OnInit {
 
   }
 
+  public openDeleteConfirmModal(click: MouseEvent): void {
+
+    const idCompanyClicked = this.getIdCompanyClicked(click);
+
+    if (idCompanyClicked) {
+      this.idCompanyClicked = idCompanyClicked;
+      this.isOpenConfirmDeleteModal = true;
+    }
+    
+  }
+
   public closeModal(isSendRequest: boolean = false): void {
     
     if (isSendRequest) this.getCompaniesSubscription = this.getCompanies();    
     this. isOpenCreateUpdateModal = false;
     this.isOpenViewModal = false;
-    this.isOpenConfirmDelete = false; 
+    this.isOpenConfirmDeleteModal = false; 
   }
 
-  public deleteConfirm(click: MouseEvent): void {
-
-    const idCompanyClicked = this.getIdCompanyClicked(click);
-
-    if (idCompanyClicked) {
-      this.idCompanyDelete = idCompanyClicked;
-      this.isOpenConfirmDelete = true;
-      return;
-    }
-
-    this.isOpenConfirmDelete = false;
-  }
-
-  public deleteCompany(isDelete: boolean): void {
-    if (isDelete == true && this.idCompanyDelete) {
-      this.isLoading = true;
-      this.deleteCompanySubscription = this._companyService.deleteCompany(this.idCompanyDelete).subscribe({
-        next: response => {
-          this.getCompaniesSubscription = this.getCompanies();          
-          this.toastr.success("Empresa eliminada.","Enhorabuena!")
-          this.isLoading = false;
-        },
-        error: error => {
-          this.isLoading = false;
-          this._companyErrorNotification.delete();
-        }
-      });
-    }
-  }
+  
 
   public searchCompany(): void {
 

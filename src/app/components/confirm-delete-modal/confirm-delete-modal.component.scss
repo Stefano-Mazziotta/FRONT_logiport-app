@@ -1,8 +1,6 @@
 @import "../../app.component.scss";
 
-// popup-read styles //
-.popup-overlay {
-  visibility: hidden;
+.modal-overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,11 +13,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &.active {
-    visibility: visible;
-  }
 
-  .popup-container {
+  animation: fade 0.3s ease forwards;
+
+  .modal-container {
     width: 95%;
 
     background-color: white;
@@ -30,17 +27,11 @@
 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-    opacity: 0;
     transition: all 0.3s ease;
-    /* cuando el popup tenga la clase active,
-        se le aplican las siguientes propiedades: */
-    &.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+    animation: fade 0.5s ease forwards;
 
-    // popup -> title styles.
-    .popup__title {
+    // modal -> title styles.
+    .modal__title {
       width: 100%;
       margin-bottom: 60px;
       padding-bottom: 10px;
@@ -54,11 +45,7 @@
       text-transform: uppercase;
       text-align: center;
       font-size: 21px;
-      opacity: 0;
 
-      &.active {
-        animation: fade 0.8s ease forwards;
-      }
     }
 
     .buttons-wrap {
@@ -68,11 +55,6 @@
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
-
-      opacity: 0;
-      &.active {
-        animation: fade 0.8s ease forwards;
-      }
 
       button{
         width: 35%;
@@ -109,24 +91,24 @@
 
 // ___ Tablet ___ //
 @media (min-width: 768px) {
-  .popup-overlay {
-    .popup-container {
+  .modal-overlay {
+    .modal-container {
       width: 55%;
     }
   }
 }
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
-  .popup-overlay {
-    .popup-container {
+  .modal-overlay {
+    .modal-container {
       width: 40%;
     }
   }
 }
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
-  .popup-overlay {
-    .popup-container {
+  .modal-overlay {
+    .modal-container {
       width: 35%;
     }
   }
