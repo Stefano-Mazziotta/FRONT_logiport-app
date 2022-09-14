@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CompanyService } from 'src/app/services/company/company.service';
@@ -7,11 +7,11 @@ import { CompanyErrorNotificationService } from 'src/app/services/company/compan
 import { ICompany } from 'src/app/interfaces/company';
 
 @Component({
-  selector: 'app-company-popup-view',
-  templateUrl: './company-popup-view.component.html',
-  styleUrls: ['./company-popup-view.component.scss']
+  selector: 'app-company-view-modal',
+  templateUrl: './company-view-modal.component.html',
+  styleUrls: ['./company-view-modal.component.scss']
 })
-export class CompanyPopupViewComponent implements OnInit, OnDestroy {
+export class CompanyViewModalComponent implements OnInit, OnDestroy {
 
   @Input() isOpenModalView!: boolean;
   @Input() idCompanyClicked!: string;

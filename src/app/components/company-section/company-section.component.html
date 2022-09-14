@@ -76,11 +76,11 @@
   </div>
 
   <!---------------------- modal view  ---------------------->
-  <app-company-popup-view 
+  <app-company-view-modal
     *ngIf="isOpenViewModal"
     (closeModalEvent)="closeModal()"
     [idCompanyClicked]="idCompanyClicked">
-  </app-company-popup-view>
+  </app-company-view-modal>
 
   <!---------------------- modal confirm delete  ---------------------->
   <app-popup-confirm-delete (closePopup)="closeModal($event)" (isDelete)="deleteCompany($event)"
