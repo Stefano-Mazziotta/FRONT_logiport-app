@@ -35,10 +35,10 @@ export class ConfirmDeleteModalComponent implements OnInit {
     this.deleteCompanySubscription?.unsubscribe();
   }
 
-  public closeModal() {
+  public closeModal(isSendRequest:boolean = false) {
 
     if (this.clickModal == false && !this.isLoading) {
-      this.closeModalEvent.emit();
+      this.closeModalEvent.emit(isSendRequest);
     }
     this.clickModal = false;
   }
@@ -55,8 +55,8 @@ export class ConfirmDeleteModalComponent implements OnInit {
     return this._companyService.deleteCompany(this.idEntityClicked).subscribe({
       next: response => {
         this.isLoading = false;
-        this.closeModal();
-        this.toastr.success("Empresa eliminada.", "Enhorabuena!")
+        this.closeModal(true);
+        this.toastr.success("Empresa eliminada.", "Enhorabuena!");
       },
       error: error => {
         this.isLoading = false;

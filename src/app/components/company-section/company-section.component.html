@@ -85,7 +85,7 @@
   <!---------------------- modal confirm delete - WORK HERE  ---------------------->
   <app-confirm-delete-modal
     *ngIf="isOpenConfirmDeleteModal" 
-    (closeModalEvent)="closeModal()" 
+    (closeModalEvent)="closeModal($event)" 
     [idEntityClicked]="idCompanyClicked"
     [section]="section">
   </app-confirm-delete-modal >
