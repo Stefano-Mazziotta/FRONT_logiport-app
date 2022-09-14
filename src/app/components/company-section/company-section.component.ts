@@ -84,7 +84,7 @@ export class CompanySectionComponent implements OnInit {
         this._companyErrorNotification.getAll(status);
       }
     });
-  };
+  }
 
   private getIdCompanyClicked(click: MouseEvent | any): string | null {
     let idCompanyClicked = null;
@@ -154,9 +154,7 @@ export class CompanySectionComponent implements OnInit {
     this. isOpenCreateUpdateModal = false;
     this.isOpenViewModal = false;
     this.isOpenConfirmDeleteModal = false; 
-  }
-
-  
+  } 
 
   public searchCompany(): void {
 
