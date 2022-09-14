@@ -18,7 +18,7 @@ import { CompanySectionComponent } from './components/company-section/company-se
 import { CompanyCreateUpdateModalComponent } from './components/company-section/company-create-update-modal/company-create-update-modal.component';
 import { CompanyViewModalComponent } from './components/company-section/company-view-modal/company-view-modal.component';
 
-import { PopupConfirmDeleteComponent } from './components/popup-confirm-delete/popup-confirm-delete.component';
+import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
 
 import { CompanySelectorComponent } from './components/company-selector/company-selector.component';
 
@@ -46,7 +46,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
     CompanySectionComponent,
     CompanyCreateUpdateModalComponent,
     CompanyViewModalComponent,
-    PopupConfirmDeleteComponent,
+    ConfirmDeleteModalComponent,
     BoatSectionComponent,
     MotorAbmComponent,
     GeneratorAbmComponent,
