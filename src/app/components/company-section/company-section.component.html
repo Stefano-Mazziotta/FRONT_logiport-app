@@ -4,12 +4,12 @@
   <!-------------------- btn create -------------------->
   <button class="btn-add" (click)="openCreateModal()">Añadir empresa</button>
 
-  <app-company-popup-add-edit
+  <app-company-create-update-modal
     *ngIf="isOpenCreateUpdateModal" 
     (closeModalEvent)="closeModal($event)" 
     [isEdit]="isEdit"
     [idCompanyClicked]="idCompanyClicked">
-  </app-company-popup-add-edit>
+  </app-company-create-update-modal>
 
   <!-------------------- nav search -------------------->
   <h3 class="title sub">Filtro</h3>

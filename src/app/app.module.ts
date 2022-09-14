@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 import { HeaderMobileComponent } from './components/app-mobile/header-mobile/header-mobile.component';
 
 import { CompanySectionComponent } from './components/company-section/company-section.component';
-import { CompanyPopupAddComponent } from './components/company-section/company-popup-add-edit/company-popup-add-edit.component';
+import { CompanyCreateUpdateModalComponent } from './components/company-section/company-create-update-modal/company-create-update-modal.component';
 import { CompanyPopupViewComponent } from './components/company-section/company-popup-view/company-popup-view.component';
 
 import { PopupConfirmDeleteComponent } from './components/popup-confirm-delete/popup-confirm-delete.component';
@@ -44,7 +44,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
     AppComponent,
     HeaderMobileComponent,
     CompanySectionComponent,
-    CompanyPopupAddComponent,
+    CompanyCreateUpdateModalComponent,
     CompanyPopupViewComponent,
     PopupConfirmDeleteComponent,
     BoatSectionComponent,

@@ -2,8 +2,6 @@ import {
   Component,
   OnInit,
   Renderer2,
-  ViewChild,
-  ElementRef,
   Input,
   Output,
   OnChanges,
@@ -14,18 +12,18 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { ICompany, ICreateCompanyDTO, IUpdateCompanyDTO } from 'src/app/interfaces/company';
+import { ICreateCompanyDTO, IUpdateCompanyDTO } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
 import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
 
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-company-popup-add-edit',
-  templateUrl: './company-popup-add-edit.component.html',
-  styleUrls: ['./company-popup-add-edit.component.scss']
+  selector: 'app-company-create-update-modal',
+  templateUrl: './company-create-update-modal.component.html',
+  styleUrls: ['./company-create-update-modal.component.scss']
 })
-export class CompanyPopupAddComponent implements OnInit, OnChanges, OnDestroy {
+export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() isEdit!: boolean;
   @Input() idCompanyClicked: string | null = null;
