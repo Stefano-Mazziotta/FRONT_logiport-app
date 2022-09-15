@@ -26,8 +26,7 @@ export interface ISearchCompanyDTO {
 interface IResponse {
     status: number,
     type: string,
-    message: string,
-    data: ICompany | ICompany[] | null
+    message: string
 }
 
 export interface IResponseListCompany extends IResponse {
