@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICompany, ICreateCompanyDTO, IUpdateCompanyDTO, ISearchCompanyDTO, IResponseListCompany, IResponseOneCompany, IResponseNullData } from 'src/app/interfaces/company'
+import { ICreateCompanyDTO, IUpdateCompanyDTO, ISearchCompanyDTO, IResponseListCompany, IResponseOneCompany, IResponseNullData } from 'src/app/interfaces/company'
 
 @Injectable({
   providedIn: 'root'
