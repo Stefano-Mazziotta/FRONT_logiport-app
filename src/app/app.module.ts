@@ -23,7 +23,7 @@ import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/c
 import { CompanySelectorComponent } from './components/company-selector/company-selector.component';
 
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
-import { BoatPopupAddEditComponent } from './components/boat-section/boat-popup-add-edit/boat-popup-add-edit.component';
+import { BoatCreateUpdateModalComponent } from './components/boat-section/boat-create-update-modal/boat-create-update-modal.component';
 import { BoatPopupViewComponent } from './components/boat-section/boat-popup-view/boat-popup-view.component';
 
 import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
@@ -51,7 +51,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
     MotorAbmComponent,
     GeneratorAbmComponent,
     CompanySelectorComponent,
-    BoatPopupAddEditComponent,
+    BoatCreateUpdateModalComponent,
     BoatPopupViewComponent,
     TimestampToDatePipe,
     NavBottomMobileComponent,

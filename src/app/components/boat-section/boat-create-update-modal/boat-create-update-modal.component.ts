@@ -1,15 +1,15 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Boat } from 'src/app/interfaces/boat';
-import { Company } from 'src/app/interfaces/company';
+import { ICompany } from 'src/app/interfaces/company';
 import UtilsDate from 'src/app/utils/utilsDate';
 
 @Component({
-  selector: 'app-boat-popup-add-edit',
-  templateUrl: './boat-popup-add-edit.component.html',
-  styleUrls: ['./boat-popup-add-edit.component.scss']
+  selector: 'app-boat-create-update-modal',
+  templateUrl: './boat-create-update-modal.component.html',
+  styleUrls: ['./boat-create-update-modal.component.scss']
 })
-export class BoatPopupAddEditComponent implements OnInit {
+export class BoatCreateUpdateModalComponent implements OnInit {
 
   @Input() isOpen!:boolean;
   @Input() isEdit!:boolean;
@@ -156,7 +156,7 @@ export class BoatPopupAddEditComponent implements OnInit {
   public onSubmit(){
     
     let companyJson = localStorage.getItem("companySelected");
-    let companySelected:Company;
+    let companySelected:ICompany;
     let boat:Boat;
 
     let idBoatEdit = null;
@@ -178,7 +178,7 @@ export class BoatPopupAddEditComponent implements OnInit {
       
       boat = {
         IdBoat: this.isEdit ? idBoatEdit : null,
-        IdCompany: companySelected.IdCompany,
+        IdCompany: 1,
         BoatName: this.BoatForm.get('boatName')?.value,
         Enrollment: this.BoatForm.get('enrollment')?.value,
         DistinguishingMark: this.BoatForm.get('distinguishingMark')?.value, 

@@ -6,8 +6,8 @@
   <div class="addmenu-container">
     <button class="btn" (click)="add_popup()">Añadir lancha</button>
   </div>
-  <app-boat-popup-add-edit (isSubmit)="insert_or_edit_boat_event($event)" (closePopup)="close_popup_parent($event)"
-    [isOpen]="isOpen" [isEdit]="isEdit" [boatEdit]="boat"></app-boat-popup-add-edit>
+  <app-boat-create-update-modal (isSubmit)="insert_or_edit_boat_event($event)" (closePopup)="close_popup_parent($event)"
+    [isOpen]="isOpen" [isEdit]="isEdit" [boatEdit]="boat"></app-boat-create-update-modal>
 
   <!-- ======== Filtros ======== -->
   <h3 class="title sub">Filtros</h3>
@@ -72,8 +72,8 @@
   </div>
 
   <!---------------------- popup read data - popup confirm delete  ---------------------->
-  <app-boat-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView" [boat]="boat"></app-boat-popup-view>
-  <app-popup-confirm-delete (closePopup)="close_popup_parent($event)" (isDelete)="delete_boat($event)" [isOpenConfirmDelete]="isOpenConfirmDelete"></app-popup-confirm-delete>
+  <!-- <app-boat-popup-view (closePopup)="close_popup_parent($event)" [isOpenView]="isOpenView" [boat]="boat"></app-boat-popup-view> -->
+  <!-- <app-popup-confirm-delete (closePopup)="close_popup_parent($event)" (isDelete)="delete_boat($event)" [isOpenConfirmDelete]="isOpenConfirmDelete"></app-popup-confirm-delete> -->
 
   <!-------------------- paginated buttons of table -------------------->
   <div *ngIf="existBoats" class="pagination-wrap">
