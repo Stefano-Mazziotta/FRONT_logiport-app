@@ -2,11 +2,11 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, 
 import { Boat } from 'src/app/interfaces/boat';
 
 @Component({
-  selector: 'app-boat-popup-view',
-  templateUrl: './boat-popup-view.component.html',
-  styleUrls: ['./boat-popup-view.component.scss']
+  selector: 'app-boat-view-modal',
+  templateUrl: './boat-view-modal.component.html',
+  styleUrls: ['./boat-view-modal.component.scss']
 })
-export class BoatPopupViewComponent implements OnInit {
+export class BoatViewModalComponent implements OnInit {
 
   @Input() isOpenView!:boolean;
   @Input() boat!:Boat;

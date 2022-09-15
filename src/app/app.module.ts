@@ -24,7 +24,7 @@ import { CompanySelectorComponent } from './components/company-selector/company-
 
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { BoatCreateUpdateModalComponent } from './components/boat-section/boat-create-update-modal/boat-create-update-modal.component';
-import { BoatPopupViewComponent } from './components/boat-section/boat-popup-view/boat-popup-view.component';
+import { BoatViewModalComponent } from './components/boat-section/boat-view-modal/boat-view-modal.component';
 
 import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
@@ -42,25 +42,25 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
 @NgModule({
   declarations: [
     AppComponent,
+    AppDesktopComponent,
+    AppMobileComponent,
+    NavBottomMobileComponent,
+    NavHeaderDesktopComponent,
     HeaderMobileComponent,
+    LoginComponent,
+    HomeComponent,
     CompanySectionComponent,
     CompanyCreateUpdateModalComponent,
     CompanyViewModalComponent,
-    ConfirmDeleteModalComponent,
     BoatSectionComponent,
+    BoatCreateUpdateModalComponent,
+    BoatViewModalComponent,
+    ConfirmDeleteModalComponent,
     MotorAbmComponent,
     GeneratorAbmComponent,
     CompanySelectorComponent,
-    BoatCreateUpdateModalComponent,
-    BoatPopupViewComponent,
     TimestampToDatePipe,
-    NavBottomMobileComponent,
-    HomeComponent,
     LoaderDirective,
-    NavHeaderDesktopComponent,
-    AppDesktopComponent,
-    AppMobileComponent,
-    LoginComponent,
   ],
   imports: [
     NgxPaginationModule,

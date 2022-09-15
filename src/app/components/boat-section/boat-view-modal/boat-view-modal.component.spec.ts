@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoatPopupViewComponent } from './boat-popup-view.component';
+import { BoatViewModalComponent } from './boat-view-modal.component';
 
 describe('BoatPopupViewComponent', () => {
-  let component: BoatPopupViewComponent;
-  let fixture: ComponentFixture<BoatPopupViewComponent>;
+  let component: BoatViewModalComponent;
+  let fixture: ComponentFixture<BoatViewModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BoatPopupViewComponent ]
+      declarations: [ BoatViewModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoatPopupViewComponent);
+    fixture = TestBed.createComponent(BoatViewModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
