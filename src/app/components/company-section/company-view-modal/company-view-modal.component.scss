@@ -62,6 +62,7 @@
       text-transform: uppercase;
       text-align: center;
       background-color: $principal-color-blue;
+      text-shadow: 2px 2px $hover-color;
     }
 
     .loader-container{
@@ -109,6 +110,7 @@
           width: 100%;
           border-bottom: 2px solid $secondary-color;
           margin-bottom: 10px;
+          text-shadow: 2px 2px $secondary-color;
         }
 
         .elements__p {
