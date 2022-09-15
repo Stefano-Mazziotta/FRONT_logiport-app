@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, tap } from 'rxjs';
-import { Boat } from '../../interfaces/boat';
+import { Observable } from 'rxjs';
+import { ICreateBoatDTO, IUpdateBoatDTO, ISearchBoatDTO, IResponseListBoat, IResponseOneBoat, IResponseNullData } from 'src/app/interfaces/boat';
 
 @Injectable({
   providedIn: 'root'
@@ -11,61 +11,33 @@ export class BoatService {
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/boats/';
 
-  private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient) { }
 
-  get refresh$(){
-    return this._refresh$;
+  public getAllBoats(idCompany:string):Observable<IResponseListBoat>{
+    return this.http.get<IResponseListBoat>(this.myAppUrl + this.myApiUrl + `?idCompany=${idCompany}`);
   }
 
-  getListBoats(idCompanySelected:number):Observable<Boat[]>{
-    return this.http.get<Boat[]>(this.myAppUrl + this.myApiUrl ,{
-      params: {
-        IdCompany: idCompanySelected
-      }
-    });
-    
-  }
-
-  getBoatById(idBoat:number):Observable<Boat>{
-    return this.http.get<Boat>(this.myAppUrl + this.myApiUrl + idBoat);
+  public getBoatById(idBoat:string):Observable<IResponseOneBoat>{
+    return this.http.get<IResponseOneBoat>(this.myAppUrl + this.myApiUrl + idBoat );
   }
   
-  insertBoat(boat:Boat):Observable<any>{
-    return this.http.post(this.myAppUrl + this.myApiUrl, boat)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  public createBoat(boat:ICreateBoatDTO):Observable<IResponseNullData>{
+    return this.http.post<IResponseNullData>(this.myAppUrl + this.myApiUrl, boat);
   }
 
-  deleteBoat(IdBoat?:number):Observable<any>{
-    return this.http.delete(this.myAppUrl + this.myApiUrl + IdBoat)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  public updateBoat(boat:IUpdateBoatDTO):Observable<IResponseNullData>{
+    return this.http.put<IResponseNullData>(this.myAppUrl + this.myApiUrl + boat.idBoat, boat);
   }
 
-  updateBoat(boat:Boat):Observable<any>{
-    return this.http.put(this.myAppUrl + this.myApiUrl + boat.IdBoat, boat)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
+  public deleteBoat(idBoat:string):Observable<IResponseNullData>{
+    return this.http.delete<IResponseNullData>(this.myAppUrl + this.myApiUrl + idBoat);
   }
 
-  searchBoat(boatName:string, idCompanySelected:number):Observable<Boat[]>{
-    return this.http.get<Boat[]>(this.myAppUrl + this.myApiUrl ,{
-      params: {
-        IdCompany: idCompanySelected,
-        BoatName: boatName
-      }
-    });
+  public searchBoat(filterParams:ISearchBoatDTO):Observable<IResponseListBoat>{
+    const { idCompany, boatName } = filterParams;
+    const queryString = + `?idCompany=${idCompany}&boatName=${boatName}`;
 
+    return this.http.get<IResponseListBoat>(this.myAppUrl + this.myApiUrl + queryString);
   }
 
 }
