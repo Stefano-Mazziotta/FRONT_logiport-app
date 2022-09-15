@@ -20,7 +20,6 @@ export class CompanySectionComponent implements OnInit {
   section:string = "company";
   
   getCompaniesSubscription: Subscription | undefined;  
-  deleteCompanySubscription: Subscription | undefined;
   searchCompanySubscription: Subscription | undefined;
  
   companyList: ICompany[] = [];
@@ -65,7 +64,6 @@ export class CompanySectionComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.getCompaniesSubscription?.unsubscribe();
-    this.deleteCompanySubscription?.unsubscribe();
     this.searchCompanySubscription?.unsubscribe();
   }
 
