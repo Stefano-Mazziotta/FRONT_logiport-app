@@ -34,7 +34,7 @@ export class CompanyService {
   }
 
   public searchCompany(searchCompanyDTO: ISearchCompanyDTO): Observable<IResponseListCompany> {
-    const razonSocial = searchCompanyDTO;
+    const { razonSocial } = searchCompanyDTO;
     return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl + `?razonSocial=${razonSocial}`);
   }
 
