@@ -108,7 +108,7 @@ export class CompanySectionComponent implements OnInit {
   }
 
   public openCreateModal(): void {
-    this. isOpenCreateUpdateModal = true;
+    this.isOpenCreateUpdateModal = true;
     this.isUpdate = false;
   }
 
