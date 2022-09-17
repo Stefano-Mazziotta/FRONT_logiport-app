@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ICompany, ISearchCompanyDTO } from 'src/app/interfaces/company';
+import { ICompany, ISearchCompanyDTO, IcompanySelected } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
 import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
 
@@ -16,7 +16,7 @@ export class CompanySelectorComponent implements OnInit {
     private _companyErrorNotification: CompanyErrorNotificationService
   ) { }
 
-  @Output() companySelectedEvent = new EventEmitter<string|null>();
+  @Output() companySelectedEvent = new EventEmitter<IcompanySelected|null>();
 
   companies: ICompany[] = [];
 
@@ -71,7 +71,12 @@ export class CompanySelectorComponent implements OnInit {
       this.isSelected = true;
       this.inputSearchValue = company.RazonSocial;
 
-      this.companySelectedEvent.emit(company.IdCompany);
+      const companySelected:IcompanySelected = {
+        idCompany: company.IdCompany,
+        razonSocial: company.RazonSocial
+      }
+
+      this.companySelectedEvent.emit(companySelected);
     }
   }
 
