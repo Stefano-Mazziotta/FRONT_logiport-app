@@ -1,6 +1,7 @@
 <div class="main">
 
-    <label>Selecciona una empresa</label>
+    <label *ngIf="!isSelected">Selecciona una empresa:</label>
+    <label *ngIf="isSelected">Empresa seleccionada:</label>
 
     <div class="search-wrap">
         <div class="input-decorator"></div>
