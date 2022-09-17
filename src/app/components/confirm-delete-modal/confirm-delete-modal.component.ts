@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
 import { CompanyService } from 'src/app/services/company/company.service';
-import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
+import { CompanyErrorNotificationService } from 'src/app/services/company/company-error-notification/company-error-notification.service';
 
 @Component({
   selector: 'app-confirm-delete-modal',

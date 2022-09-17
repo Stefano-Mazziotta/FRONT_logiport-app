@@ -7,7 +7,7 @@ import {
 } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
 
-import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
+import { CompanyErrorNotificationService } from 'src/app/services/company/company-error-notification/company-error-notification.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
