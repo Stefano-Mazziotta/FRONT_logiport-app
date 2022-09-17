@@ -72,7 +72,7 @@
                 
                 transition: .3s ease all;
                 &:hover{
-                    color: rgba($error-color,.8);
+                    color: $hover-error-color;
                 }
             }
             
