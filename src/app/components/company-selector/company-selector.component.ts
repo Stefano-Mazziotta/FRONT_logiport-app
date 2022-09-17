@@ -1,6 +1,8 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ICompany } from 'src/app/interfaces/company';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ICompany, ISearchCompanyDTO } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
+import { CompanyErrorNotificationService } from 'src/app/services/company/companyErrorNotification/company-error-notification.service';
 
 @Component({
   selector: 'app-company-selector',
@@ -11,93 +13,74 @@ export class CompanySelectorComponent implements OnInit {
 
   constructor(
     private _companyService: CompanyService,
-    private renderer: Renderer2
+    private _companyErrorNotification: CompanyErrorNotificationService
   ) { }
-  
-  @ViewChild('searchInput') searchInput!: ElementRef;
-  @ViewChild('crossResetSelect') crossResetSelect!: ElementRef;
-  @ViewChild('resultWrap') resultWrap!: ElementRef;
+
+  @Output() companySelectedEvent = new EventEmitter<string|null>();
 
   companies: ICompany[] = [];
-  companySelected: ICompany | null = null;
 
+  inputSearchValue:string = "";
 
-  ngOnInit(): void {    
-    let company = localStorage.getItem("companySelected");
+  isLoading: boolean = false;
+  isSelected: boolean = false;
+
+  searchCompanySubscription: Subscription | undefined; 
+
+  ngOnInit(): void {
+  }
+  ngOnDestroy(): void {
+    this.searchCompanySubscription?.unsubscribe;
+  }
+
+  private searchCompany(razonSocial: string): Subscription {
+    this.isLoading = true;
+
+    const searchCompanyDto:ISearchCompanyDTO = {
+      razonSocial:razonSocial
+    };
     
-    if(company != null && company != ""){
-      this.companySelected = JSON.parse(company);
-    }    
+    return this._companyService.searchCompany(searchCompanyDto).subscribe({
+      next: result => {
+        this.companies = result.data;
+        this.isLoading = false;
+      },
+      error: error => {
+        const {status} = error;
+        this.isLoading = false;
+        this._companyErrorNotification.search(status);
+      }
+    });
   }
 
-  ngAfterViewInit(){
-    const searchInput = this.searchInput.nativeElement;
-    const crossResetSelect = this.crossResetSelect.nativeElement;
-    const resultWrap = this.resultWrap.nativeElement;
-
-    if(this.companySelected != null){
-      searchInput.value = this.companySelected.RazonSocial;
-      searchInput.disabled = true;
-
-      this.renderer.addClass(resultWrap, 'hidden');
-      this.renderer.removeClass(crossResetSelect, 'hidden');
-    }
-  }
-
-  public searchCompany(event: any) {
-    let searchValue = event.target.value;
-    if (searchValue.length >= 3) {
-
-      this._companyService.searchCompany(searchValue)
-        .subscribe({
-          next: result => {
-            this.companies = result.data;
-          },
-          error: error => {
-            console.log(error);
-          }
-        })
-
-      return;
-    }
+  public typingInputSearch(focusout: any): void {
     this.companies = [];
-  }
+    const razonSocial:string = focusout.target.value;
 
-  // get company by "razon social"
-  public selectCompany(event: any){
-    let companyName:string = event.target.innerHTML;
-    
-    const searchInput = this.searchInput.nativeElement;
-    const crossResetSelect = this.crossResetSelect.nativeElement;
-    const resultWrap = this.resultWrap.nativeElement;
-    
-    let company = this.companies.find( elem => elem.RazonSocial == companyName );
-    if(company != null){
-      this.companySelected = company;
-      localStorage.setItem('companySelected', JSON.stringify(this.companySelected));
-    
-      searchInput.value = this.companySelected.RazonSocial;
-      searchInput.disabled = true;
-
-      this.renderer.addClass(resultWrap, 'hidden');
-      this.renderer.removeClass(crossResetSelect, 'hidden');
+    if (razonSocial.length >= 3) {
+      this.searchCompanySubscription = this.searchCompany(razonSocial);
     }
-
   }
 
-  // when click in cross of searchCompany, reset company-selected.
-  public resetSelectCompany(){
-    const searchInput = this.searchInput.nativeElement;
-    const crossResetSelect = this.crossResetSelect.nativeElement;
-    const resultWrap = this.resultWrap.nativeElement;
+  public selectCompany(click: any): void {
 
-    this.companies = [];
-    this.companySelected = null;
-    localStorage.setItem('companySelected', JSON.stringify(this.companySelected));
+    const companyName: string = click.target.innerHTML;
+    const company = this.companies.find(elem => elem.RazonSocial == companyName);
+
+    if (company) {
+      this.isSelected = true;
+      this.inputSearchValue = company.RazonSocial;
+
+      this.companySelectedEvent.emit(company.IdCompany);
+    }
+  }
+
+  public removeCompanySelected(): void {
     
-    searchInput.value = "";
-    searchInput.disabled = false;
-    this.renderer.removeClass(resultWrap, 'hidden');
-    this.renderer.addClass(crossResetSelect, 'hidden');
+    this.companies = [];
+    this.isSelected = false;
+    this.inputSearchValue = "";
+
+    this.companySelectedEvent.emit(null);
   }
 }

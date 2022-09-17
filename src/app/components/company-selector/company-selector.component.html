@@ -1,25 +1,22 @@
 <div class="main">
-    <h2 class="title sub">Busque y seleccione una empresa</h2>
-    
-    <div class="search-container">
-        <i class='far fa-building'></i>
-        <span #crossResetSelect (click)="resetSelectCompany()" class="cross hidden">x</span>
-        <input #searchInput class="search__input" type="text" placeholder="Razón social" (keyup)="searchCompany($event)" maxlength="25" >
-        <div #resultWrap class="result-wrap">
-            <ul *ngFor="let company of companies" >
-                <li (click)="selectCompany($event)">{{company.RazonSocial}}</li>
-            </ul>
+
+    <label>Selecciona una empresa</label>
+
+    <div class="search-wrap">
+        <div class="input-decorator"></div>
+        <div class="input-container">
+            <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
+            <i class='far fa-building'></i>
+            <span *ngIf="isSelected" (click)="removeCompanySelected()" class="cross">x</span>
+            <input [disabled]="isLoading || isSelected" type="text" placeholder="Buscar empresa" (focusout)="typingInputSearch($event)" maxlength="25" value="{{inputSearchValue}}" >
         </div>
     </div>
 
-    <div *ngIf="companySelected != null" class="addmenu-container">
-        <h2 class="title profile-company">{{companySelected.RazonSocial}}</h2>
-        <a class="btn link" [routerLink]="['../', companySelected.RazonSocial, 'lanchas']">Lanchas</a> 
-        <div class="links-container">
-          <a class="btn link" href="">Generadores</a>
-          <a class="btn link" href="">Motores</a>
-        </div>
+    <div *ngIf="!isSelected" class="result-wrap">
+        <ul *ngFor="let company of companies" >
+            <li (click)="selectCompany($event)">{{company.RazonSocial}}</li>
+        </ul>
     </div>
-
 
 </div>
+
