@@ -41,4 +41,8 @@ export interface IResponseNullData extends IResponse {
     data: null
 }
 
+export interface IcompanySelected {
+    idCompany: string
+    razonSocial: string
+}
 
