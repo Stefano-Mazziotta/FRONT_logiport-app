@@ -1,7 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { Boat } from 'src/app/interfaces/boat';
-import { ICompany } from 'src/app/interfaces/company';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+
+import { IBoat, ICreateBoatDTO, IUpdateBoatDTO } from 'src/app/interfaces/boat';
+import { BoatErrorNotificationService } from 'src/app/services/boat/boat-error-notification/boat-error-notification.service';
+import { BoatService } from 'src/app/services/boat/boat.service';
+
 import UtilsDate from 'src/app/utils/utilsDate';
 
 @Component({
@@ -11,28 +16,13 @@ import UtilsDate from 'src/app/utils/utilsDate';
 })
 export class BoatCreateUpdateModalComponent implements OnInit {
 
-  @Input() isOpen!:boolean;
-  @Input() isEdit!:boolean;
-  @Input() boatEdit:Boat | null = null;
-
-  @Output() closePopup = new EventEmitter<boolean>();
-  @Output() isSubmit = new EventEmitter<Boat>();
-
-  @ViewChild('overlay') overlay!: ElementRef;
-  @ViewChild('popup') popup!: ElementRef;
-  @ViewChild('title') title!: ElementRef;
-  @ViewChild('form') form!: ElementRef;
-  @ViewChild('enrollmentDateInput') enrollmentDateInput!: ElementRef;
-  @ViewChild('constructionDateInput') constructionDateInput!: ElementRef;
-
-  clickPopup:boolean = false;
-  titleText:string = "";
-  btnText:string = "";
-
-  BoatForm: FormGroup;
-
-  constructor( private renderer: Renderer2, private fb: FormBuilder) {
-    this.BoatForm = this.fb.group({
+  constructor(
+    private _boatService: BoatService,
+    private _boatErrorNotification: BoatErrorNotificationService,
+    private toastr: ToastrService,
+    private fb: FormBuilder
+  ) {
+    this.boatForm = this.fb.group({
       boatName: ['', Validators.required],
       enrollment: ['', Validators.required],
       distinguishingMark: ['', Validators.required],
@@ -49,166 +39,193 @@ export class BoatCreateUpdateModalComponent implements OnInit {
       puntal: ['', Validators.required],
       peopleTransported: ['', Validators.required],
       boatPower: ['', Validators.required],
-      electricPower: ['', Validators.required]      
+      electricPower: ['', Validators.required]
     })
   }
 
-  ngOnInit(): void {
-  }
+  @Input() isUpdate!: boolean;
+  @Input() idBoatClicked: string | null = null;
+  @Input() idCompanySelected: string | null = null;
 
-  ngOnChanges():void {
+  @Output() closeModalEvent = new EventEmitter<boolean>();
 
-    if(this.isOpen == true){
-      this.open_popup();
-    }
-  }
+  clickModal: boolean = false;
+  titleText: string = "";
+  btnText: string = "";
 
-  // open_popup() -> open popup with DOM.
-  private open_popup():void{
-    console.log(this.boatEdit);
-    const overlay = this.overlay.nativeElement;
-    const popup = this.popup.nativeElement;
-    const title = this.title.nativeElement;
-    const form = this.form.nativeElement;
+  isLoading: boolean = false;
 
-    const enrollmentDateInput  = this.enrollmentDateInput.nativeElement;
-    const constructionDateInput = this.constructionDateInput.nativeElement;
+  boatForm: FormGroup;
 
-    this.renderer.addClass(overlay,'active');
-    this.renderer.addClass(popup,'active');
-    this.renderer.addClass(title,'active');
-    this.renderer.addClass(form,'active');
+  createBoatSubscription: Subscription | undefined;
+  updateBoatSubscription: Subscription | undefined;
+  getBoatByIdSubscription: Subscription | undefined;
 
-    this.renderer.setAttribute(enrollmentDateInput, 'type', 'text');
-    this.renderer.setAttribute(constructionDateInput, 'type', 'text');
 
-    if (this.isEdit == false){
+  public ngOnInit(): void {
 
-      this.titleText = "AÑADIR LANCHA";
-      this.btnText = "AÑADIR";
-    }
+    this.titleText = "AÑADIR LANCHA";
+    this.btnText = "AÑADIR";
 
-    if(this.isEdit == true && this.boatEdit != null){
+    if (this.isUpdate && this.idBoatClicked) {
 
       this.titleText = "EDITAR LANCHA";
       this.btnText = "EDITAR"
-      
-      let enrollmentTimestamp = this.boatEdit.EnrollmentDate
-      let constructionTimestamp = this.boatEdit.ConstructionDate;      
-      
-      let enrollmentDate:string = "";
-      let constructionDate:string = "";
 
-      if(enrollmentTimestamp){
-        enrollmentDate =  UtilsDate.timestampToDate(enrollmentTimestamp);
-      }
-      if(constructionTimestamp){
-        constructionDate = UtilsDate.timestampToDate(constructionTimestamp);
-      }
-
-      this.BoatForm.get('boatName')?.setValue(`${this.boatEdit.BoatName}`); 
-      this.BoatForm.get('enrollment')?.setValue(`${this.boatEdit.Enrollment}`); 
-      this.BoatForm.get('distinguishingMark')?.setValue(`${this.boatEdit.DistinguishingMark}`); 
-      this.BoatForm.get('hullMaterial')?.setValue(`${this.boatEdit.HullMaterial}`); 
-      this.BoatForm.get('boatType')?.setValue(`${this.boatEdit.BoatType}`); 
-      this.BoatForm.get('service')?.setValue(`${this.boatEdit.Service}`); 
-      this.BoatForm.get('specificExploitation')?.setValue(`${this.boatEdit.SpecificExploitation}`); 
-      this.BoatForm.get('enrollmentDate')?.setValue(`${enrollmentDate}`); 
-      this.BoatForm.get('constructionDate')?.setValue(`${constructionDate}`); 
-      this.BoatForm.get('nat')?.setValue(`${this.boatEdit.NAT}`); 
-      this.BoatForm.get('nan')?.setValue(`${this.boatEdit.NAN}`); 
-      this.BoatForm.get('eslora')?.setValue(`${this.boatEdit.Eslora}`); 
-      this.BoatForm.get('manga')?.setValue(`${this.boatEdit.Manga}`); 
-      this.BoatForm.get('puntal')?.setValue(`${this.boatEdit.Puntal}`); 
-      this.BoatForm.get('peopleTransported')?.setValue(`${this.boatEdit.PeopleTransported}`); 
-      this.BoatForm.get('boatPower')?.setValue(`${this.boatEdit.BoatPower}`); 
-      this.BoatForm.get('electricPower')?.setValue(`${this.boatEdit.ElectricPower}`); 
+      this.getBoatByIdSubscription = this.getBoatById(this.idBoatClicked);
     }
-
   }
 
-  // close_popup() -> close popup and emit new value "isOpen" to parent component.
-  public close_popup(){
-
-    if(this.clickPopup == false){
-
-      const overlay = this.overlay.nativeElement;
-      const popup = this.popup.nativeElement;
-      const title = this.title.nativeElement;
-      const form = this.form.nativeElement;
-
-      this.renderer.removeClass(overlay,'active')
-      this.renderer.removeClass(popup,'active')
-      this.renderer.removeClass(title,'active');
-      this.renderer.removeClass(form,'active');
-
-      this.BoatForm.reset();
-
-      this.isOpen = false;
-      this.closePopup.emit(this.isOpen);
-    }
-    this.clickPopup = false;
+  public ngOnDestroy(): void {
+    this.createBoatSubscription?.unsubscribe();
+    this.updateBoatSubscription?.unsubscribe();
+    this.getBoatByIdSubscription?.unsubscribe();
   }
 
-  // onSubmit() ===> on click "añadir" execute this method.
-  // get values of inputs and store them in the object Boat.
-  // emit this object to father component for consume insertBoat or UpdateBoat service.
-  public onSubmit(){
-    
-    let companyJson = localStorage.getItem("companySelected");
-    let companySelected:ICompany;
-    let boat:Boat;
+  public closeModal(isSendRequest: boolean = false): void {
 
-    let idBoatEdit = null;
-    if(this.isEdit && this.boatEdit){
-      idBoatEdit = this.boatEdit.IdBoat
+    if (this.clickModal == false && !this.isLoading) {
+
+      this.boatForm.reset();
+      this.closeModalEvent.emit(isSendRequest);
     }
+    this.clickModal = false;
+  }
 
-    if(companyJson != null){
-      companySelected = JSON.parse(companyJson);
+  public onSubmit(): void {
 
-      let enrollmentDate:string = this.BoatForm.get('enrollmentDate')?.value;
-      let constructionDate:string = this.BoatForm.get('constructionDate')?.value;
-      
-      enrollmentDate = UtilsDate.formatDateToYYYYMMDD(enrollmentDate);
-      constructionDate = UtilsDate.formatDateToYYYYMMDD(constructionDate);
+    let boat: ICreateBoatDTO | IUpdateBoatDTO = this.getFormData();
 
-      let enrollmentTimestamp:number = UtilsDate.dateToTimestamp( new Date(enrollmentDate) );
-      let constructionTimestamp:number = UtilsDate.dateToTimestamp( new Date(constructionDate) );
-      
+    if (this.isUpdate && this.idBoatClicked) {
       boat = {
-        IdBoat: this.isEdit ? idBoatEdit : null,
-        IdCompany: 1,
-        BoatName: this.BoatForm.get('boatName')?.value,
-        Enrollment: this.BoatForm.get('enrollment')?.value,
-        DistinguishingMark: this.BoatForm.get('distinguishingMark')?.value, 
-        HullMaterial: this.BoatForm.get('hullMaterial')?.value,
-        BoatType: this.BoatForm.get('boatType')?.value,
-        Service: this.BoatForm.get('service')?.value,
-        SpecificExploitation: this.BoatForm.get('specificExploitation')?.value,
-        EnrollmentDate: enrollmentTimestamp,
-        ConstructionDate: constructionTimestamp, 
-        NAT: parseInt(this.BoatForm.get('nat')?.value),
-        NAN: parseInt(this.BoatForm.get('nan')?.value),
-        Eslora: this.BoatForm.get('eslora')?.value,
-        Manga: this.BoatForm.get('manga')?.value,
-        Puntal: this.BoatForm.get('puntal')?.value,
-        PeopleTransported: this.BoatForm.get('peopleTransported')?.value,
-        BoatPower: this.BoatForm.get('boatPower')?.value,
-        ElectricPower: this.BoatForm.get('electricPower')?.value,
-        IsDeleted: null,
-        TimeSave: null,
-        TimeDeleted: null,
-        TimeLastUpdate: null
+        idBoat: this.idBoatClicked,
+        ...boat
       };
-      
-      this.isSubmit.emit(boat);
-    }   
-    
-    this.close_popup();
+
+      this.updateBoatSubscription = this.updateBoat(boat);
+      return;
+    }
+
+    this.createBoatSubscription = this.createBoat(boat);
   }
 
-  
 
+  private createBoat(boat: ICreateBoatDTO): Subscription {
+    this.isLoading = true;
+    return this._boatService.createBoat(boat).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.toastr.success("Lancha creada.", "Enhorabuena!");
+        this.closeModal(true);
+      },
+      error: error => {
+        this.isLoading = false;
+        this._boatErrorNotification.create();
+      }
+    });
+  }
 
+  private updateBoat(boat: IUpdateBoatDTO): Subscription {
+    this.isLoading = true;
+
+    return this._boatService.updateBoat(boat).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.toastr.success("Lancha actualizada.", "Enhorabuena!");
+        this.closeModal(true);
+      },
+      error: error => {
+        this.isLoading = false;
+        this._boatErrorNotification.update();
+      }
+    })
+  }
+
+  private getBoatById(idBoat: string): Subscription {
+    this.isLoading = true;
+    return this._boatService.getBoatById(idBoat).subscribe({
+      next: response => {
+        const boat: IBoat = response.data;
+
+        this.isLoading = false;
+        this.setFormValues(boat);
+      },
+      error: error => {
+        this.isLoading = false;
+        this.closeModal();
+        this._boatErrorNotification.getById();
+      }
+    })
+  }
+
+  private getFormData(): ICreateBoatDTO {
+
+    if(this.idCompanySelected){
+
+    }
+    let enrollmentDate: string = this.boatForm.get('enrollmentDate')?.value;
+    let constructionDate: string = this.boatForm.get('constructionDate')?.value;
+    enrollmentDate = UtilsDate.formatDateToYYYYMMDD(enrollmentDate);
+    constructionDate = UtilsDate.formatDateToYYYYMMDD(constructionDate);
+
+    const enrollmentTimestamp: number = UtilsDate.dateToTimestamp(new Date(enrollmentDate));
+    const constructionTimestamp: number = UtilsDate.dateToTimestamp(new Date(constructionDate));
+
+    const boat: ICreateBoatDTO = {
+      idCompany: this.idCompanySelected == null ? "" : this.idCompanySelected,
+      boatName: this.boatForm.get('boatName')?.value,
+      enrollment: this.boatForm.get('enrollment')?.value,
+      distinguishingMark: this.boatForm.get('distinguishingMark')?.value,
+      hullMaterial: this.boatForm.get('hullMaterial')?.value,
+      boatType: this.boatForm.get('boatType')?.value,
+      service: this.boatForm.get('service')?.value,
+      specificExploitation: this.boatForm.get('specificExploitation')?.value,
+      enrollmentDate: enrollmentTimestamp,
+      constructionDate: constructionTimestamp,
+      nat: parseInt(this.boatForm.get('nat')?.value),
+      nan: parseInt(this.boatForm.get('nan')?.value),
+      eslora: this.boatForm.get('eslora')?.value,
+      manga: this.boatForm.get('manga')?.value,
+      puntal: this.boatForm.get('puntal')?.value,
+      peopleTransported: this.boatForm.get('peopleTransported')?.value,
+      boatPower: this.boatForm.get('boatPower')?.value,
+      electricPower: this.boatForm.get('electricPower')?.value,
+    };
+
+    return boat;
+  }
+
+  private setFormValues(boat: IBoat): void {
+    let enrollmentTimestamp = boat.EnrollmentDate
+    let constructionTimestamp = boat.ConstructionDate;
+
+    let enrollmentDate: string = "";
+    let constructionDate: string = "";
+
+    if (enrollmentTimestamp) {
+      enrollmentDate = UtilsDate.timestampToDate(enrollmentTimestamp);
+    }
+    if (constructionTimestamp) {
+      constructionDate = UtilsDate.timestampToDate(constructionTimestamp);
+    }
+
+    this.boatForm.get('boatName')?.setValue(`${boat.BoatName}`);
+    this.boatForm.get('enrollment')?.setValue(`${boat.Enrollment}`);
+    this.boatForm.get('distinguishingMark')?.setValue(`${boat.DistinguishingMark}`);
+    this.boatForm.get('hullMaterial')?.setValue(`${boat.HullMaterial}`);
+    this.boatForm.get('boatType')?.setValue(`${boat.BoatType}`);
+    this.boatForm.get('service')?.setValue(`${boat.Service}`);
+    this.boatForm.get('specificExploitation')?.setValue(`${boat.SpecificExploitation}`);
+    this.boatForm.get('enrollmentDate')?.setValue(`${enrollmentDate}`);
+    this.boatForm.get('constructionDate')?.setValue(`${constructionDate}`);
+    this.boatForm.get('nat')?.setValue(`${boat.NAT}`);
+    this.boatForm.get('nan')?.setValue(`${boat.NAN}`);
+    this.boatForm.get('eslora')?.setValue(`${boat.Eslora}`);
+    this.boatForm.get('manga')?.setValue(`${boat.Manga}`);
+    this.boatForm.get('puntal')?.setValue(`${boat.Puntal}`);
+    this.boatForm.get('peopleTransported')?.setValue(`${boat.PeopleTransported}`);
+    this.boatForm.get('boatPower')?.setValue(`${boat.BoatPower}`);
+    this.boatForm.get('electricPower')?.setValue(`${boat.ElectricPower}`);
+
+  }
 }
