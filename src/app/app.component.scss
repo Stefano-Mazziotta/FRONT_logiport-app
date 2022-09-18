@@ -33,6 +33,18 @@ $radius-3: 3px;
     to{opacity: 0;}
 }
 
+@keyframes swipeUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to{
+
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
 @keyframes spinner {
     from{transform: rotate(0);}
     to{transform: rotate(360deg);}
