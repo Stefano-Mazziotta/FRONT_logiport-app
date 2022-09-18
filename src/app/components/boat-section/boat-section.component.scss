@@ -30,6 +30,7 @@
 
   .dashboard-container {
     margin-top: 25px;
+    animation: swipeUp 0.5s ease forwards;
 
     .add-container {
       display: flex;
