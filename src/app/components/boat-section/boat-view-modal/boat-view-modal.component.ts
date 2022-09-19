@@ -1,5 +1,8 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Boat } from 'src/app/interfaces/boat';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IBoat } from 'src/app/interfaces/boat';
+import { BoatErrorNotificationService } from 'src/app/services/boat/boat-error-notification/boat-error-notification.service';
+import { BoatService } from 'src/app/services/boat/boat.service';
 
 @Component({
   selector: 'app-boat-view-modal',
@@ -8,64 +11,81 @@ import { Boat } from 'src/app/interfaces/boat';
 })
 export class BoatViewModalComponent implements OnInit {
 
-  @Input() isOpenView!:boolean;
-  @Input() boat!:Boat;
+  constructor(
+    private _boatService: BoatService,
+    private _boatErrorNotification: BoatErrorNotificationService,
+  ) {
 
-  @Output() closePopup = new EventEmitter<boolean>();
+  }
 
-  @ViewChild('overlay') overlay!: ElementRef;
-  @ViewChild('popup') popup!: ElementRef;
-  @ViewChild('title') title!: ElementRef;
-  @ViewChild('dataContainer') dataContainer!: ElementRef;
+  @Output() closeModalEvent = new EventEmitter<boolean>();
+  @Input() idBoatClicked: string | null = null;
 
-  clickPopup:boolean = false;
+  clickModal: boolean = false;
+  isLoading: boolean = false;
 
-  constructor(private renderer: Renderer2) { }
+  boat: IBoat = {
+    IdBoat: '',
+    IdCompany: 0,
+    BoatName: '',
+    Enrollment: '',
+    DistinguishingMark: '',
+    HullMaterial: '',
+    BoatType: '',
+    Service: '',
+    SpecificExploitation: '',
+    EnrollmentDate: 0,
+    ConstructionDate: 0,
+    NAT: 0,
+    NAN: 0,
+    Eslora: 0,
+    Manga: 0,
+    Puntal: 0,
+    PeopleTransported: 0,
+    BoatPower: '',
+    ElectricPower: '',
+    IsDeleted: null,
+    TimeSave: null,
+    TimeDeleted: null,
+    TimeLastUpdate: null
+  }
 
-  ngOnInit():void{
+  getBoatByIdSubscription: Subscription | undefined;
+
+  public ngOnInit(): void {
     
-  }
-
-  ngOnChanges():void{
-    if (this.isOpenView == true){
-      this.open_popup();
+    const idBoat = this.idBoatClicked;
+    if(idBoat){
+      this.getBoatByIdSubscription = this.getBoatById(idBoat);
     }
-  }
-
-  // open_popup() -> abre el popup mediante DOM y setea la info correspondiente.
-  private open_popup():void{
-       
-    const overlay = this.overlay.nativeElement;
-    const popup = this.popup.nativeElement;
-    const title = this.title.nativeElement;
-    const dataContainer = this.dataContainer.nativeElement;
-
-    this.renderer.addClass(overlay,'active');
-    this.renderer.addClass(popup,'active');
-    this.renderer.addClass(title,'active');
-    this.renderer.addClass(dataContainer,'active');
 
   }
 
-  // close_popup() -> cierra el popup y emite el nuevo valor de isOpen al parent component.
-  public close_popup(){
+  public ngOnDestroy(): void {
+    this.getBoatByIdSubscription?.unsubscribe();
+  }
 
-    if(this.clickPopup == false){
+  public closeModal(): void {
 
-      const overlay = this.overlay.nativeElement;
-      const popup = this.popup.nativeElement;
-      const title = this.title.nativeElement;
-      const dataContainer = this.dataContainer.nativeElement;
-
-      this.renderer.removeClass(overlay,'active')
-      this.renderer.removeClass(popup,'active')
-      this.renderer.removeClass(title,'active');
-      this.renderer.removeClass(dataContainer,'active');
-
-      this.isOpenView = false;
-      this.closePopup.emit(this.isOpenView);
+    if (this.clickModal == false) {
+      this.closeModalEvent.emit();
     }
-    this.clickPopup = false;
+    this.clickModal = false;
+  }
+
+  private getBoatById(idBoat:string):Subscription{
+    this.isLoading = true;
+    return this._boatService.getBoatById(idBoat).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.boat = response.data;
+      },
+      error: error => {
+        this.isLoading = false;
+        this.closeModal();
+        this._boatErrorNotification.getById();
+      }
+    });
   }
 
 }

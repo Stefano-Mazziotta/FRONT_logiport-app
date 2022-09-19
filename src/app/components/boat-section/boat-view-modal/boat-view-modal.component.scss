@@ -1,8 +1,6 @@
 @import "../../../app.component.scss";
 
-// popup-read styles //
-.popup-overlay-read {
-  visibility: hidden;
+.modal-overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,11 +13,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &.active {
-    visibility: visible;
-  }
 
-  .popup-read-container {
+  animation: fade 0.5s ease forwards;
+
+  .modal-container {
     width: 90%;
     max-height: 95vh;
     overflow-y: scroll;
@@ -28,20 +25,14 @@
 
     border-radius: 10px;
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 15px;
 
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-    opacity: 0;
     transition: all 0.3s ease;
-    /* cuando el popup tenga la clase active,
-        se le aplican las siguientes propiedades: */
-    &.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+    animation: fade 0.8s ease forwards;
 
-    .popup-read__close {
+    .modal__close {
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
@@ -51,16 +42,18 @@
       flex-direction: row-reverse;
 
       transition: all 0.3s ease;
+
       &:hover {
         fill: #ad1f2d;
       }
+
       svg {
         cursor: pointer;
       }
     }
 
-    // popup -> title styles.
-    .popup-read__title {
+    // modal -> title styles.
+    .modal__title {
       width: 100%;
       margin-bottom: 25px;
       padding-bottom: 10px;
@@ -71,11 +64,25 @@
       color: $secondary-color;
       text-transform: uppercase;
       text-align: center;
-      opacity: 0;
       background-color: $principal-color-blue;
+    }
 
-      &.active {
-        animation: fade 0.8s ease forwards;
+    .loader-container{
+      width: 90%;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+
+      padding-right: 15px;
+      padding-left:  15px;
+
+      text-align: center;
+
+      .loader-animation{
+        font-size: 64px;
+        color: $principal-color-blue;
+        animation: spinner 1.5s ease infinite;
       }
     }
 
@@ -90,10 +97,6 @@
 
       padding-right: 15px;
       padding-left: 15px;
-      opacity: 0;
-      &.active {
-        animation: fade 0.8s ease forwards;
-      }
 
       .registers__elements {
         width: 100%;
@@ -124,31 +127,39 @@
 
 // ___ Tablet ___ //
 @media (min-width: 768px) {
-  .popup-overlay-read {
-    .popup-read-container {
-      .registers-container{
+  .modal-overlay {
+    .modal-container {
+      .registers-container {
         flex-flow: row wrap;
         justify-content: space-between;
-        .registers__elements{
+
+        .registers__elements {
           width: 45%;
         }
       }
     }
   }
 }
+
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
-  .popup-overlay-read {
-    .popup-read-container {
-      .registers-container{
-        .registers__elements{
+  .modal-overlay {
+    .modal-container {
+      .registers-container {
+        .registers__elements {
           width: 30%;
         }
-      }      
+      }
     }
   }
 }
+
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
-  
+  .modal-overlay {
+    .modal-container {
+      overflow-y: auto;
+    }
+  }
+
 }
