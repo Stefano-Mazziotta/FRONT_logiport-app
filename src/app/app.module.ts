@@ -26,7 +26,7 @@ import { BoatSectionComponent } from './components/boat-section/boat-section.com
 import { BoatCreateUpdateModalComponent } from './components/boat-section/boat-create-update-modal/boat-create-update-modal.component';
 import { BoatViewModalComponent } from './components/boat-section/boat-view-modal/boat-view-modal.component';
 
-import { MotorAbmComponent } from './components/motor-abm/motor-abm.component';
+import { MotorSectionComponent } from './components/motor-section/motor-section.component';
 import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
@@ -56,7 +56,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
     BoatCreateUpdateModalComponent,
     BoatViewModalComponent,
     ConfirmDeleteModalComponent,
-    MotorAbmComponent,
+    MotorSectionComponent,
     GeneratorAbmComponent,
     CompanySelectorComponent,
     TimestampToDatePipe,
