@@ -35,7 +35,7 @@ export class BoatService {
 
   public searchBoat(filterParams:ISearchBoatDTO):Observable<IResponseListBoat>{
     const { idCompany, boatName } = filterParams;
-    const queryString = + `?idCompany=${idCompany}&boatName=${boatName}`;
+    const queryString = `?idCompany=${idCompany}&boatName=${boatName}`;
 
     return this.http.get<IResponseListBoat>(this.myAppUrl + this.myApiUrl + queryString);
   }
