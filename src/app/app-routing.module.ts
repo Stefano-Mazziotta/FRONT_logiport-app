@@ -1,10 +1,12 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
-import { CompanySelectorComponent } from './components/company-selector/company-selector.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { MotorSectionComponent } from './components/motor-section/motor-section.component';
+
 import { UserGuardGuard } from './guards/userGuard/user-guard.guard';
 
 const routes: Routes = [
@@ -16,6 +18,11 @@ const routes: Routes = [
   {
     path: 'lanchas', 
     component: BoatSectionComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'motores', 
+    component: MotorSectionComponent,
     canActivate: [UserGuardGuard],
   },
   {
