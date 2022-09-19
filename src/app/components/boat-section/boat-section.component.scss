@@ -125,6 +125,17 @@
 
     }
 
+    .loader-container{
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+      .loader-animation{
+        font-size: 64px;
+        color: $principal-color-blue;
+        animation: spinner 1.5s ease infinite;
+      }
+    }
+
     //--- table -> thead & tbody ---//
     .table-data {
       width: 100%;

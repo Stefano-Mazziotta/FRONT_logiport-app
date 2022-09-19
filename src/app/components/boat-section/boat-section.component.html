@@ -44,15 +44,20 @@
 
 
     <div class="btnfilter-container">
-      <button class="btnfilter__btn" [disabled]="boatFilterForm.invalid" (click)="searchBoat()"><i
+      <button class="btnfilter__btn" [disabled]="boatFilterForm.invalid || isLoading" (click)="searchBoat()"><i
           class="fa-solid fa-magnifying-glass"></i></button>
-      <button class="btnfilter__btn" (click)="resetFilter()"><i class="fa-solid fa-rotate"></i></button>
+      <button class="btnfilter__btn" [disabled]="isLoading" (click)="resetFilter()"><i class="fa-solid fa-rotate"></i></button>
     </div>
 
     <!-- ======== Table ======== -->
     <h3 class="title sub">Resultados</h3>
-    <p *ngIf="!existBoats"> No existen lanchas para esta empresa.</p>
-    <div *ngIf="existBoats" style="overflow-x:auto; margin-bottom:10px;">
+
+    <div *ngIf="isLoading" class="loader-container">
+      <i class="fa-solid fa-circle-notch loader-animation"></i>
+    </div>
+    
+    <p *ngIf="!existBoats && !isLoading"> No existen lanchas para esta empresa.</p>
+    <div *ngIf="existBoats && !isLoading" style="overflow-x:auto; margin-bottom:10px;">
       <table class="table-data">
 
         <thead>
@@ -100,7 +105,7 @@
     </div>
 
     <!-------------------- paginated buttons of table -------------------->
-    <div *ngIf="existBoats" class="pagination-wrap">
+    <div *ngIf="existBoats && !isLoading" class="pagination-wrap">
       <pagination-controls class="pagination-buttons" (pageChange)="currentPage = $event"
         [responsive]="responsivePagination" previousLabel="Anterior" nextLabel="Siguiente">
       </pagination-controls>
