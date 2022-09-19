@@ -14,13 +14,7 @@ const routes: Routes = [
     canActivate: [UserGuardGuard],
   },
   {
-    path: 'seleccionar-empresa', 
-    component: CompanySelectorComponent,
-    canActivate: [UserGuardGuard],
-    
-  },
-  {
-    path: ':companyName/lanchas', 
+    path: 'lanchas', 
     component: BoatSectionComponent,
     canActivate: [UserGuardGuard],
   },
