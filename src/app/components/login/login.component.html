@@ -23,7 +23,10 @@
             </div>
         </div>
 
-        <input class="login__btn" type="submit" value="Ingresar" [disabled]="loginForm.invalid">
+        <button class="login__btn" type="submit" [disabled]="loginForm.invalid || isLoading">
+            Ingresar 
+            <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
+        </button>
 
     </form>
 

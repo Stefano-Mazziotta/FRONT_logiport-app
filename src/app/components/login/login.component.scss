@@ -89,6 +89,10 @@
                 cursor: default;
                 background-color: $principal-color-blue;
             }
+
+            .loader-animation{
+                animation: spinner 1.5s ease infinite;
+            }
         }
 
     }
