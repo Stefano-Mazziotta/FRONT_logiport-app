@@ -7,7 +7,7 @@
         <div class="input-decorator"></div>
         <div class="input-container">
             <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
-            <i class='far fa-building'></i>
+            <i class="fa-solid fa-building"></i>
             <span *ngIf="isSelected" (click)="removeCompanySelected()" class="cross">x</span>
             <input [disabled]="isLoading || isSelected" type="text" placeholder="Buscar empresa" (focusout)="typingInputSearch($event)" maxlength="25" value="{{inputSearchValue}}" >
         </div>
