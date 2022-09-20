@@ -38,6 +38,7 @@ import { AppDesktopComponent } from './components/app-desktop/app-desktop.compon
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
 import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-interceptor.interceptor';
+import { BoatSelectorComponent } from './components/boat-selector/boat-selector.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
     CompanySelectorComponent,
     TimestampToDatePipe,
     LoaderDirective,
+    BoatSelectorComponent,
   ],
   imports: [
     NgxPaginationModule,
