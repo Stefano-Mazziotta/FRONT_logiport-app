@@ -1,1 +1,22 @@
-<p>boat-selector works!</p>
+<div class="main">
+
+    <label *ngIf="!isSelected">Selecciona una lancha:</label>
+    <label *ngIf="isSelected">Lancha seleccionada:</label>
+
+    <div class="search-wrap">
+        <div class="input-decorator"></div>
+        <div class="input-container">
+            <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
+            <i class="fa-solid fa-ship"></i>
+            <span *ngIf="isSelected" (click)="removeBoatSelected()" class="cross">x</span>
+            <input [disabled]="isLoading || isSelected" type="text" placeholder="Buscar lancha" (focusout)="typingInputSearch($event)" maxlength="25" value="{{inputSearchValue}}" >
+        </div>
+    </div>
+
+    <div *ngIf="!isSelected" class="result-wrap">
+        <ul *ngFor="let boat of boats" >
+            <li (click)="selectBoat($event)">{{boat.BoatName}}</li>
+        </ul>
+    </div>
+
+</div>
