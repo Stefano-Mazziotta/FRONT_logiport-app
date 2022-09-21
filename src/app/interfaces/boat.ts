@@ -71,3 +71,8 @@ export interface IResponseOneBoat extends IResponse {
 export interface IResponseNullData extends IResponse {
     data: null
 }
+
+export interface IBoatSelected {
+    idBoat: string,
+    boatName: string
+}
