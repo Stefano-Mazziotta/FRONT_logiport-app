@@ -39,6 +39,7 @@ import { AppMobileComponent } from './components/app-mobile/app-mobile.component
 import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-interceptor.interceptor';
 import { BoatSelectorComponent } from './components/boat-selector/boat-selector.component';
+import { MotorCreateUpdateModalComponent } from './components/motor-section/motor-create-update-modal/motor-create-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { BoatSelectorComponent } from './components/boat-selector/boat-selector.
     TimestampToDatePipe,
     LoaderDirective,
     BoatSelectorComponent,
+    MotorCreateUpdateModalComponent,
   ],
   imports: [
     NgxPaginationModule,
