@@ -160,9 +160,6 @@ export class BoatCreateUpdateModalComponent implements OnInit {
 
   private getFormData(): ICreateBoatDTO {
 
-    if(this.idCompanySelected){
-
-    }
     let enrollmentDate: string = this.boatForm.get('enrollmentDate')?.value;
     let constructionDate: string = this.boatForm.get('constructionDate')?.value;
     enrollmentDate = UtilsDate.formatDateToYYYYMMDD(enrollmentDate);
