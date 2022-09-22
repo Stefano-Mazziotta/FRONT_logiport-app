@@ -15,7 +15,6 @@ export interface IMotor {
 }
 
 export interface ICreateMotorDTO {
-    idCompany: string
     idBoat: string
     quantity: string
     brand: string
