@@ -15,6 +15,7 @@ export interface IMotor {
 }
 
 export interface ICreateMotorDTO {
+    idCompany: string
     idBoat: string
     quantity: string
     brand: string
@@ -29,9 +30,13 @@ export interface IUpdateMotorDTO extends ICreateMotorDTO {
     idMotor: string
 }
 
-export interface ISearchMotorDTO {
+export interface IGetAllMotorsDTO {
+    idCompany:string
     idBoat: string
-    numberMotor: string
+}
+
+export interface ISearchMotorDTO extends IGetAllMotorsDTO {
+    numberMotor: number
 }
 
 interface IResponse {
