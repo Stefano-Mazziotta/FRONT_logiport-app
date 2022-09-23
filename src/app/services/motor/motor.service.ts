@@ -17,7 +17,7 @@ export class MotorService {
   public getAllMotors(params:IGetAllMotorsDTO):Observable<IResponseListMotor>{
 
     const { idCompany, idBoat } = params;
-    const queryString = `?idCompany${idCompany}&idBoat=${idBoat}`;
+    const queryString = `?idCompany=${idCompany}&idBoat=${idBoat}`;
 
     return this.http.get<IResponseListMotor>(this.myAppUrl + this.myApiUrl + queryString);
   }
