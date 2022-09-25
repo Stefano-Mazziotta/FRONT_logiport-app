@@ -1,0 +1,165 @@
+@import "../../../app.component.scss";
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgb(0, 0, 0, 0.7);
+  z-index: 5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fade 0.5s ease forwards;
+
+  .modal-container {
+    width: 90%;
+    max-height: 95vh;
+    overflow-y: scroll;
+
+    background-color: white;
+
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    transition: all 0.3s ease;
+    animation: fade 0.8s ease forwards;
+
+    .modal__close {
+      width: 100%;
+      margin-bottom: 10px;
+      padding-right: 20px;
+      fill: #dc3545;
+
+      display: flex;
+      flex-direction: row-reverse;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        fill: #ad1f2d;
+      }
+
+      svg {
+        cursor: pointer;
+      }
+    }
+
+    // modal -> title styles.
+    .modal__title {
+      width: 100%;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+      color: $secondary-color;
+      text-transform: uppercase;
+      text-align: center;
+      background-color: $principal-color-blue;
+    }
+
+    .loader-container{
+      width: 90%;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+
+      padding-right: 15px;
+      padding-left:  15px;
+
+      text-align: center;
+
+      .loader-animation{
+        font-size: 64px;
+        color: $principal-color-blue;
+        animation: spinner 1.5s ease infinite;
+      }
+    }
+
+    .registers-container {
+      width: 90%;
+      margin: 0 auto;
+
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      padding-right: 15px;
+      padding-left: 15px;
+
+      .registers__elements {
+        width: 100%;
+
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        margin-bottom: 30px;
+
+        .elements__title {
+          width: 100%;
+          border-bottom: 2px solid $secondary-color;
+          margin-bottom: 5px;
+          font-size: 16px;
+        }
+
+        .elements__p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+// ############################## Responsive ############################## //
+
+// ___ Tablet ___ //
+@media (min-width: 768px) {
+  .modal-overlay {
+    .modal-container {
+      .registers-container {
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .registers__elements {
+          width: 45%;
+        }
+      }
+    }
+  }
+}
+
+// ___ Laptop ___ //
+@media (min-width: 1024px) {
+  .modal-overlay {
+    .modal-container {
+      .registers-container {
+        .registers__elements {
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+//___ Laptop L ___ //
+@media (min-width: 1440px) {
+  .modal-overlay {
+    .modal-container {
+      overflow-y: auto;
+    }
+  }
+
+}
