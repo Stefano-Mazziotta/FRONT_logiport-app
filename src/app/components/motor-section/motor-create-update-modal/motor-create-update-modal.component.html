@@ -13,93 +13,101 @@
         <h2 class="modal__title">{{ titleText }}</h2>
 
         <form class="modal__form" [formGroup]="motorForm" (ngSubmit)="onSubmit()">
-            <div class="form__input-container">
-                <label class="form__label" for="quantity">Cantidad</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('quantity')?.valid"
-                        [class.error]="motorForm.get('quantity')?.invalid && motorForm.get('quantity')?.touched"></div>
-                    <input formControlName="quantity" class="form__input" type="text" placeholder="* Cantidad"
-                        name="quantity" autocomplete="off" maxlength="60">
-                </div>
-                <span class="form__error"
-                    *ngIf="motorForm.get('quantity')?.invalid && motorForm.get('quantity')?.touched">
-                    Este campo es <strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="brand">Marca</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('brand')?.valid"
-                        [class.error]="motorForm.get('brand')?.invalid && motorForm.get('brand')?.touched"></div>
-                    <input formControlName="brand" class="form__input" type="text" placeholder="* Marca" name="brand"
-                        autocomplete="off" maxlength="11">
-                </div>
-                <span class="form__error" *ngIf="motorForm.get('brand')?.invalid && motorForm.get('brand')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="numberMotor">Número de motor</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('numberMotor')?.valid"
-                        [class.error]="motorForm.get('numberMotor')?.invalid && motorForm.get('numberMotor')?.touched">
+            <div class="form-flex">
+                <div class="form__input-container">
+                    <label class="form__label" for="quantity">Cantidad</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('quantity')?.valid"
+                            [class.error]="motorForm.get('quantity')?.invalid && motorForm.get('quantity')?.touched"></div>
+                        <input formControlName="quantity" class="form__input" type="text" placeholder="* Cantidad"
+                            name="quantity" autocomplete="off" maxlength="60">
                     </div>
-                    <input formControlName="numberMotor" class="form__input" type="text" placeholder="* Número de motor"
-                        name="numberMotor" autocomplete="off" maxlength="11">
+                    <span class="form__error"
+                        *ngIf="motorForm.get('quantity')?.invalid && motorForm.get('quantity')?.touched">
+                        Este campo es <strong>obligatorio.</strong>
+                    </span>
                 </div>
-                <span class="form__error"
-                    *ngIf="motorForm.get('numberMotor')?.invalid && motorForm.get('numberMotor')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="model">Modelo</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('model')?.valid"
-                        [class.error]="motorForm.get('model')?.invalid && motorForm.get('model')?.touched"></div>
-                    <input formControlName="model" class="form__input" type="text" placeholder="* Modelo" name="model"
-                        autocomplete="off" maxlength="11">
+                <div class="form__input-container">
+                    <label class="form__label" for="brand">Marca</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('brand')?.valid"
+                            [class.error]="motorForm.get('brand')?.invalid && motorForm.get('brand')?.touched"></div>
+                        <input formControlName="brand" class="form__input" type="text" placeholder="* Marca" name="brand"
+                            autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error" *ngIf="motorForm.get('brand')?.invalid && motorForm.get('brand')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
                 </div>
-                <span class="form__error" *ngIf="motorForm.get('model')?.invalid && motorForm.get('model')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="type">Tipo</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('type')?.valid"
-                        [class.error]="motorForm.get('type')?.invalid && motorForm.get('type')?.touched"></div>
-                    <input formControlName="type" class="form__input" type="text" placeholder="* Tipo" name="type"
-                        autocomplete="off" maxlength="11">
+                <div class="form__input-container">
+                    <label class="form__label" for="numberMotor">Número de motor</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('numberMotor')?.valid"
+                            [class.error]="motorForm.get('numberMotor')?.invalid && motorForm.get('numberMotor')?.touched">
+                        </div>
+                        <input formControlName="numberMotor" class="form__input" type="text" placeholder="* Número de motor"
+                            name="numberMotor" autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error"
+                        *ngIf="motorForm.get('numberMotor')?.invalid && motorForm.get('numberMotor')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
                 </div>
-                <span class="form__error" *ngIf="motorForm.get('type')?.invalid && motorForm.get('type')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="power">Potencia</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('power')?.valid"
-                        [class.error]="motorForm.get('power')?.invalid && motorForm.get('power')?.touched"></div>
-                    <input formControlName="power" class="form__input" type="text" placeholder="* Potencia" name="power"
-                        autocomplete="off" maxlength="11">
+                <div class="form__input-container">
+                    <label class="form__label" for="model">Modelo</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('model')?.valid"
+                            [class.error]="motorForm.get('model')?.invalid && motorForm.get('model')?.touched"></div>
+                        <input formControlName="model" class="form__input" type="text" placeholder="* Modelo" name="model"
+                            autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error" *ngIf="motorForm.get('model')?.invalid && motorForm.get('model')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
                 </div>
-                <span class="form__error" *ngIf="motorForm.get('power')?.invalid && motorForm.get('power')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
-            </div>
-            <div class="form__input-container">
-                <label class="form__label" for="location">Ubicación</label>
-                <div class="input-wrap">
-                    <div class="input__decorator" [class.success]="motorForm.get('location')?.valid"
-                        [class.error]="motorForm.get('location')?.invalid && motorForm.get('location')?.touched"></div>
-                    <input formControlName="location" class="form__input" type="text" placeholder="* Ubicación"
-                        name="location" autocomplete="off" maxlength="11">
+                <div class="form__input-container">
+                    <label class="form__label" for="type">Tipo</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('type')?.valid"
+                            [class.error]="motorForm.get('type')?.invalid && motorForm.get('type')?.touched"></div>
+                        <input formControlName="type" class="form__input" type="text" placeholder="* Tipo" name="type"
+                            autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error" *ngIf="motorForm.get('type')?.invalid && motorForm.get('type')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
                 </div>
-                <span class="form__error"
-                    *ngIf="motorForm.get('location')?.invalid && motorForm.get('location')?.touched">
-                    Este campo es<strong>obligatorio.</strong>
-                </span>
+                <div class="form__input-container">
+                    <label class="form__label" for="power">Potencia</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('power')?.valid"
+                            [class.error]="motorForm.get('power')?.invalid && motorForm.get('power')?.touched"></div>
+                        <input formControlName="power" class="form__input" type="text" placeholder="* Potencia" name="power"
+                            autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error" *ngIf="motorForm.get('power')?.invalid && motorForm.get('power')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
+                </div>
+                <div class="form__input-container">
+                    <label class="form__label" for="location">Ubicación</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="motorForm.get('location')?.valid"
+                            [class.error]="motorForm.get('location')?.invalid && motorForm.get('location')?.touched"></div>
+                        <input formControlName="location" class="form__input" type="text" placeholder="* Ubicación"
+                            name="location" autocomplete="off" maxlength="11">
+                    </div>
+                    <span class="form__error"
+                        *ngIf="motorForm.get('location')?.invalid && motorForm.get('location')?.touched">
+                        Este campo es<strong>obligatorio.</strong>
+                    </span>
+                </div>
+                <div class="form__input-container">
+                    
+                </div>
+                <div class="form__input-container">
+                    
+                </div>
             </div>
             <button type="submit" class="form__btn"[disabled]="motorForm.invalid || motorForm.untouched || isLoading">
                 {{ btnText }} <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
