@@ -36,7 +36,7 @@
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
-      fill: #dc3545;
+      fill: $principal-color-blue;
 
       display: flex;
       flex-direction: row-reverse;
@@ -145,6 +145,8 @@
 @media (min-width: 1024px) {
   .modal-overlay {
     .modal-container {
+      width: 85%;
+      overflow-y: auto;
       .registers-container {
         .registers__elements {
           width: 30%;
@@ -158,7 +160,7 @@
 @media (min-width: 1440px) {
   .modal-overlay {
     .modal-container {
-      overflow-y: auto;
+      width: 60%;
     }
   }
 
