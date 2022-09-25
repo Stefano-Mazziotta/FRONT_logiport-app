@@ -40,6 +40,7 @@ import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-interceptor.interceptor';
 import { BoatSelectorComponent } from './components/boat-selector/boat-selector.component';
 import { MotorCreateUpdateModalComponent } from './components/motor-section/motor-create-update-modal/motor-create-update-modal.component';
+import { MotorViewModalComponent } from './components/motor-section/motor-view-modal/motor-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { MotorCreateUpdateModalComponent } from './components/motor-section/moto
     LoaderDirective,
     BoatSelectorComponent,
     MotorCreateUpdateModalComponent,
+    MotorViewModalComponent,
   ],
   imports: [
     NgxPaginationModule,
