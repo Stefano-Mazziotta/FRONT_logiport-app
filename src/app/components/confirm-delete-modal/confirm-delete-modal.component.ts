@@ -4,8 +4,12 @@ import { Subscription } from 'rxjs';
 
 import { CompanyService } from 'src/app/services/company/company.service';
 import { CompanyErrorNotificationService } from 'src/app/services/company/company-error-notification/company-error-notification.service';
+
 import { BoatService } from 'src/app/services/boat/boat.service';
 import { BoatErrorNotificationService } from 'src/app/services/boat/boat-error-notification/boat-error-notification.service';
+
+import { MotorService } from 'src/app/services/motor/motor.service';
+import { MotorErrorNotificationService } from 'src/app/services/motor/motor-error-notification/motor-error-notification.service';
 
 @Component({
   selector: 'app-confirm-delete-modal',
@@ -24,12 +28,15 @@ export class ConfirmDeleteModalComponent implements OnInit {
   isLoading: boolean = false;
   deleteCompanySubscription: Subscription | undefined;
   deleteBoatSubscription: Subscription | undefined;
+  deleteMotorSubscription: Subscription | undefined;
 
   constructor(
     private _companyService: CompanyService,
     private _companyErrorNotification: CompanyErrorNotificationService,
     private _boatService: BoatService,
     private _boatErrorNotification: BoatErrorNotificationService,
+    private _motorService: MotorService,
+    private _motorErrorNotification: MotorErrorNotificationService,
     private toastr: ToastrService,
   ) { }
 
@@ -39,6 +46,7 @@ export class ConfirmDeleteModalComponent implements OnInit {
   public ngOnDestroy(): void {
     this.deleteCompanySubscription?.unsubscribe();
     this.deleteBoatSubscription?.unsubscribe();
+    this.deleteMotorSubscription?.unsubscribe(); 
   }
 
   public closeModal(isSendRequest:boolean = false) {
@@ -55,6 +63,9 @@ export class ConfirmDeleteModalComponent implements OnInit {
     }
     if(this.section === "boat"){
       this.deleteBoatSubscription = this.deleteBoat();
+    }
+    if(this.section === "motor"){
+      this.deleteMotorSubscription = this.deleteMotor();
     }
   }
 
@@ -86,6 +97,22 @@ export class ConfirmDeleteModalComponent implements OnInit {
       error: error => {
         this.isLoading = false;
         this._boatErrorNotification.delete();
+      }
+    });
+  }
+
+  private deleteMotor(): Subscription {
+    this.isLoading = true;
+
+    return this._motorService.deleteMotor(this.idEntityClicked).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.closeModal(true);
+        this.toastr.success("Motor eliminado.", "Enhorabuena!");
+      },
+      error: error => {
+        this.isLoading = false;
+        this._motorErrorNotification.delete();
       }
     });
   }
