@@ -112,7 +112,7 @@
 
         transition: all .3s ease;
 
-        &:hover &:enabled {
+        &:hover:enabled {
           background-color: $hover-color;
         }
 
@@ -282,6 +282,70 @@
       margin-bottom: 20px;
     }
   }
+}
 
+@media (min-width: 768px) {
+  .main {
+    width: 80%;
+  }
+}
 
+@media (min-width: 1024px) {
+  .main {
+    width: 85%;
+
+    .title {
+      .icon-back {
+        transition: ease all .3s;
+        display: inline-block;
+
+        &:hover {
+          transform: translateX(-3px);
+        }
+      }
+    }
+
+    .dashboard-container {
+
+      .add-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .btn {
+          width: 25%;
+
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: $hover-color;
+          }
+        }
+      }
+      
+      .filter-form {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .main {
+    width: 60%;
+
+    .dashboard-container {
+      .add-container {
+        .btn {
+          width: 20%;
+        }
+      }
+
+      .filter-form {
+        width: 45%;
+      }
+    }
+
+  }
 }
