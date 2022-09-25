@@ -62,7 +62,7 @@
             <i class="fa-solid fa-circle-notch loader-animation"></i>
         </div>
 
-        <p *ngIf="!existMotors && !isLoading"> No existen motores para esta empresa.</p>
+        <p *ngIf="!existMotors && !isLoading"> No existen motores para {{ boatSelected.boatName }}.</p>
         <div *ngIf="existMotors && !isLoading" style="overflow-x:auto; margin-bottom:10px;">
             <table class="table-data">
 
