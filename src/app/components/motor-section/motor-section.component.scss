@@ -29,19 +29,18 @@
   }
 
   .dashboard-container {
-    margin-top: 25px;
+    margin-top: 50px;
     animation: swipeUp 0.5s ease forwards;
 
     .add-container {
       display: flex;
       flex-direction: column;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
 
       .btn {
         width: 100%;
         padding: 15px 20px;
-        margin-bottom: 10px;
 
         background-color: $principal-color-blue;
         color: white;
@@ -92,7 +91,6 @@
 
     .btnfilter-container {
       width: 100%;
-      margin-bottom: 50px;
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -313,7 +311,7 @@
         align-items: flex-start;
 
         .btn {
-          width: 25%;
+          width: 50%;
 
           cursor: pointer;
           transition: all 0.3s ease;
@@ -338,7 +336,7 @@
     .dashboard-container {
       .add-container {
         .btn {
-          width: 20%;
+          width: 45%;
         }
       }
 
