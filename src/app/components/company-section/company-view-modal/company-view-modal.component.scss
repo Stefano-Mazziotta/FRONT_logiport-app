@@ -142,7 +142,17 @@
 @media (min-width: 1024px) {
   .modal-overlay {
     .modal-container {
-      width: 45%;
+      width: 85%;
+
+      .registers-container{
+        width: 90%;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .registers__elements {
+          width: 45%;
+        }
+      }
     }
   }
 }
@@ -151,7 +161,7 @@
 @media (min-width: 1440px) {
   .modal-overlay {
     .modal-container {
-      width: 35%;
+      width: 60%;
     }
   }
 }
