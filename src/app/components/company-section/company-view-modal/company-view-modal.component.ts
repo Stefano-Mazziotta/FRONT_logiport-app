@@ -19,7 +19,7 @@ export class CompanyViewModalComponent implements OnInit, OnDestroy {
   @Output() closeModalEvent = new EventEmitter<void>();
 
   isLoading: boolean = false;
-  clickPopup: boolean = false;
+  clickModal: boolean = false;
 
   company: ICompany = {
     IdCompany: "",
@@ -48,10 +48,10 @@ export class CompanyViewModalComponent implements OnInit, OnDestroy {
 
   public closeModal() {
 
-    if (this.clickPopup == false && !this.isLoading) {
+    if (this.clickModal == false && !this.isLoading) {
       this.closeModalEvent.emit();
     }
-    this.clickPopup = false;
+    this.clickModal = false;
   }
 
   private getCompanyById(idCompany: string): Subscription {

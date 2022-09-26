@@ -1,7 +1,7 @@
 @import "../../../app.component.scss";
 
-// popup-read styles //
-.popup-overlay-read {
+// modal read styles //
+.modal-overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -17,12 +17,12 @@
 
   animation: fade 0.3s ease forwards;
 
-  .popup-read-container {
+  .modal-container {
     width: 90%;
 
     background-color: white;
 
-    border-radius: 10px;
+    border-radius: 5px;
     padding-top: 20px;
     padding-bottom: 50px;
 
@@ -30,7 +30,7 @@
 
     animation: fade 0.5s ease forwards;
 
-    .popup-read__close {
+    .modal__close {
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
@@ -50,7 +50,7 @@
     }
 
     // popup -> title styles.
-    .popup-read__title {
+    .modal__title {
       width: 100%;
       margin-bottom: 25px;
       padding-bottom: 10px;
@@ -125,17 +125,23 @@
 
 // ___ Tablet ___ //
 @media (min-width: 768px) {
-  .popup-overlay-read {
-    .popup-read-container {
-      width: 55%;
+  .modal-overlay {
+    .modal-container {
+      width: 80%;
+
+      .registers-container{
+        padding-left: 0;
+        padding-right: 0;
+        width: 60%;
+      }
     }
   }
 }
 
 // ___ Laptop ___ //
 @media (min-width: 1024px) {
-  .popup-overlay-read {
-    .popup-read-container {
+  .modal-overlay {
+    .modal-container {
       width: 45%;
     }
   }
@@ -143,8 +149,8 @@
 
 //___ Laptop L ___ //
 @media (min-width: 1440px) {
-  .popup-overlay-read {
-    .popup-read-container {
+  .modal-overlay {
+    .modal-container {
       width: 35%;
     }
   }
