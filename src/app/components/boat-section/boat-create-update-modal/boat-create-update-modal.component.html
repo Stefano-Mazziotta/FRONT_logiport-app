@@ -1,7 +1,7 @@
 <div (click)="closeModal()" class="modal-overlay">
   <div (click)="clickModal = true" class="modal-container">
     <div class="modal__close">
-      <svg (click)="closeModal()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
+      <svg (click)="closeModal()" xmlns="http//www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 96 96">
         <switch>
           <g>
             <path
@@ -16,10 +16,8 @@
 
       <div class="form-flex">
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('boatName')?.touched && boatForm.get('boatName')?.value != null && boatForm.get('boatName')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('boatName')?.touched && boatForm.get('boatName')?.value.length == 0 && !boatForm.get('boatName')?.pristine">
-            Nombre de lancha:
+          <label class="form__label-input">
+            Nombre
           </label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('boatName')?.valid"
@@ -29,16 +27,14 @@
               name="boatName" autocomplete="off">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('boatName')?.invalid && boatForm.get('boatName')?.touched">
+            *ngIf="boatForm.get('boatName')?.invalid && boatForm.get('boatName')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('enrollment')?.touched && boatForm.get('enrollment')?.value != null && boatForm.get('enrollment')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('enrollment')?.touched && boatForm.get('enrollment')?.value.length == 0 && !boatForm.get('enrollment')?.pristine">
-            Matrícula:
+          <label class="form__label-input">
+            Matrícula
           </label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('enrollment')?.valid"
@@ -48,17 +44,13 @@
               name="enrollment" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('enrollment')?.invalid && boatForm.get('enrollment')?.touched">
+            *ngIf="boatForm.get('enrollment')?.invalid && boatForm.get('enrollment')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('distinguishingMark')?.touched && boatForm.get('distinguishingMark')?.value != null && boatForm.get('distinguishingMark')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('distinguishingMark')?.touched && boatForm.get('distinguishingMark')?.value.length == 0 && !boatForm.get('distinguishingMark')?.pristine">
-            Señal distintiva:
-          </label>
+          <label class="form__label-input">Señal distintiva</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('distinguishingMark')?.valid"
               [class.error]="boatForm.get('distinguishingMark')?.invalid && boatForm.get('distinguishingMark')?.touched">
@@ -67,17 +59,13 @@
               name="distinguishingMark" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('distinguishingMark')?.invalid && boatForm.get('distinguishingMark')?.touched">
+            *ngIf="boatForm.get('distinguishingMark')?.invalid && boatForm.get('distinguishingMark')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('hullMaterial')?.touched && boatForm.get('hullMaterial')?.value != null && boatForm.get('hullMaterial')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('hullMaterial')?.touched && boatForm.get('hullMaterial')?.value.length == 0 && !boatForm.get('hullMaterial')?.pristine">
-            Material del casco:
-          </label>
+          <label class="form__label-input">Material del casco</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('hullMaterial')?.valid"
               [class.error]="boatForm.get('hullMaterial')?.invalid && boatForm.get('hullMaterial')?.touched">
@@ -86,17 +74,13 @@
               name="hullMaterial" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('hullMaterial')?.invalid && boatForm.get('hullMaterial')?.touched">
+            *ngIf="boatForm.get('hullMaterial')?.invalid && boatForm.get('hullMaterial')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('boatType')?.touched && boatForm.get('boatType')?.value != null && boatForm.get('boatType')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('boatType')?.touched && boatForm.get('boatType')?.value.length == 0 && !boatForm.get('boatType')?.pristine">
-            Tipo de lancha:
-          </label>
+          <label class="form__label-input">Tipo</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('boatType')?.valid"
               [class.error]="boatForm.get('boatType')?.invalid && boatForm.get('boatType')?.touched">
@@ -105,17 +89,13 @@
               name="boatType" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('boatType')?.invalid && boatForm.get('boatType')?.touched">
+            *ngIf="boatForm.get('boatType')?.invalid && boatForm.get('boatType')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('service')?.touched && boatForm.get('service')?.value != null && boatForm.get('service')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('service')?.touched && boatForm.get('service')?.value.length == 0 && !boatForm.get('service')?.pristine">
-            Servicio:
-          </label>
+          <label class="form__label-input">Servicio</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('service')?.valid"
               [class.error]="boatForm.get('service')?.invalid && boatForm.get('service')?.touched">
@@ -123,17 +103,13 @@
             <input formControlName="service" class="form__input" type="text" placeholder="Servicio" name="service"
               autocomplete="off" maxlength="11">
           </div>
-          <span class="form__error" [class.show]="boatForm.get('service')?.invalid && boatForm.get('service')?.touched">
+          <span class="form__error" *ngIf="boatForm.get('service')?.invalid && boatForm.get('service')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('specificExploitation')?.touched && boatForm.get('specificExploitation')?.value != null && boatForm.get('specificExploitation')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('specificExploitation')?.touched && boatForm.get('specificExploitation')?.value.length == 0 && !boatForm.get('specificExploitation')?.pristine">
-            Explotación específica:
-          </label>
+          <label class="form__label-input">Explotación específica</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('specificExploitation')?.valid"
               [class.error]="boatForm.get('specificExploitation')?.invalid && boatForm.get('specificExploitation')?.touched">
@@ -142,17 +118,13 @@
               placeholder="Explotación específica" name="specificExploitation" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('specificExploitation')?.invalid && boatForm.get('specificExploitation')?.touched">
+            *ngIf="boatForm.get('specificExploitation')?.invalid && boatForm.get('specificExploitation')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('enrollmentDate')?.touched && boatForm.get('enrollmentDate')?.value != null && boatForm.get('enrollmentDate')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('enrollmentDate')?.touched && boatForm.get('enrollmentDate')?.value.length == 0 && !boatForm.get('enrollmentDate')?.pristine">
-            Fecha de matrícula:
-          </label>
+          <label class="form__label-input">Fecha de matrícula</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('enrollmentDate')?.valid"
               [class.error]="boatForm.get('enrollmentDate')?.invalid && boatForm.get('enrollmentDate')?.touched">
@@ -161,17 +133,13 @@
               placeholder="Fecha matrícula" name="enrollmentDate" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('enrollmentDate')?.invalid && boatForm.get('enrollmentDate')?.touched">
+            *ngIf="boatForm.get('enrollmentDate')?.invalid && boatForm.get('enrollmentDate')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('constructionDate')?.touched && boatForm.get('constructionDate')?.value != null && boatForm.get('constructionDate')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('constructionDate')?.touched && boatForm.get('constructionDate')?.value.length == 0 && !boatForm.get('constructionDate')?.pristine">
-            Fecha de construcción:
-          </label>
+          <label class="form__label-input">Fecha de construcción</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('constructionDate')?.valid"
               [class.error]="boatForm.get('constructionDate')?.invalid && boatForm.get('constructionDate')?.touched">
@@ -180,17 +148,13 @@
               placeholder="Fecha construcción" name="constructionDate" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('constructionDate')?.invalid && boatForm.get('constructionDate')?.touched">
+            *ngIf="boatForm.get('constructionDate')?.invalid && boatForm.get('constructionDate')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('nat')?.touched && boatForm.get('nat')?.value != null && boatForm.get('nat')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('nat')?.touched && boatForm.get('nat')?.value == null && !boatForm.get('nat')?.pristine">
-            NAT:
-          </label>
+          <label class="form__label-input">NAT</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('nat')?.valid"
               [class.error]="boatForm.get('nat')?.invalid && boatForm.get('nat')?.touched">
@@ -199,17 +163,13 @@
               autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('nat')?.invalid && boatForm.get('nat')?.touched && boatForm.get('nat')?.value == null">
+            *ngIf="boatForm.get('nat')?.invalid && boatForm.get('nat')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('nan')?.touched && boatForm.get('nan')?.value != null && boatForm.get('nan')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('nan')?.touched && boatForm.get('nan')?.value == null && !boatForm.get('nan')?.pristine">
-            NAN:
-          </label>
+          <label class="form__label-input">NAN</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('nan')?.valid"
               [class.error]="boatForm.get('nan')?.invalid && boatForm.get('nan')?.touched">
@@ -217,17 +177,13 @@
             <input formControlName="nan" class="form__input" type="number" placeholder="NAN" name="nan"
               autocomplete="off" maxlength="11">
           </div>
-          <span class="form__error" [class.show]="boatForm.get('nan')?.invalid && boatForm.get('nan')?.touched">
+          <span class="form__error" *ngIf="boatForm.get('nan')?.invalid && boatForm.get('nan')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('eslora')?.touched && boatForm.get('eslora')?.value != null && boatForm.get('eslora')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('eslora')?.touched && boatForm.get('eslora')?.value == null && !boatForm.get('eslora')?.pristine">
-            Eslora:
-          </label>
+          <label class="form__label-input">Eslora</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('eslora')?.valid"
               [class.error]="boatForm.get('eslora')?.invalid && boatForm.get('eslora')?.touched">
@@ -235,17 +191,13 @@
             <input formControlName="eslora" class="form__input" type="number" placeholder="Eslora" name="eslora"
               autocomplete="off" maxlength="11">
           </div>
-          <span class="form__error" [class.show]="boatForm.get('eslora')?.invalid && boatForm.get('eslora')?.touched">
+          <span class="form__error" *ngIf="boatForm.get('eslora')?.invalid && boatForm.get('eslora')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('manga')?.touched && boatForm.get('manga')?.value != null && boatForm.get('manga')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('manga')?.touched && boatForm.get('manga')?.value == null && !boatForm.get('manga')?.pristine">
-            Manga:
-          </label>
+          <label class="form__label-input">Manga</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('manga')?.valid"
               [class.error]="boatForm.get('manga')?.invalid && boatForm.get('manga')?.touched">
@@ -253,17 +205,13 @@
             <input formControlName="manga" class="form__input" type="number" placeholder="Manga" name="manga"
               autocomplete="off" maxlength="11">
           </div>
-          <span class="form__error" [class.show]="boatForm.get('manga')?.invalid && boatForm.get('manga')?.touched">
+          <span class="form__error" *ngIf="boatForm.get('manga')?.invalid && boatForm.get('manga')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('puntal')?.touched && boatForm.get('puntal')?.value != null && boatForm.get('puntal')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('puntal')?.touched && boatForm.get('puntal')?.value == null && !boatForm.get('puntal')?.pristine">
-            Puntal:
-          </label>
+          <label class="form__label-input">Puntal</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('puntal')?.valid"
               [class.error]="boatForm.get('puntal')?.invalid && boatForm.get('puntal')?.touched">
@@ -271,17 +219,13 @@
             <input formControlName="puntal" class="form__input" type="number" placeholder="Puntal" name="puntal"
               autocomplete="off" maxlength="11">
           </div>
-          <span class="form__error" [class.show]="boatForm.get('puntal')?.invalid && boatForm.get('puntal')?.touched">
+          <span class="form__error" *ngIf="boatForm.get('puntal')?.invalid && boatForm.get('puntal')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('peopleTransported')?.touched && boatForm.get('peopleTransported')?.value != null && boatForm.get('peopleTransported')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('peopleTransported')?.touched && boatForm.get('peopleTransported')?.value == null && !boatForm.get('peopleTransported')?.pristine">
-            Personas transportadas:
-          </label>
+          <label class="form__label-input">Personas transportadas</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('peopleTransported')?.valid"
               [class.error]="boatForm.get('peopleTransported')?.invalid && boatForm.get('peopleTransported')?.touched">
@@ -290,17 +234,13 @@
               placeholder="Personas transportadas" name="peopleTransported" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('peopleTransported')?.invalid && boatForm.get('peopleTransported')?.touched">
+            *ngIf="boatForm.get('peopleTransported')?.invalid && boatForm.get('peopleTransported')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('boatPower')?.touched && boatForm.get('boatPower')?.value != null && boatForm.get('boatPower')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('boatPower')?.touched && boatForm.get('boatPower')?.value.length == 0 && !boatForm.get('boatPower')?.pristine">
-            Potencia de la lancha:
-          </label>
+          <label class="form__label-input">Potencia</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('boatPower')?.valid"
               [class.error]="boatForm.get('boatPower')?.invalid && boatForm.get('boatPower')?.touched">
@@ -309,17 +249,13 @@
               autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('boatPower')?.invalid && boatForm.get('boatPower')?.touched">
+            *ngIf="boatForm.get('boatPower')?.invalid && boatForm.get('boatPower')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
 
         <div class="form__input-container">
-          <label class="form__label-input"
-            [class.show]="boatForm.get('electricPower')?.touched && boatForm.get('electricPower')?.value != null && boatForm.get('electricPower')?.valid || this.isUpdate"
-            [class.out]="boatForm.get('electricPower')?.touched && boatForm.get('electricPower')?.value.length == 0 && !boatForm.get('electricPower')?.pristine">
-            Potencia eléctrica:
-          </label>
+          <label class="form__label-input">Potencia eléctrica</label>
           <div class="input-wrap">
             <div class="input-info" [class.success]="boatForm.get('electricPower')?.valid"
               [class.error]="boatForm.get('electricPower')?.invalid && boatForm.get('electricPower')?.touched">
@@ -328,11 +264,14 @@
               name="electricPower" autocomplete="off" maxlength="11">
           </div>
           <span class="form__error"
-            [class.show]="boatForm.get('electricPower')?.invalid && boatForm.get('electricPower')?.touched">
+            *ngIf="boatForm.get('electricPower')?.invalid && boatForm.get('electricPower')?.touched">
             Debe <strong>completar el campo.</strong>
           </span>
         </div>
+
+        <div class="form__input-container"></div>
       </div>
+
 
       <button type="submit" class="form__btn" [disabled]="boatForm.invalid || isLoading ">{{ btnText }} <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i></button>
     </form>
