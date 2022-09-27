@@ -1,14 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import {
-  ICompany,
-  ISearchCompanyDTO,
-} from 'src/app/interfaces/company';
+import { ICompany, ISearchCompanyDTO } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
-
 import { CompanyErrorNotificationService } from 'src/app/services/company/company-error-notification/company-error-notification.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-section',
@@ -48,15 +44,20 @@ export class CompanySectionComponent implements OnInit {
   };
   
   existCompanies: boolean = false;
-  
 
-  @ViewChild('razonSocialFilter') $razonSocialFilter!: ElementRef;
+  companyFilterForm:FormGroup;
 
   constructor(
     private _companyService: CompanyService,
     private _companyErrorNotification: CompanyErrorNotificationService,
-    private toastr: ToastrService
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+
+    this.companyFilterForm = this.formBuilder.group({
+      razonSocial: ['', Validators.required]
+    })
+    
+  }
 
   ngOnInit(): void {
     this.getCompanies();
@@ -99,12 +100,17 @@ export class CompanySectionComponent implements OnInit {
     return idCompanyClicked;
   }
 
-  private getFilterParams(): ISearchCompanyDTO {
+  private getFilterParams(): ISearchCompanyDTO | null {
+    
+    let params: ISearchCompanyDTO | null = null;
+    const razonSocial = this.companyFilterForm.get('razonSocial')?.value;
 
-    const $razonSocialFilter = this.$razonSocialFilter.nativeElement;
-    const paramRazonSocial = $razonSocialFilter.value;
-
-    return paramRazonSocial;
+    if(razonSocial){
+      params = {
+        razonSocial
+      }
+    }
+    return params;
   }
 
   public openCreateModal(): void {
@@ -178,9 +184,7 @@ export class CompanySectionComponent implements OnInit {
 
   public resetFilter(): void {
     
-    const $razonSocialFilter = this.$razonSocialFilter.nativeElement;
-    $razonSocialFilter.value = '';
-    
+    this.companyFilterForm.reset();    
     this.getCompaniesSubscription = this.getCompanies();    
   }
 

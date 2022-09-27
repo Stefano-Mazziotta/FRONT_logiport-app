@@ -14,13 +14,19 @@
   <!-------------------- nav search -------------------->
   <h3 class="title sub">Filtro</h3>
 
-  <div class="input-container">
-    <div class="input__decorator"></div>
-    <input class="search__input" type="text" placeholder="Buscar por razón social" #razonSocialFilter>
-  </div>
+  <form class="filter-form" [formGroup]="companyFilterForm">
+
+    <label for="razonSocial">Razón social</label>
+    <div class="input-container">
+      <div class="input__decorator"></div>
+      <input class="search__input" type="text" placeholder="Buscar por razón social" formControlName="razonSocial">
+    </div>
+
+  </form>
+
 
   <div class="btnfilter-container">
-    <button class="btnfilter__btn" [disabled]="isLoading" (click)="searchCompany()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button class="btnfilter__btn" [disabled]="isLoading || companyFilterForm.invalid" (click)="searchCompany()"><i class="fa-solid fa-magnifying-glass"></i></button>
     <button class="btnfilter__btn" [disabled]="isLoading" (click)="resetFilter()"><i class="fa-solid fa-rotate"></i></button>
   </div>
 
