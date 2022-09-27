@@ -1,7 +1,7 @@
 @import "../../../app.component.scss";
 
-// -------- popup-create styles -------- //
-.popup-overlay {
+// -------- modal-create styles -------- //
+.modal-overlay {
   
   position: fixed;
   top: 0;
@@ -18,18 +18,18 @@
 
   animation: fade 0.3s ease forwards;
 
-  .popup-container {
+  .modal-container {
     width: 90%;
 
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 25px;
     background-color: white;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     animation: fade 0.5s ease forwards;    
    
-    .popup__close {
+    .modal__close {
       width: 100%;
       margin-bottom: 10px;
       padding-right: 20px;
@@ -47,11 +47,11 @@
       }
     }
 
-    // popup -> title styles.
-    .popup__title {
+    // modal -> title styles.
+    .modal__title {
       width: 100%;
 
-      margin-bottom: 35px;
+      margin-bottom: 25px;
       padding-bottom: 10px;
       padding-top: 10px;
       background-color: $principal-color-blue;
@@ -62,12 +62,12 @@
       text-shadow: 2px 2px $hover-color;
     }
 
-    .popup__form {
+    .modal__form {
       width: 100%;
       display: flex;
       flex-direction: column;
 
-      // popup -> form input styles. //
+      // modal -> form input styles. //
       .form__input-container {
         width: 90%;
         margin-left: auto;
@@ -132,11 +132,11 @@
 
       }
 
-      // popup -> form button styles. //
+      // modal -> form button styles. //
       .form__btn {
         width: 90%;
 
-        margin-top: 30px;
+        margin-top: 25px;
         margin-left: auto;
         margin-right: auto;
         
@@ -172,12 +172,12 @@
 }
 
 @media screen and (min-width: 768px) {
-  .popup-overlay {
-    .popup-container {
-      width: 60%;
+  .modal-overlay {
+    .modal-container {
+      width: 80%;
 
-      .popup__form{
-        width: 80%;
+      .modal__form{
+        width: 60%;
         margin-left: auto;
         margin-right: auto;
       }
@@ -185,10 +185,10 @@
   }
 }
 
-@media (min-width: 1024) {
-  .popup-overlay {
-    .popup-container {
-      width: 50%;
+@media (min-width: 1024px) {
+  .modal-overlay {
+    .modal-container {
+      width: 85%;
 
       
     }
@@ -196,9 +196,9 @@
 }
 
 @media (min-width: 1440px) {
-  .popup-overlay {
-    .popup-container {
-      width: 40%;
+  .modal-overlay {
+    .modal-container {
+      width: 60%;
 
     }
   }

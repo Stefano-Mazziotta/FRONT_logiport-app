@@ -29,7 +29,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
 
-  clickPopup: boolean = false;
+  clickModal: boolean = false;
   titleText: string = "";
   btnText: string = "";
 
@@ -78,15 +78,15 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
     this.getCompanyByIdSubscription?.unsubscribe(); 
   }
 
-  public closePopup(isSendRequest: boolean = false): void {
+  public closeModal(isSendRequest: boolean = false): void {
 
-    if (this.clickPopup == false && !this.isLoading) {
+    if (this.clickModal == false && !this.isLoading) {
 
       this.companyForm.reset();
       this.closeModalEvent.emit(isSendRequest);
     }
 
-    this.clickPopup = false;
+    this.clickModal = false;
   }
 
   public onSubmit(): void {
@@ -120,7 +120,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
     return this._companyService.createCompany(createCompanyDto).subscribe({
       next: response => {
         this.isLoading = false;
-        this.closePopup(true);
+        this.closeModal(true);
         this.toastr.success("Empresa creada.", "Enhorabuena!");
       },
       error: error => {
@@ -137,7 +137,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
     return this._companyService.updateCompany(companyDto).subscribe({
       next: response => {
         this.isLoading = false;
-        this.closePopup(true);
+        this.closeModal(true);
         this.toastr.success("Empresa actualizada.", "Enhorabuena!");
       },
       error: error => {
@@ -157,7 +157,7 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
       },
       error: error => {
         this.isLoading = false;
-        this.closePopup();
+        this.closeModal();
         this._companyErrorNotification.getById();
       }
     });
