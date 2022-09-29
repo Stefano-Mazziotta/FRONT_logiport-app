@@ -27,7 +27,6 @@ import { BoatCreateUpdateModalComponent } from './components/boat-section/boat-c
 import { BoatViewModalComponent } from './components/boat-section/boat-view-modal/boat-view-modal.component';
 
 import { MotorSectionComponent } from './components/motor-section/motor-section.component';
-import { GeneratorAbmComponent } from './components/generator-abm/generator-abm.component';
 
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
 import { NavBottomMobileComponent } from './components/app-mobile/nav-bottom-mobile/nav-bottom-mobile.component';
@@ -41,6 +40,7 @@ import { JwtInterceptorInterceptor } from './interceptors/JwtInterceptor/jwt-int
 import { BoatSelectorComponent } from './components/boat-selector/boat-selector.component';
 import { MotorCreateUpdateModalComponent } from './components/motor-section/motor-create-update-modal/motor-create-update-modal.component';
 import { MotorViewModalComponent } from './components/motor-section/motor-view-modal/motor-view-modal.component';
+import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
 
 @NgModule({
   declarations: [
@@ -58,15 +58,15 @@ import { MotorViewModalComponent } from './components/motor-section/motor-view-m
     BoatSectionComponent,
     BoatCreateUpdateModalComponent,
     BoatViewModalComponent,
-    ConfirmDeleteModalComponent,
     MotorSectionComponent,
-    GeneratorAbmComponent,
-    CompanySelectorComponent,
-    TimestampToDatePipe,
-    LoaderDirective,
-    BoatSelectorComponent,
     MotorCreateUpdateModalComponent,
     MotorViewModalComponent,
+    GeneratorSectionComponent,
+    CompanySelectorComponent,
+    BoatSelectorComponent,
+    ConfirmDeleteModalComponent,
+    TimestampToDatePipe,
+    LoaderDirective,
   ],
   imports: [
     NgxPaginationModule,
