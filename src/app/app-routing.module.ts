@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CompanySectionComponent } from './components/company-section/company-section.component';
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { MotorSectionComponent } from './components/motor-section/motor-section.component';
+import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
 
 import { UserGuardGuard } from './guards/userGuard/user-guard.guard';
 
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'motores', 
     component: MotorSectionComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'generadores', 
+    component: GeneratorSectionComponent,
     canActivate: [UserGuardGuard],
   },
   {
