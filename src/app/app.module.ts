@@ -41,6 +41,7 @@ import { BoatSelectorComponent } from './components/boat-selector/boat-selector.
 import { MotorCreateUpdateModalComponent } from './components/motor-section/motor-create-update-modal/motor-create-update-modal.component';
 import { MotorViewModalComponent } from './components/motor-section/motor-view-modal/motor-view-modal.component';
 import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
+import { GeneratorCreateUpdateModalComponent } from './components/generator-section/generator-create-update-modal/generator-create-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { GeneratorSectionComponent } from './components/generator-section/genera
     ConfirmDeleteModalComponent,
     TimestampToDatePipe,
     LoaderDirective,
+    GeneratorCreateUpdateModalComponent,
   ],
   imports: [
     NgxPaginationModule,
