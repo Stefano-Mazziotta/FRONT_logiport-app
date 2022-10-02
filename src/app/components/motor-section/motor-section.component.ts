@@ -59,6 +59,7 @@ export class MotorSectionComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.getMotorsSubscription?.unsubscribe();
+    this.searchMotorSubscription?.unsubscribe();
   }
 
   public companySelectedEvent(companySelected: IcompanySelected | null): void {
