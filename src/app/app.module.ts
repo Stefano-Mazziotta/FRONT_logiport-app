@@ -42,6 +42,7 @@ import { MotorCreateUpdateModalComponent } from './components/motor-section/moto
 import { MotorViewModalComponent } from './components/motor-section/motor-view-modal/motor-view-modal.component';
 import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
 import { GeneratorCreateUpdateModalComponent } from './components/generator-section/generator-create-update-modal/generator-create-update-modal.component';
+import { GeneratorViewModalComponent } from './components/generator-section/generator-view-modal/generator-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { GeneratorCreateUpdateModalComponent } from './components/generator-sect
     TimestampToDatePipe,
     LoaderDirective,
     GeneratorCreateUpdateModalComponent,
+    GeneratorViewModalComponent,
   ],
   imports: [
     NgxPaginationModule,
