@@ -43,6 +43,7 @@ import { MotorViewModalComponent } from './components/motor-section/motor-view-m
 import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
 import { GeneratorCreateUpdateModalComponent } from './components/generator-section/generator-create-update-modal/generator-create-update-modal.component';
 import { GeneratorViewModalComponent } from './components/generator-section/generator-view-modal/generator-view-modal.component';
+import { ExpirationSectionComponent } from './components/expiration-section/expiration-section.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { GeneratorViewModalComponent } from './components/generator-section/gene
     LoaderDirective,
     GeneratorCreateUpdateModalComponent,
     GeneratorViewModalComponent,
+    ExpirationSectionComponent,
   ],
   imports: [
     NgxPaginationModule,
