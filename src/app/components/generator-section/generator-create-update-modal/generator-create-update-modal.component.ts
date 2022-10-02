@@ -28,7 +28,6 @@ export class GeneratorCreateUpdateModalComponent implements OnInit, OnDestroy {
       model: ['', Validators.required],
       type: ['', Validators.required],
       power: ['', Validators.required],
-      location: ['', Validators.required],
     });
   }
 

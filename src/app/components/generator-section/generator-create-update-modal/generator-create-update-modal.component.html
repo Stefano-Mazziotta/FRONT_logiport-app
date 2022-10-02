@@ -89,25 +89,7 @@
                         Este campo es<strong>obligatorio.</strong>
                     </span>
                 </div>
-                <div class="form__input-container">
-                    <label class="form__label" for="location">Ubicación</label>
-                    <div class="input-wrap">
-                        <div class="input__decorator" [class.success]="generatorForm.get('location')?.valid"
-                            [class.error]="generatorForm.get('location')?.invalid && generatorForm.get('location')?.touched"></div>
-                        <input formControlName="location" class="form__input" type="text" placeholder="* Ubicación"
-                            name="location" autocomplete="off" maxlength="11">
-                    </div>
-                    <span class="form__error"
-                        *ngIf="generatorForm.get('location')?.invalid && generatorForm.get('location')?.touched">
-                        Este campo es<strong>obligatorio.</strong>
-                    </span>
-                </div>
-                <div class="form__input-container">
-                    
-                </div>
-                <div class="form__input-container">
-                    
-                </div>
+                
             </div>
             <button type="submit" class="form__btn"[disabled]="generatorForm.invalid || generatorForm.untouched || isLoading">
                 {{ btnText }} <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
