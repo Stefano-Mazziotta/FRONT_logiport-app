@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
@@ -11,12 +11,27 @@ import { BoatErrorNotificationService } from 'src/app/services/boat/boat-error-n
 import { MotorService } from 'src/app/services/motor/motor.service';
 import { MotorErrorNotificationService } from 'src/app/services/motor/motor-error-notification/motor-error-notification.service';
 
+import { GeneratorService } from 'src/app/services/generator/generator.service';
+import { GeneratorErrorNotificationService } from 'src/app/services/generator/generator-error-notification/generator-error-notification.service';
+
 @Component({
   selector: 'app-confirm-delete-modal',
   templateUrl: './confirm-delete-modal.component.html',
   styleUrls: ['./confirm-delete-modal.component.scss']
 })
-export class ConfirmDeleteModalComponent implements OnInit {
+export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
+
+  constructor(
+    private _companyService: CompanyService,
+    private _companyErrorNotification: CompanyErrorNotificationService,
+    private _boatService: BoatService,
+    private _boatErrorNotification: BoatErrorNotificationService,
+    private _motorService: MotorService,
+    private _motorErrorNotification: MotorErrorNotificationService,
+    private _generatorService: GeneratorService,
+    private _generatorErrorNotification: GeneratorErrorNotificationService,
+    private toastr: ToastrService,
+  ) { }
 
   @Input() section!: string;
   @Input() idEntityClicked!: string;
@@ -29,16 +44,7 @@ export class ConfirmDeleteModalComponent implements OnInit {
   deleteCompanySubscription: Subscription | undefined;
   deleteBoatSubscription: Subscription | undefined;
   deleteMotorSubscription: Subscription | undefined;
-
-  constructor(
-    private _companyService: CompanyService,
-    private _companyErrorNotification: CompanyErrorNotificationService,
-    private _boatService: BoatService,
-    private _boatErrorNotification: BoatErrorNotificationService,
-    private _motorService: MotorService,
-    private _motorErrorNotification: MotorErrorNotificationService,
-    private toastr: ToastrService,
-  ) { }
+  deleteGeneratorSubscription: Subscription | undefined;
 
   public ngOnInit(): void {
   }
@@ -47,6 +53,7 @@ export class ConfirmDeleteModalComponent implements OnInit {
     this.deleteCompanySubscription?.unsubscribe();
     this.deleteBoatSubscription?.unsubscribe();
     this.deleteMotorSubscription?.unsubscribe(); 
+    this.deleteGeneratorSubscription?.unsubscribe(); 
   }
 
   public closeModal(isSendRequest:boolean = false) {
@@ -67,6 +74,10 @@ export class ConfirmDeleteModalComponent implements OnInit {
     if(this.section === "motor"){
       this.deleteMotorSubscription = this.deleteMotor();
     }
+    if(this.section === "generator"){
+      this.deleteGeneratorSubscription = this.deleteGenerator();
+    }
+    
   }
 
   private deleteCompany(): Subscription {
@@ -113,6 +124,22 @@ export class ConfirmDeleteModalComponent implements OnInit {
       error: error => {
         this.isLoading = false;
         this._motorErrorNotification.delete();
+      }
+    });
+  }
+
+  private deleteGenerator(): Subscription {
+    this.isLoading = true;
+
+    return this._generatorService.deleteGenerator(this.idEntityClicked).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.closeModal(true);
+        this.toastr.success("Generador eliminado.", "Enhorabuena!");
+      },
+      error: error => {
+        this.isLoading = false;
+        this._generatorErrorNotification.delete();
       }
     });
   }
