@@ -7,6 +7,7 @@ import { CompanySectionComponent } from './components/company-section/company-se
 import { BoatSectionComponent } from './components/boat-section/boat-section.component';
 import { MotorSectionComponent } from './components/motor-section/motor-section.component';
 import { GeneratorSectionComponent } from './components/generator-section/generator-section.component';
+import { ExpirationSectionComponent } from './components/expiration-section/expiration-section.component';
 
 import { UserGuardGuard } from './guards/userGuard/user-guard.guard';
 
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'generadores', 
     component: GeneratorSectionComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'vencimientos', 
+    component: ExpirationSectionComponent,
     canActivate: [UserGuardGuard],
   },
   {
