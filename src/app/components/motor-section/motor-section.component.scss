@@ -56,6 +56,11 @@
       margin-bottom: 25px;
       width: 100%;
 
+      label{
+        font-size: 14px;
+        color: rgba($principal-color-blue, 0.7);
+      }
+
       .input-wrap {
         width: 100%;
         display: flex;
@@ -311,7 +316,7 @@
         align-items: flex-start;
 
         .btn {
-          width: 50%;
+          width: 25%;
 
           cursor: pointer;
           transition: all 0.3s ease;
@@ -334,11 +339,6 @@
     width: 60%;
 
     .dashboard-container {
-      .add-container {
-        .btn {
-          width: 45%;
-        }
-      }
 
       .filter-form {
         width: 45%;
