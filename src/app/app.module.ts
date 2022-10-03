@@ -44,6 +44,7 @@ import { GeneratorSectionComponent } from './components/generator-section/genera
 import { GeneratorCreateUpdateModalComponent } from './components/generator-section/generator-create-update-modal/generator-create-update-modal.component';
 import { GeneratorViewModalComponent } from './components/generator-section/generator-view-modal/generator-view-modal.component';
 import { ExpirationSectionComponent } from './components/expiration-section/expiration-section.component';
+import { ExpirationCreateUpdateModalComponent } from './components/expiration-section/expiration-create-update-modal/expiration-create-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ExpirationSectionComponent } from './components/expiration-section/expi
     GeneratorCreateUpdateModalComponent,
     GeneratorViewModalComponent,
     ExpirationSectionComponent,
+    ExpirationCreateUpdateModalComponent,
   ],
   imports: [
     NgxPaginationModule,
