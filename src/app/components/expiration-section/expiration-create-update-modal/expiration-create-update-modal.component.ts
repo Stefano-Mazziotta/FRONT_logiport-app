@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ExpirationErrorNotificationService } from 'src/app/services/expiration/expiration-error-notification/expiration-error-notification.service';
 import { ExpirationService } from 'src/app/services/expiration/expiration.service'; 
 import { IExpiration, ICreateExpirationDTO, IUpdateExpirationDTO } from 'src/app/interfaces/expiration';
+import UtilsDate from 'src/app/utils/utilsDate';
 
 @Component({
   selector: 'app-expiration-create-update-modal',
@@ -142,20 +143,33 @@ export class ExpirationCreateUpdateModalComponent implements OnInit {
 
   private getFormData(): ICreateExpirationDTO {
 
+    let expirationDate: string = this.expirationForm.get('expirationDate')?.value;
+    expirationDate = UtilsDate.formatDateToYYYYMMDD(expirationDate);
+
+    const expirationDateTimestamp: number = UtilsDate.dateToTimestamp(new Date(expirationDate));
+
     const expiration: ICreateExpirationDTO = {
       idBoat: this.idBoatSelected == null ? "" : this.idBoatSelected,
       title: this.expirationForm.get('title')?.value,
       description: this.expirationForm.get('description')?.value,
-      expirationDate: this.expirationForm.get('expirationDate')?.value,
+      expirationDate: expirationDateTimestamp,
     };
 
     return expiration;
   }
 
   private setFormValues(expiration: IExpiration): void {
+
+    let expirationDateTimestamp = expiration.ExpirationDate;
+    let expirationDate: string = "";
+
+    if (expirationDateTimestamp) {
+      expirationDate = UtilsDate.timestampToDate(expirationDateTimestamp);
+    }
+
     this.expirationForm.get('title')?.setValue(`${expiration.Title}`);
     this.expirationForm.get('description')?.setValue(`${expiration.Description}`);
-    this.expirationForm.get('expirationDate')?.setValue(`${expiration.ExpirationDate}`);
+    this.expirationForm.get('expirationDate')?.setValue(`${expirationDate}`);
   }
 
 }

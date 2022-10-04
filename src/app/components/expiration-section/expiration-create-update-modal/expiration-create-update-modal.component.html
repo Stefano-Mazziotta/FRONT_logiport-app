@@ -15,11 +15,11 @@
         <form class="modal__form" [formGroup]="expirationForm" (ngSubmit)="onSubmit()">
             <div class="form-flex">
                 <div class="form__input-container">
-                    <label class="form__label" for="title">Título</label>
+                    <label class="form__label" for="title">* Título</label>
                     <div class="input-wrap">
                         <div class="input__decorator" [class.success]="expirationForm.get('title')?.valid"
                             [class.error]="expirationForm.get('title')?.invalid && expirationForm.get('title')?.touched"></div>
-                        <input formControlName="title" class="form__input" type="text" placeholder="* Título"
+                        <input formControlName="title" class="form__input" type="text" placeholder="Título"
                             name="title" autocomplete="off" maxlength="60">
                     </div>
                     <span class="form__error"
@@ -28,11 +28,11 @@
                     </span>
                 </div>
                 <div class="form__input-container">
-                    <label class="form__label" for="description">Descripción</label>
+                    <label class="form__label" for="description">* Descripción</label>
                     <div class="input-wrap">
                         <div class="input__decorator" [class.success]="expirationForm.get('description')?.valid"
                             [class.error]="expirationForm.get('description')?.invalid && expirationForm.get('description')?.touched"></div>
-                        <input formControlName="description" class="form__input" type="text" placeholder="* Descripción" name="description"
+                        <input formControlName="description" class="form__input" type="text" placeholder="Descripción" name="description"
                             autocomplete="off" maxlength="11">
                     </div>
                     <span class="form__error" *ngIf="expirationForm.get('description')?.invalid && expirationForm.get('description')?.touched">
@@ -40,13 +40,13 @@
                     </span>
                 </div>
                 <div class="form__input-container">
-                    <label class="form__label" for="expirationDate">Fecha de vencimiento</label>
+                    <label class="form__label" for="expirationDate">* Fecha de vencimiento</label>
                     <div class="input-wrap">
                         <div class="input__decorator" [class.success]="expirationForm.get('expirationDate')?.valid"
                             [class.error]="expirationForm.get('expirationDate')?.invalid && expirationForm.get('expirationDate')?.touched">
                         </div>
-                        <input formControlName="expirationDate" class="form__input" type="text" placeholder="* Número de generador"
-                            name="expirationDate" autocomplete="off" maxlength="11">
+                        <input formControlName="expirationDate" class="form__input" type="text" onfocus="(this.type='date')" placeholder="Fecha de vencimiento"
+                            name="expirationDate" autocomplete="off" min="1900-01-01" max="2100-01-01">
                     </div>
                     <span class="form__error"
                         *ngIf="expirationForm.get('expirationDate')?.invalid && expirationForm.get('expirationDate')?.touched">
