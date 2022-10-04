@@ -24,12 +24,12 @@
         [idExpirationClicked]="idExpirationClicked">
     </app-expiration-view-modal>
 
-    <!-- <app-confirm-delete-modal 
+    <app-confirm-delete-modal 
         *ngIf="isOpenConfirmDeleteModal" 
         (closeModalEvent)="closeModal($event)"
         [idEntityClicked]="idExpirationClicked"
         [section]="section">
-    </app-confirm-delete-modal> -->
+    </app-confirm-delete-modal>
 
     <div *ngIf="companySelected && boatSelected" class="dashboard-container">
         
