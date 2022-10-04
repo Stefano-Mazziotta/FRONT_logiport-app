@@ -82,7 +82,7 @@
                         *ngFor="let expiration of expirationList | paginate: { itemsPerPage: 7, currentPage: currentPage}">
                         <td style="display: none;">{{ expiration.IdExpiration }}</td>
                         <td>{{ expiration.Title }}</td>
-                        <td>{{ expiration.ExpirationDate }}</td>
+                        <td>{{ expiration.ExpirationDate | timestampToDate }}</td>
                         <td class="btn-container">
                             <button (click)="openViewModal($event)" class="btn-read">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
