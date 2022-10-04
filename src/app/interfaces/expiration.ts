@@ -12,9 +12,9 @@ export interface IExpiration {
 
 export interface ICreateExpirationDTO {
     idBoat: string
-    Title: string
-    Description: string
-    ExpirationDate: number
+    title: string
+    description: string
+    expirationDate: number
 }
 
 export interface IUpdateExpirationDTO extends ICreateExpirationDTO {
