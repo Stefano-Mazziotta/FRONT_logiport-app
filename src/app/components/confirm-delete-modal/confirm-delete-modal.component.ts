@@ -161,7 +161,7 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
     return this._expirationService.deleteExpiration(this.idEntityClicked).subscribe({
       next: response => {
         this.isLoading = false;
-        this.closeModal();
+        this.closeModal(true);
         this.toastr.success("Vencimiento eliminado.", "Enhorabuena!");
       },
       error: error => {
