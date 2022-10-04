@@ -14,6 +14,9 @@ import { MotorErrorNotificationService } from 'src/app/services/motor/motor-erro
 import { GeneratorService } from 'src/app/services/generator/generator.service';
 import { GeneratorErrorNotificationService } from 'src/app/services/generator/generator-error-notification/generator-error-notification.service';
 
+import { ExpirationService } from 'src/app/services/expiration/expiration.service';
+import { ExpirationErrorNotificationService } from 'src/app/services/expiration/expiration-error-notification/expiration-error-notification.service';
+
 @Component({
   selector: 'app-confirm-delete-modal',
   templateUrl: './confirm-delete-modal.component.html',
@@ -30,6 +33,8 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
     private _motorErrorNotification: MotorErrorNotificationService,
     private _generatorService: GeneratorService,
     private _generatorErrorNotification: GeneratorErrorNotificationService,
+    private _expirationService: ExpirationService,
+    private _expirationErrorNotification: ExpirationErrorNotificationService,
     private toastr: ToastrService,
   ) { }
 
@@ -41,10 +46,12 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
   clickModal: boolean = false;
 
   isLoading: boolean = false;
+
   deleteCompanySubscription: Subscription | undefined;
   deleteBoatSubscription: Subscription | undefined;
   deleteMotorSubscription: Subscription | undefined;
   deleteGeneratorSubscription: Subscription | undefined;
+  deleteExpirationSubscription: Subscription | undefined;
 
   public ngOnInit(): void {
   }
@@ -54,6 +61,7 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
     this.deleteBoatSubscription?.unsubscribe();
     this.deleteMotorSubscription?.unsubscribe(); 
     this.deleteGeneratorSubscription?.unsubscribe(); 
+    this.deleteExpirationSubscription?.unsubscribe(); 
   }
 
   public closeModal(isSendRequest:boolean = false) {
@@ -76,6 +84,9 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
     }
     if(this.section === "generator"){
       this.deleteGeneratorSubscription = this.deleteGenerator();
+    }
+    if(this.section === "expiration"){
+      this.deleteExpirationSubscription = this.deleteExpiration();
     }
     
   }
@@ -142,6 +153,23 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
         this._generatorErrorNotification.delete();
       }
     });
+  }
+  
+  private deleteExpiration(): Subscription {
+    this.isLoading = true;
+
+    return this._expirationService.deleteExpiration(this.idEntityClicked).subscribe({
+      next: response => {
+        this.isLoading = false;
+        this.closeModal();
+        this.toastr.success("Vencimiento eliminado.", "Enhorabuena!");
+      },
+      error: error => {
+        this.isLoading = false;
+        this._expirationErrorNotification.delete();
+      }
+    })
+
   }
 }
 
