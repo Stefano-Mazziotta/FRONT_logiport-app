@@ -130,6 +130,7 @@
 @media (min-width: 768px) {
   .modal-overlay {
     .modal-container {
+      width: 80%;
       .registers-container {
         flex-flow: row wrap;
         justify-content: space-between;
