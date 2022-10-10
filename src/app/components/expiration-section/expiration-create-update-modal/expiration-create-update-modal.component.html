@@ -32,8 +32,9 @@
                     <div class="input-wrap">
                         <div class="input__decorator" [class.success]="expirationForm.get('description')?.valid"
                             [class.error]="expirationForm.get('description')?.invalid && expirationForm.get('description')?.touched"></div>
-                        <input formControlName="description" class="form__input" type="text" placeholder="Descripción" name="description"
-                            autocomplete="off" maxlength="11">
+                        <textarea formControlName="description" class="form__input" placeholder="Descripción" name="description"
+                        autocomplete="off">
+                        </textarea>
                     </div>
                     <span class="form__error" *ngIf="expirationForm.get('description')?.invalid && expirationForm.get('description')?.touched">
                         Este campo es<strong> obligatorio.</strong>
