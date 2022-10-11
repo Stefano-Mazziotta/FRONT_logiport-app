@@ -10,8 +10,7 @@ export class TimestampToDatePipe implements PipeTransform {
       return "";
     }
 
-    let timestampMilliseconds: number = (timestamp * 1000);
-    let date = new Date(timestampMilliseconds).toLocaleDateString();
+    let date = new Date(timestamp).toLocaleDateString();
 
     return date;
   }
