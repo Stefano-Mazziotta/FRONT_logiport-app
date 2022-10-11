@@ -30,10 +30,11 @@ export class ExpirationViewModalComponent implements OnInit, OnDestroy {
     Description: '',
     ExpirationDate: 0,
     Status: '',
+    DaysToExpiration: 0,
     TimeSave: 0,
     TimeLastUpdate: 0,
     IsDeleted: false,
-    TimeDeleted: 0
+    TimeDeleted: 0,
   }
 
   getExpirationByIdSubscription: Subscription | undefined;
