@@ -199,7 +199,29 @@
           td {
             width: 210px;
             padding: 20px;
+            
+            .status {
+              width: 25px;
+              height: 25px;
+
+              margin-left: auto;
+              margin-right: auto;
+
+              border-radius: 3px;
+
+              box-shadow: $box-shadow-btn;
+              &.red{
+                background-color: $expirated-status-color;
+              }
+              &.yellow{
+                background-color: $warning-status-color;
+              }
+              &.green{
+                background-color: $ok-statuts-color;
+              }
+            }
           }
+
 
           td.btn-container {
             display: flex;
