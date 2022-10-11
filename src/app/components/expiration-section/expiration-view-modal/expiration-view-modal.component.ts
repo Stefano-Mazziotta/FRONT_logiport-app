@@ -29,6 +29,7 @@ export class ExpirationViewModalComponent implements OnInit, OnDestroy {
     Title: '',
     Description: '',
     ExpirationDate: 0,
+    Status: '',
     TimeSave: 0,
     TimeLastUpdate: 0,
     IsDeleted: false,

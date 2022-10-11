@@ -4,6 +4,7 @@ export interface IExpiration {
     Title: string
     Description: string
     ExpirationDate: number
+    Status: string
     TimeSave: number
     TimeLastUpdate: number
     IsDeleted: boolean
