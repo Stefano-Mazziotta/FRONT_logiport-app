@@ -1,12 +1,11 @@
 export default class UtilsDate {
 
     public static dateToTimestamp(date:Date):number {
-        return date.getTime() / 1000;   
+        return date.getTime();   
     }
 
     public static timestampToDate(timestamp:number):string {
-        let timestampMilliseconds:number = ( timestamp * 1000 );
-        let date = new Date (timestampMilliseconds).toLocaleDateString();
+        let date = new Date (timestamp).toLocaleDateString();
     
         return date;   
     }
