@@ -1,0 +1,5 @@
+<div class="status" (click)="isHoverStatus = !isHoverStatus" (mouseenter)="isHoverStatus = true"
+    (mouseleave)="isHoverStatus = false"
+    [ngClass]="{'red': status === 'expirated', 'yellow': status === 'warning', 'green': status === 'ok'}">
+    <p *ngIf="isHoverStatus" class="status__tooltip">{{ daysToExpiration | daysToExpirationMsg }}</p>
+</div>

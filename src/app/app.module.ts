@@ -46,6 +46,8 @@ import { GeneratorViewModalComponent } from './components/generator-section/gene
 import { ExpirationSectionComponent } from './components/expiration-section/expiration-section.component';
 import { ExpirationCreateUpdateModalComponent } from './components/expiration-section/expiration-create-update-modal/expiration-create-update-modal.component';
 import { ExpirationViewModalComponent } from './components/expiration-section/expiration-view-modal/expiration-view-modal.component';
+import { DaysToExpirationMsgPipe } from './pipes/days-to-expiration-msg.pipe';
+import { StatusDetailComponent } from './components/expiration-section/status-detail/status-detail.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { ExpirationViewModalComponent } from './components/expiration-section/ex
     ExpirationSectionComponent,
     ExpirationCreateUpdateModalComponent,
     ExpirationViewModalComponent,
+    DaysToExpirationMsgPipe,
+    StatusDetailComponent,
   ],
   imports: [
     NgxPaginationModule,
