@@ -82,9 +82,11 @@
                     <tr class="table__row-body"
                         *ngFor="let expiration of expirationList | paginate: { itemsPerPage: 7, currentPage: currentPage}">
                         <td style="display: none;">{{ expiration.IdExpiration }}</td>
-                        <td><div class="status"
-                            [ngClass]="{'red': expiration.Status === 'expirated', 'yellow': expiration.Status === 'warning', 'green': expiration.Status === 'ok'}">
-                            </div>
+                        <td>
+                            <status-detail 
+                            [daysToExpiration]="expiration.DaysToExpiration"
+                            [status]="expiration.Status">
+                            </status-detail>
                         </td>
                         <td>{{ expiration.Title }}</td>
                         <td>{{ expiration.ExpirationDate | timestampToDate }}</td>
