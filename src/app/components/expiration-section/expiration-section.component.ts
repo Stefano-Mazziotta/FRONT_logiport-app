@@ -193,7 +193,7 @@ export class ExpirationSectionComponent implements OnInit, OnDestroy {
   private getIdExpirationClicked(click:any): string | null{
     let idExpirationClicked = null;
 
-    const elements: HTMLElement[] = click.path;
+    const elements: HTMLElement[] = click.composedPath();
     const row = elements.find(element => 
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );

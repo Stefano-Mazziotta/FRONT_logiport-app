@@ -88,7 +88,7 @@ export class CompanySectionComponent implements OnInit {
   private getIdCompanyClicked(click: MouseEvent | any): string | null {
     let idCompanyClicked = null;
 
-    const elements: HTMLElement[] = click.path;
+    const elements: HTMLElement[] = click.composedPath();
     const row = elements.find(element => 
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );

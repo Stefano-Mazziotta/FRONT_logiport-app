@@ -104,7 +104,7 @@ export class BoatSectionComponent implements OnInit {
 
     let idBoatClicked = null;
 
-    const elements: HTMLElement[] = click.path;
+    const elements: HTMLElement[] = click.composedPath();
     const row = elements.find(element => 
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );

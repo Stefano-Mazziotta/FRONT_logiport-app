@@ -192,7 +192,7 @@ export class GeneratorSectionComponent implements OnInit, OnDestroy {
   private getIdGeneratorClicked(click:any): string | null{
     let idGeneratorClicked = null;
 
-    const elements: HTMLElement[] = click.path;
+    const elements: HTMLElement[] = click.composedPath();
     const row = elements.find(element => 
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );

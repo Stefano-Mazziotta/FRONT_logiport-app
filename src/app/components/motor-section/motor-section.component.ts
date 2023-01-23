@@ -171,7 +171,7 @@ export class MotorSectionComponent implements OnInit {
   private getIdMotorClicked(click:any): string | null{
     let idMotorClicked = null;
 
-    const elements: HTMLElement[] = click.path;
+    const elements: HTMLElement[] = click.composedPath();
     const row = elements.find(element => 
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );
