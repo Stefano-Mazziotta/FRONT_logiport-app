@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { IMotor } from 'src/app/interfaces/motor';
@@ -10,7 +10,7 @@ import { MotorService } from 'src/app/services/motor/motor.service';
   templateUrl: './motor-view-modal.component.html',
   styleUrls: ['./motor-view-modal.component.scss']
 })
-export class MotorViewModalComponent implements OnInit {
+export class MotorViewModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private _motorService: MotorService,

@@ -1,5 +1,5 @@
 <app-nav-header-desktop *ngIf="(existToken$ | async)" class="nav-sidebar"></app-nav-header-desktop>
-<div [ngClass]="(existToken$ | async) == true ? 'app-container app' : 'app-container login'" >
+<div [ngClass]="(existToken$ | async) === true ? 'app-container app' : 'app-container login'" >
     <router-outlet></router-outlet>
 </div>
 

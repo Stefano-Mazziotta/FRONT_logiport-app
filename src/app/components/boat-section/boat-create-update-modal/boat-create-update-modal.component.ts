@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import UtilsDate from 'src/app/utils/utilsDate';
   templateUrl: './boat-create-update-modal.component.html',
   styleUrls: ['./boat-create-update-modal.component.scss']
 })
-export class BoatCreateUpdateModalComponent implements OnInit {
+export class BoatCreateUpdateModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private _boatService: BoatService,

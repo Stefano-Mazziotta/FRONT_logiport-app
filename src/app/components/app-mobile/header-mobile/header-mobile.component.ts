@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header-mobile',
   templateUrl: './header-mobile.component.html',
   styleUrls: ['./header-mobile.component.scss']
 })
-export class HeaderMobileComponent implements OnInit {
+export class HeaderMobileComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

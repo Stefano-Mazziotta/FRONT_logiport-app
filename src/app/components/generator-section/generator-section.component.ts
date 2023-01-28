@@ -14,7 +14,7 @@ import { GeneratorErrorNotificationService } from 'src/app/services/generator/ge
   templateUrl: './generator-section.component.html',
   styleUrls: ['./generator-section.component.scss']
 })
-export class GeneratorSectionComponent implements OnInit, OnDestroy {
+export class GeneratorSectionComponent implements OnDestroy {
   
   constructor(
     private _generatorService: GeneratorService,
@@ -55,9 +55,6 @@ export class GeneratorSectionComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   totalItemsPage: number = 7;
   responsivePagination: boolean = true;
-  
-  ngOnInit(): void {
-  }
 
   ngOnDestroy(): void {
     this.getGeneratorsSubscription?.unsubscribe();

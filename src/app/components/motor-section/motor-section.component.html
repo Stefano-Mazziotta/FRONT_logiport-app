@@ -11,7 +11,7 @@
     </app-boat-selector>
 
     <app-motor-create-update-modal *ngIf="isOpenCreateUpdateModal" (closeModalEvent)="closeModal($event)"
-        [isUpdate]="isUpdate" [idBoatSelected]="boatSelected != null ? boatSelected.idBoat : '' "
+        [isUpdate]="isUpdate" [idBoatSelected]="boatSelected !== null ? boatSelected.idBoat : '' "
         [idMotorClicked]="idMotorClicked">
     </app-motor-create-update-modal>
 

@@ -8,7 +8,7 @@
       *ngIf="isOpenCreateUpdateModal" 
       (closeModalEvent)="closeModal($event)" 
       [isUpdate]="isUpdate"
-      [idCompanySelected]="companySelected != null ? companySelected.idCompany : '' "
+      [idCompanySelected]="companySelected !== null ? companySelected.idCompany : '' "
       [idBoatClicked]="idBoatClicked">
   </app-boat-create-update-modal>
   

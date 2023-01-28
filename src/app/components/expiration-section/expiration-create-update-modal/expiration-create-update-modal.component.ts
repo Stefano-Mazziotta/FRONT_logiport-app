@@ -14,7 +14,7 @@ import UtilsDate from 'src/app/utils/utilsDate';
   templateUrl: './expiration-create-update-modal.component.html',
   styleUrls: ['./expiration-create-update-modal.component.scss']
 })
-export class ExpirationCreateUpdateModalComponent implements OnInit {
+export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ICompany, ISearchCompanyDTO, IcompanySelected } from 'src/app/interfaces/company';
 import { CompanyService } from 'src/app/services/company/company.service';
@@ -9,7 +9,7 @@ import { CompanyErrorNotificationService } from 'src/app/services/company/compan
   templateUrl: './company-selector.component.html',
   styleUrls: ['./company-selector.component.scss']
 })
-export class CompanySelectorComponent implements OnInit {
+export class CompanySelectorComponent implements OnDestroy {
 
   constructor(
     private _companyService: CompanyService,
@@ -27,8 +27,6 @@ export class CompanySelectorComponent implements OnInit {
 
   searchCompanySubscription: Subscription | undefined; 
 
-  ngOnInit(): void {
-  }
   ngOnDestroy(): void {
     this.searchCompanySubscription?.unsubscribe;
   }

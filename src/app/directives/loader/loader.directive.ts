@@ -1,10 +1,10 @@
-import { Directive, Input, Type, ViewContainerRef } from '@angular/core';
+import { Directive, Input, OnInit, Type, ViewContainerRef } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Directive({
   selector: '[appLoader]'
 })
-export class LoaderDirective {
+export class LoaderDirective implements OnInit {
 
   @Input() appLoader!: Type<any>;
 

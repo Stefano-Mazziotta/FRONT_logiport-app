@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IExpiration } from 'src/app/interfaces/expiration';
 
 @Component({
-  selector: 'status-detail',
+  selector: 'app-status-detail',
   templateUrl: './status-detail.component.html',
   styleUrls: ['./status-detail.component.scss']
 })
-export class StatusDetailComponent implements OnInit {
+export class StatusDetailComponent {
 
   constructor() { }
 
@@ -14,9 +14,5 @@ export class StatusDetailComponent implements OnInit {
   @Input() status: string = "";
 
   isHoverStatus: boolean = false;
-  
-
-  ngOnInit(): void {
-  }
 
 }

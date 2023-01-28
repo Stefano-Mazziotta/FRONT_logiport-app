@@ -22,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './company-create-update-modal.component.html',
   styleUrls: ['./company-create-update-modal.component.scss']
 })
-export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnDestroy {
+export class CompanyCreateUpdateModalComponent implements OnInit, OnDestroy {
 
   @Input() isUpdate!: boolean;
   @Input() idCompanyClicked: string | null = null;
@@ -67,9 +67,6 @@ export class CompanyCreateUpdateModalComponent implements OnInit, OnChanges, OnD
 
     this.titleText = "AÑADIR EMPRESA";
     this.btnText = "AÑADIR";
-  }
-
-  public ngOnChanges(): void {
   }
 
   public ngOnDestroy(): void {

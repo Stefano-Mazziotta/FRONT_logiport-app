@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { ICreateMotorDTO, IMotor, IUpdateMotorDTO } from 'src/app/interfaces/mot
   templateUrl: './motor-create-update-modal.component.html',
   styleUrls: ['./motor-create-update-modal.component.scss']
 })
-export class MotorCreateUpdateModalComponent implements OnInit {
+export class MotorCreateUpdateModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,

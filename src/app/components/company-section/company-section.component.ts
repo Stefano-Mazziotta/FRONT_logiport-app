@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { CompanyErrorNotificationService } from 'src/app/services/company/compan
   templateUrl: './company-section.component.html',
   styleUrls: ['./company-section.component.scss']
 })
-export class CompanySectionComponent implements OnInit {
+export class CompanySectionComponent implements OnInit, OnDestroy {
 
   section:string = "company";
   

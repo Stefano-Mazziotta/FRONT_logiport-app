@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { IBoat, IBoatSelected, ISearchBoatDTO } from 'src/app/interfaces/boat';
@@ -10,7 +10,7 @@ import { BoatService } from 'src/app/services/boat/boat.service';
   templateUrl: './boat-selector.component.html',
   styleUrls: ['./boat-selector.component.scss']
 })
-export class BoatSelectorComponent implements OnInit {
+export class BoatSelectorComponent implements OnDestroy {
 
   constructor(
     private _boatService: BoatService,
@@ -28,10 +28,6 @@ export class BoatSelectorComponent implements OnInit {
   isSelected: boolean = false;
 
   searchBoatSubscription: Subscription | undefined; 
-
-  ngOnInit(): void {
-    
-  }
 
   ngOnDestroy(): void {
     this.searchBoatSubscription?.unsubscribe();

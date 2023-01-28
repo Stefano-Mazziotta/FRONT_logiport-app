@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IcompanySelected } from 'src/app/interfaces/company';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './motor-section.component.html',
   styleUrls: ['./motor-section.component.scss']
 })
-export class MotorSectionComponent implements OnInit {
+export class MotorSectionComponent implements OnDestroy {
 
   constructor(
     private _motorService: MotorService,
@@ -53,9 +53,6 @@ export class MotorSectionComponent implements OnInit {
   currentPage: number = 1;
   totalItemsPage: number = 7;
   responsivePagination: boolean = true;
-
-  ngOnInit(): void {
-  }
 
   ngOnDestroy(): void {
     this.getMotorsSubscription?.unsubscribe();

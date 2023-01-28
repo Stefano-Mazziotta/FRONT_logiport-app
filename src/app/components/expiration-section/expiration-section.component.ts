@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { ExpirationErrorNotificationService } from 'src/app/services/expiration/
   templateUrl: './expiration-section.component.html',
   styleUrls: ['./expiration-section.component.scss']
 })
-export class ExpirationSectionComponent implements OnInit, OnDestroy {
+export class ExpirationSectionComponent implements OnDestroy {
 
   constructor(
     private _expirationService: ExpirationService,
@@ -56,9 +56,6 @@ export class ExpirationSectionComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   totalItemsPage: number = 7;
   responsivePagination: boolean = true;
-
-  ngOnInit(): void {
-  }
 
   ngOnDestroy(): void {
     this.getExpirationsSubscription?.unsubscribe();

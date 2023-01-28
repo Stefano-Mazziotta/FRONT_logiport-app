@@ -22,7 +22,7 @@ import { ExpirationErrorNotificationService } from 'src/app/services/expiration/
   templateUrl: './confirm-delete-modal.component.html',
   styleUrls: ['./confirm-delete-modal.component.scss']
 })
-export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
+export class ConfirmDeleteModalComponent implements OnDestroy {
 
   constructor(
     private _companyService: CompanyService,
@@ -52,9 +52,6 @@ export class ConfirmDeleteModalComponent implements OnInit, OnDestroy {
   deleteMotorSubscription: Subscription | undefined;
   deleteGeneratorSubscription: Subscription | undefined;
   deleteExpirationSubscription: Subscription | undefined;
-
-  public ngOnInit(): void {
-  }
 
   public ngOnDestroy(): void {
     this.deleteCompanySubscription?.unsubscribe();

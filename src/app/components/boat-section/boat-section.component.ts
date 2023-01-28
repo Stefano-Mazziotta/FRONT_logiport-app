@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { IcompanySelected } from 'src/app/interfaces/company';
   templateUrl: './boat-section.component.html',
   styleUrls: ['./boat-section.component.scss']
 })
-export class BoatSectionComponent implements OnInit {
+export class BoatSectionComponent implements OnDestroy {
 
   constructor(
     private _boatService: BoatService,
@@ -72,10 +72,6 @@ export class BoatSectionComponent implements OnInit {
 
   getBoatsSubscription: Subscription | undefined;
   searchBoatSubscription: Subscription | undefined;
-
-  ngOnInit(): void {
-
-  }
 
   ngOnDestroy(): void {
     this.getBoatsSubscription?.unsubscribe();

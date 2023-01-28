@@ -19,7 +19,4 @@ export class AppComponent {
     localStorage.setItem('companySelected', "");
   }
 
-  ngOnInit(){
-  }
-
 }

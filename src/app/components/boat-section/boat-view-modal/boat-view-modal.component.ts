@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IBoat } from 'src/app/interfaces/boat';
 import { BoatErrorNotificationService } from 'src/app/services/boat/boat-error-notification/boat-error-notification.service';
@@ -9,7 +9,7 @@ import { BoatService } from 'src/app/services/boat/boat.service';
   templateUrl: './boat-view-modal.component.html',
   styleUrls: ['./boat-view-modal.component.scss']
 })
-export class BoatViewModalComponent implements OnInit {
+export class BoatViewModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private _boatService: BoatService,
