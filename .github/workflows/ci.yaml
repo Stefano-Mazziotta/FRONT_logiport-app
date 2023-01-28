@@ -19,32 +19,30 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-- name: NPM Install
-  run: npm install
+            ${{ runner.os }}-node-
+      - name: NPM Install
+        run: npm install
 
-- name: NPM Install Angular
-  run: npm install -g @angular/cli > /dev/null
+      - name: NPM Install Angular
+        run: npm install -g @angular/cli > /dev/null
 
-- name: Lint
-  run: npm run lint
+      - name: Lint
+        run: npm run lint
 
-- name: Format
-  run: npm run format
+      - name: Format
+        run: npm run format
 
-- name: NPM build Angular Production
-  run: npm run build:prod
+      - name: NPM build Angular Production
+        run: npm run build:prod
 
-- name: Deploy to my EC2 instance
-  uses: easingthemes/ssh-deploy@v2.1.5
-  with:
-    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-    SOURCE: "dist/logiport-app/"
-    REMOTE_HOST: "ec2-54-232-160-105.sa-east-1.compute.amazonaws.com"
-    REMOTE_USER: "ubuntu"
-    TARGET: "/var/www/html/logiport-app-front/"
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
+          SOURCE: "dist/logiport-app/"
+          REMOTE_HOST: "ec2-54-232-160-105.sa-east-1.compute.amazonaws.com"
+          REMOTE_USER: "ubuntu"
+          TARGET: "/var/www/html/logiport-app-front/"
 
