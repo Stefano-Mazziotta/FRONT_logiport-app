@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) { 
 
     if(window.location.host == 'app.logiport.site'){
-      this.serverUrl = 'https://app.logiport.site:8080/'
+      this.serverUrl = 'https://app.logiport.site/'
     }
 
   }

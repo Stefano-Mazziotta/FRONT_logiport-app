@@ -15,10 +15,10 @@ export class MotorService {
   
   constructor(private http: HttpClient) { 
     if(window.location.host == 'app.logiport.site'){
-      this.myAppUrl = 'https://app.logiport.site:8080/'
+      this.myAppUrl = 'https://app.logiport.site/'
     }
   }
-  
+
   public getAllMotors(params:IGetAllMotorsDTO):Observable<IResponseListMotor>{
 
     const { idCompany, idBoat } = params;

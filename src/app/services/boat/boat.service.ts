@@ -14,7 +14,7 @@ export class BoatService {
   constructor(private http: HttpClient) { 
 
     if(window.location.host == 'app.logiport.site'){
-      this.myAppUrl = 'https://app.logiport.site:8080/'
+      this.myAppUrl = 'https://app.logiport.site/'
     }
   
   }
