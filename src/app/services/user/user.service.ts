@@ -10,7 +10,13 @@ export class UserService {
   private serverUrl = 'http://localhost:8080/';
   private apiUrl = 'api/users/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+    if(window.location.host == 'app.logiport.site'){
+      this.serverUrl = 'https://app.logiport.site:8080/'
+    }
+
+  }
 
   public login(userData:any):Observable<any>{
     return this.http.post(this.serverUrl + this.apiUrl + 'login' , userData);

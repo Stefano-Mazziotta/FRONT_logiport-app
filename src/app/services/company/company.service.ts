@@ -11,7 +11,11 @@ export class CompanyService {
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/companies/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if(window.location.host == 'app.logiport.site'){
+      this.myAppUrl = 'https://app.logiport.site:8080/'
+    }
+  }
 
   public getAllCompanies(): Observable<IResponseListCompany> {
     return this.http.get<IResponseListCompany>(this.myAppUrl + this.myApiUrl);

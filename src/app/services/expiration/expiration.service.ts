@@ -13,10 +13,15 @@ import {
 })
 export class ExpirationService {
 
-  constructor(private http: HttpClient) { }
-
+  
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/expirations/';
+
+  constructor(private http: HttpClient) {
+    if(window.location.host == 'app.logiport.site'){
+      this.myAppUrl = 'https://app.logiport.site:8080/'
+    }
+  }
 
   public getAllExpirations(params:IGetAllExpirationsDTO):Observable<IResponseListExpiration>{
 

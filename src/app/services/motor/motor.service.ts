@@ -9,11 +9,16 @@ import { ICreateMotorDTO, IUpdateMotorDTO, IGetAllMotorsDTO, ISearchMotorDTO, IR
 })
 export class MotorService {
 
-  constructor(private http: HttpClient) { }
-
+  
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/motors/';
-
+  
+  constructor(private http: HttpClient) { 
+    if(window.location.host == 'app.logiport.site'){
+      this.myAppUrl = 'https://app.logiport.site:8080/'
+    }
+  }
+  
   public getAllMotors(params:IGetAllMotorsDTO):Observable<IResponseListMotor>{
 
     const { idCompany, idBoat } = params;

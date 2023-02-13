@@ -9,10 +9,15 @@ import { ICreateGeneratorDTO, IGetAllGeneratorsDTO, IResponseListGenerator, IRes
 })
 export class GeneratorService {
 
-  constructor(private http: HttpClient) { }
-
+  
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/generators/';
+  
+  constructor(private http: HttpClient) {
+    if(window.location.host == 'app.logiport.site'){
+      this.myAppUrl = 'https://app.logiport.site:8080/'
+    }
+  }
 
   public getAllGenerators(params:IGetAllGeneratorsDTO):Observable<IResponseListGenerator>{
 

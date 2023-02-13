@@ -11,7 +11,13 @@ export class BoatService {
   private myAppUrl = 'http://localhost:8080/';
   private myApiUrl = 'api/boats/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+    if(window.location.host == 'app.logiport.site'){
+      this.myAppUrl = 'https://app.logiport.site:8080/'
+    }
+  
+  }
 
   public getAllBoats(idCompany:string):Observable<IResponseListBoat>{
     return this.http.get<IResponseListBoat>(this.myAppUrl + this.myApiUrl + `?idCompany=${idCompany}`);
