@@ -1,3 +1,2 @@
-<ng-template [appLoader]="appDesktopComponent"></ng-template>
-<ng-template [appLoader]="appMobileComponent"></ng-template>
-
+<app-app-desktop *ngIf="isDesktop"></app-app-desktop>
+<app-app-mobile *ngIf="isMobile"></app-app-mobile>

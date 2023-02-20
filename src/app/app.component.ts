@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
-import { AppMobileComponent } from './components/app-mobile/app-mobile.component'
+// import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
+// import { AppMobileComponent } from './components/app-mobile/app-mobile.component'
 
 @Component({
   selector: 'app-root',
@@ -8,15 +8,13 @@ import { AppMobileComponent } from './components/app-mobile/app-mobile.component
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'logiport-app';
+  title: string = 'logiport-app';
+  pxTablet: number = 768;
+  currentWidth: number = window.innerWidth;
 
-  appDesktopComponent = AppDesktopComponent;
-  appMobileComponent = AppMobileComponent;
+  isDesktop: boolean = this.currentWidth > this.pxTablet;
+  isMobile: boolean = this.currentWidth <= this.pxTablet;
   
-  constructor(
-
-  ) {
-    localStorage.setItem('companySelected', "");
-  }
+  constructor() { localStorage.setItem('companySelected', "");  }
 
 }

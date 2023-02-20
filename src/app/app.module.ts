@@ -31,7 +31,7 @@ import { MotorSectionComponent } from './components/motor-section/motor-section.
 import { TimestampToDatePipe } from './pipes/timestampToDate.pipe';
 import { NavBottomMobileComponent } from './components/app-mobile/nav-bottom-mobile/nav-bottom-mobile.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoaderDirective } from './directives/loader/loader.directive';
+
 import { NavHeaderDesktopComponent } from './components/app-desktop/nav-header-desktop/nav-header-desktop.component';
 import { AppDesktopComponent } from './components/app-desktop/app-desktop.component';
 import { AppMobileComponent } from './components/app-mobile/app-mobile.component';
@@ -73,7 +73,6 @@ import { StatusDetailComponent } from './components/expiration-section/status-de
     BoatSelectorComponent,
     ConfirmDeleteModalComponent,
     TimestampToDatePipe,
-    LoaderDirective,
     GeneratorCreateUpdateModalComponent,
     GeneratorViewModalComponent,
     ExpirationSectionComponent,
