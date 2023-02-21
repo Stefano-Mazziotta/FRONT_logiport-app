@@ -9,7 +9,7 @@
             <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
             <i class="fa-solid fa-ship"></i>
             <span *ngIf="isSelected" (click)="removeBoatSelected()" class="cross">x</span>
-            <input [disabled]="isSelected" type="text" placeholder="Buscar lancha" (keypress)="typingInputSearch($event)" maxlength="25" value="{{inputSearchValue}}" >
+            <input [disabled]="isSelected" type="text" placeholder="Buscar lancha" (keyup)="typingInputSearch($event)" maxlength="25" value="{{inputSearchValue}}" >
         </div>
     </div>
 
