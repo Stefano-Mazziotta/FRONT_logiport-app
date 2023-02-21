@@ -1,0 +1,72 @@
+@import "./../../app.component.scss";
+
+.main{
+    width: 90%;
+
+    margin-top: 10px;
+    margin-bottom: 50px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    color: $principal-color-blue;
+
+    .section-title{
+        font-size: 36px;
+        padding-bottom: 5px;
+        margin-bottom: 25px;
+        
+        text-shadow: 2px 2px $secondary-color-2;
+        border-bottom: 3px solid $secondary-color;
+    }
+
+    .menu-wrap{
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        
+        .menu__item{
+            width: 100%;
+            height: 75px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            margin-bottom: 25px;
+            background-color: $principal-color-blue;            
+            border-radius: 5px;
+            box-shadow: $box-shadow-btn;
+            
+            color: $secondary-color;
+            text-decoration: none;            
+        }
+    }
+    
+}
+
+// ___ Laptop ___ //
+@media screen and (min-width: 1024px) {
+
+    .main{
+        width: 90%;
+        margin-bottom: 0;
+        .menu-wrap{
+            flex-direction: row;
+            justify-content: left;
+            flex-wrap: wrap;
+        
+            .menu__item{
+                width: 275px;
+                transition: all ease .3s;
+                font-size: 21px;             
+
+                &:hover{
+                    background-color: $hover-color;
+                }
+            }
+        }
+    }
+
+}

@@ -10,8 +10,23 @@ import { GeneratorSectionComponent } from './components/generator-section/genera
 import { ExpirationSectionComponent } from './components/expiration-section/expiration-section.component';
 
 import { UserGuardGuard } from './guards/userGuard/user-guard.guard';
+import { AccountSectionComponent } from './components/account-section/account-section.component';
 
 const routes: Routes = [
+  {
+    path: 'login', 
+    component: LoginComponent
+  },
+  {
+    path: 'inicio', 
+    component: HomeComponent,
+    canActivate: [UserGuardGuard],
+  },
+  {
+    path: 'cuenta', 
+    component: AccountSectionComponent,
+    canActivate: [UserGuardGuard],
+  },
   {
     path: 'empresas', 
     component: CompanySectionComponent,
@@ -36,15 +51,6 @@ const routes: Routes = [
     path: 'vencimientos', 
     component: ExpirationSectionComponent,
     canActivate: [UserGuardGuard],
-  },
-  {
-    path: 'inicio', 
-    component: HomeComponent,
-    canActivate: [UserGuardGuard],
-  },
-  {
-    path: 'login', 
-    component: LoginComponent
   },
   {
     path: '',   
