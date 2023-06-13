@@ -1,5 +1,21 @@
-<div class="status" (click)="isHoverStatus = !isHoverStatus" (mouseenter)="isHoverStatus = true"
-    (mouseleave)="isHoverStatus = false"
-    [ngClass]="{'red': status === 'expirated', 'yellow': status === 'warning', 'green': status === 'ok'}">
-    <p *ngIf="isHoverStatus" class="status__tooltip">{{ daysToExpiration | daysToExpirationMsg }}</p>
+<div
+  class="status"
+  (click)="isHoverStatus = !isHoverStatus"
+  (mouseenter)="isHoverStatus = true"
+  (mouseleave)="isHoverStatus = false"
+  [ngClass]="{
+    red: status === 'expirated' || status === '0' ,
+    yellow: status === 'warning',
+    green: status === 'ok' || status === '1'
+  }"
+>
+  <p *ngIf="isHoverStatus" class="status__tooltip">
+    {{
+      daysToExpiration !== 1 && daysToExpiration !== 0
+        ? (daysToExpiration | daysToExpirationMsg)
+        : daysToExpiration === 1
+        ? "Firmado"
+        : "Sin Firmar"
+    }}
+  </p>
 </div>
