@@ -32,7 +32,7 @@ export class ExpirationSectionComponent implements OnDestroy {
   expirationFilterForm: FormGroup;
 
   existCompanySelected: boolean = false;
-  companySelected:IcompanySelected | null = null;
+  companySelected: IcompanySelected | null = null;
 
   existBoatSelected: boolean = false;
   boatSelected: IBoatSelected | null = null;
@@ -40,7 +40,7 @@ export class ExpirationSectionComponent implements OnDestroy {
   isLoading: boolean = false;
 
   getExpirationsSubscription: Subscription | undefined;
-  searchExpirationSubscription: Subscription | undefined;  
+  searchExpirationSubscription: Subscription | undefined;
 
   expirationList: IExpiration[] = [];
   existExpirations: boolean = false;
@@ -88,8 +88,8 @@ export class ExpirationSectionComponent implements OnDestroy {
 
   public openUpdateModal(click: MouseEvent): void {
     const idExpirationClicked = this.getIdExpirationClicked(click);
-    
-    if(idExpirationClicked){
+
+    if (idExpirationClicked) {
       this.idExpirationClicked = idExpirationClicked;
       this.isUpdate = true;
       this.isOpenCreateUpdateModal = true;
@@ -98,8 +98,8 @@ export class ExpirationSectionComponent implements OnDestroy {
 
   public openViewModal(click: MouseEvent): void {
     const idExpirationClicked = this.getIdExpirationClicked(click);
-    
-    if(idExpirationClicked){
+
+    if (idExpirationClicked) {
       this.idExpirationClicked = idExpirationClicked;
       this.isOpenViewModal = true;
     }
@@ -127,7 +127,7 @@ export class ExpirationSectionComponent implements OnDestroy {
 
     this.isOpenCreateUpdateModal = false;
     this.isOpenViewModal = false;
-    this.isOpenConfirmDeleteModal = false; 
+    this.isOpenConfirmDeleteModal = false;
   }
 
   public searchExpiration(): void {
@@ -142,7 +142,7 @@ export class ExpirationSectionComponent implements OnDestroy {
           this.existExpirations = this.expirationList.length > 0;
           this.isLoading = false;
         },
-        error: error => {          
+        error: error => {
           const { status } = error;
           this.isLoading = false;
           this._expirationErrorNotification.search(status);
@@ -157,12 +157,12 @@ export class ExpirationSectionComponent implements OnDestroy {
     const idCompanySelected = this.companySelected?.idCompany;
     const idBoatSelected = this.boatSelected?.idBoat;
 
-    if(idCompanySelected && idBoatSelected){
-      const params:IGetAllExpirationsDTO = {
+    if (idCompanySelected && idBoatSelected) {
+      const params: IGetAllExpirationsDTO = {
         idCompany: idCompanySelected,
         idBoat: idBoatSelected
       }
-      this.getExpirationsSubscription = this.getExpirations(params); 
+      this.getExpirationsSubscription = this.getExpirations(params);
     }
   }
 
@@ -187,11 +187,11 @@ export class ExpirationSectionComponent implements OnDestroy {
     return params;
   }
 
-  private getIdExpirationClicked(click:any): string | null{
+  private getIdExpirationClicked(click: any): string | null {
     let idExpirationClicked = null;
 
     const elements: HTMLElement[] = click.composedPath();
-    const row = elements.find(element => 
+    const row = elements.find(element =>
       element.className == "table__row-body" || element.className == "table__row-body ng-star-inserted"
     );
 
@@ -202,7 +202,7 @@ export class ExpirationSectionComponent implements OnDestroy {
     return idExpirationClicked;
   }
 
-  private getExpirations(params: IGetAllExpirationsDTO):Subscription {
+  private getExpirations(params: IGetAllExpirationsDTO): Subscription {
     this.isLoading = true;
     return this._expirationService.getAllExpirations(params).subscribe({
       next: response => {
