@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { IExpiration } from 'src/app/interfaces/expiration'; 
-import { ExpirationErrorNotificationService } from 'src/app/services/expiration/expiration-error-notification/expiration-error-notification.service'; 
-import { ExpirationService } from 'src/app/services/expiration/expiration.service'; 
+import { IExpiration } from 'src/app/interfaces/expiration';
+import { ExpirationErrorNotificationService } from 'src/app/services/expiration/expiration-error-notification/expiration-error-notification.service';
+import { ExpirationService } from 'src/app/services/expiration/expiration.service';
 
 @Component({
   selector: 'app-expiration-view-modal',
@@ -23,25 +23,28 @@ export class ExpirationViewModalComponent implements OnInit, OnDestroy {
   clickModal: boolean = false;
   isLoading: boolean = false;
 
-  expiration:IExpiration = {
+  expiration: IExpiration = {
     IdExpiration: '',
     IdBoat: '',
     Title: '',
+    InitDate: 0,
     Description: '',
     ExpirationDate: 0,
+    InspectorCheck: 0,
     Status: '',
     DaysToExpiration: 0,
     TimeSave: 0,
     TimeLastUpdate: 0,
     IsDeleted: false,
     TimeDeleted: 0,
+    orderPrio: 0
   }
 
   getExpirationByIdSubscription: Subscription | undefined;
 
   ngOnInit(): void {
     const idExpiration = this.idExpirationClicked;
-    if(idExpiration){
+    if (idExpiration) {
       this.getExpirationByIdSubscription = this.getExpirationById(idExpiration);
     }
   }
@@ -58,7 +61,7 @@ export class ExpirationViewModalComponent implements OnInit, OnDestroy {
     this.clickModal = false;
   }
 
-  private getExpirationById(idExpiration:string):Subscription{
+  private getExpirationById(idExpiration: string): Subscription {
     this.isLoading = true;
     return this._expirationService.getExpirationById(idExpiration).subscribe({
       next: response => {

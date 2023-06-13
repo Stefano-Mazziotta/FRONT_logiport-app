@@ -1,130 +1,210 @@
 <section class="main">
+  <h2 class="title">
+    <a class="icon-back" routerLink="/inicio"
+      ><i class="fa-solid fa-arrow-left"></i></a
+    >Vencimientos
+  </h2>
 
-    <h2 class="title"> <a class="icon-back" routerLink="/inicio"><i class="fa-solid fa-arrow-left"></i></a>Vencimientos</h2>
+  <app-company-selector
+    (companySelectedEvent)="companySelectedEvent($event)"
+  ></app-company-selector>
 
-    <app-company-selector (companySelectedEvent)="companySelectedEvent($event)"></app-company-selector>
+  <app-boat-selector
+    *ngIf="companySelected"
+    (boatSelectedEvent)="boatSelectedEvent($event)"
+    [idCompanySelected]="companySelected.idCompany"
+  >
+  </app-boat-selector>
 
-    <app-boat-selector 
-        *ngIf="companySelected" 
-        (boatSelectedEvent)="boatSelectedEvent($event)"
-        [idCompanySelected]="companySelected.idCompany">
-    </app-boat-selector>
+  <app-expiration-create-update-modal
+    *ngIf="isOpenCreateUpdateModal && boatSelected"
+    (closeModalEvent)="closeModal($event)"
+    [isUpdate]="isUpdate"
+    [idBoatSelected]="boatSelected.idBoat"
+    [idExpirationClicked]="idExpirationClicked"
+  >
+  </app-expiration-create-update-modal>
 
-    <app-expiration-create-update-modal 
-        *ngIf="isOpenCreateUpdateModal && boatSelected" 
-        (closeModalEvent)="closeModal($event)"
-        [isUpdate]="isUpdate" 
-        [idBoatSelected]="boatSelected.idBoat"
-        [idExpirationClicked]="idExpirationClicked">
-    </app-expiration-create-update-modal>
+  <app-expiration-view-modal
+    *ngIf="isOpenViewModal"
+    (closeModalEvent)="closeModal($event)"
+    [idExpirationClicked]="idExpirationClicked"
+  >
+  </app-expiration-view-modal>
 
-    <app-expiration-view-modal 
-        *ngIf="isOpenViewModal" 
-        (closeModalEvent)="closeModal($event)" 
-        [idExpirationClicked]="idExpirationClicked">
-    </app-expiration-view-modal>
+  <app-confirm-delete-modal
+    *ngIf="isOpenConfirmDeleteModal"
+    (closeModalEvent)="closeModal($event)"
+    [idEntityClicked]="idExpirationClicked"
+    [section]="section"
+  >
+  </app-confirm-delete-modal>
 
-    <app-confirm-delete-modal 
-        *ngIf="isOpenConfirmDeleteModal" 
-        (closeModalEvent)="closeModal($event)"
-        [idEntityClicked]="idExpirationClicked"
-        [section]="section">
-    </app-confirm-delete-modal>
-
-    <div *ngIf="companySelected && boatSelected" class="dashboard-container">
-        
-        <div class="add-container">
-            <button class="btn" (click)="openCreateModal()">Añadir vencimiento</button>
-        </div>
-        
-        <!-- ======== Filtros ======== -->
-        <h3 class="title sub">Filtros</h3>
-         
-        <form class="filter-form" [formGroup]="expirationFilterForm">
-            <label for="title">Título</label> 
-            <div class="input-wrap">
-                <div class="input__decorator"></div>
-                <input class="input" type="text" placeholder="Título" formControlName="title">
-            </div>
-        </form>
-
-        <div class="btnfilter-container">
-            <button class="btnfilter__btn" [disabled]="expirationFilterForm.invalid || isLoading" (click)="searchExpiration()">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <button class="btnfilter__btn" [disabled]="isLoading" (click)="resetFilter()">
-                <i class="fa-solid fa-rotate"></i>
-            </button>
-        </div>
-
-        <!-------------------- results - table -------------------->
-        <h3 class="title sub">Resultados</h3>
-
-        <div *ngIf="isLoading" class="loader-container">
-            <i class="fa-solid fa-circle-notch loader-animation"></i>
-        </div>
-
-        <p *ngIf="!existExpirations && !isLoading"> No existen vencimientos para {{ boatSelected.boatName }}.</p>
-        <div *ngIf="existExpirations && !isLoading" style="overflow-x:auto; margin-bottom:10px;">
-            <table class="table-data">
-
-                <thead>
-                    <tr class="table__row-header">
-                        <th>Estado</th>
-                        <th>Título</th>
-                        <th>Fecha de vencimiento</th>
-                        <th class="out-border">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr class="table__row-body"
-                        *ngFor="let expiration of expirationList | paginate: { itemsPerPage: 7, currentPage: currentPage}">
-                        <td style="display: none;">{{ expiration.IdExpiration }}</td>
-                        <td>
-                            <app-status-detail 
-                            [daysToExpiration]="expiration.DaysToExpiration"
-                            [status]="expiration.Status">
-                            </app-status-detail>
-                        </td>
-                        <td>{{ expiration.Title }}</td>
-                        <td>{{ expiration.ExpirationDate | timestampToDate }}</td>
-                        <td class="btn-container">
-                            <button (click)="openViewModal($event)" class="btn-read">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-                                    <path fill="none" d="M0 0h48v48h-48z" />
-                                    <path
-                                        d="M24 9c-10 0-18.54 6.22-22 15 3.46 8.78 12 15 22 15 10.01 0 18.54-6.22 22-15-3.46-8.78-11.99-15-22-15zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" />
-                                </svg>
-                            </button>
-                            <button (click)="openUpdateModal($event)" class="btn-update">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path fill="white"
-                                        d="M17.864 3.60051C17.4735 3.20999 16.8403 3.20999 16.4498 3.60051L15.0356 5.01472 19.2782 9.25736 20.6924 7.84315C21.0829 7.45263 21.0829 6.81946 20.6924 6.42894L17.864 3.60051zM17.864 10.6716L13.6213 6.42894 4.72185 15.3284C4.53431 15.516 4.42896 15.7703 4.42896 16.0355L4.42896 18.864C4.42895 19.4163 4.87667 19.864 5.42896 19.864H8.25738C8.5226 19.864 8.77695 19.7586 8.96449 19.5711L17.864 10.6716z" />
-                                </svg>
-                            </button>
-                            <button (click)="openDeleteConfirmModal($event)" class="btn-delete">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 92 92">
-                                    <path
-                                        d="M70.7 64.3c1.8 1.8 1.8 4.6 0 6.4-.9.9-2 1.3-3.2 1.3-1.2 0-2.3-.4-3.2-1.3L46 52.4 27.7 70.7c-.9.9-2 1.3-3.2 1.3s-2.3-.4-3.2-1.3c-1.8-1.8-1.8-4.6 0-6.4L39.6 46 21.3 27.7c-1.8-1.8-1.8-4.6 0-6.4 1.8-1.8 4.6-1.8 6.4 0L46 39.6l18.3-18.3c1.8-1.8 4.6-1.8 6.4 0 1.8 1.8 1.8 4.6 0 6.4L52.4 46l18.3 18.3z" />
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-        <!-------------------- paginated buttons of table -------------------->
-        <div *ngIf="existExpirations && !isLoading" class="pagination-wrap">
-            <pagination-controls class="pagination-buttons" (pageChange)="currentPage = $event"
-                [responsive]="responsivePagination" previousLabel="Anterior" nextLabel="Siguiente">
-            </pagination-controls>
-        </div>
-        
+  <div *ngIf="companySelected && boatSelected" class="dashboard-container">
+    <div class="add-container">
+      <button class="btn" (click)="openCreateModal()">
+        Añadir vencimiento
+      </button>
     </div>
 
+    <!-- ======== Filtros ======== -->
+    <h3 class="title sub">Filtros</h3>
+
+    <form class="filter-form" [formGroup]="expirationFilterForm">
+      <label for="title">Título</label>
+      <div class="input-wrap">
+        <div class="input__decorator"></div>
+        <input
+          class="input"
+          type="text"
+          placeholder="Título"
+          formControlName="title"
+        />
+      </div>
+    </form>
+
+    <div class="btnfilter-container">
+      <button
+        class="btnfilter__btn"
+        [disabled]="expirationFilterForm.invalid || isLoading"
+        (click)="searchExpiration()"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <button
+        class="btnfilter__btn"
+        [disabled]="isLoading"
+        (click)="resetFilter()"
+      >
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+    </div>
+
+    <!-------------------- results - table -------------------->
+    <h3 class="title sub">Resultados</h3>
+
+    <div *ngIf="isLoading" class="loader-container">
+      <i class="fa-solid fa-circle-notch loader-animation"></i>
+    </div>
+
+    <p *ngIf="!existExpirations && !isLoading">
+      No existen vencimientos para {{ boatSelected.boatName }}.
+    </p>
+    <div
+      *ngIf="existExpirations && !isLoading"
+      style="overflow-x: auto; margin-bottom: 10px"
+    >
+      <table class="table-data">
+        <thead>
+          <tr class="table__row-header">
+            <th>Estado</th>
+            <th>Título</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de vencimiento</th>
+            <th>Firma</th>
+            <th class="out-border">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            class="table__row-body"
+            *ngFor="
+              let expiration of expirationList
+                | paginate : { itemsPerPage: 7, currentPage: currentPage }
+            "
+          >
+            <td style="display: none">{{ expiration.IdExpiration }}</td>
+            <td>
+              <app-status-detail
+                [daysToExpiration]="expiration.DaysToExpiration"
+                [status]="expiration.Status"
+              >
+              </app-status-detail>
+            </td>
+            <td>{{ expiration.Title }}</td>
+            <td>
+              {{
+                expiration.InitDate === 0
+                  ? "**/**/****"
+                  : (expiration.InitDate | timestampToDate)
+              }}
+            </td>
+            <td>
+              {{
+                expiration.ExpirationDate === 0
+                  ? "**/**/****"
+                  : (expiration.ExpirationDate | timestampToDate)
+              }}
+            </td>
+            <td>
+              <app-status-detail
+                [daysToExpiration]="expiration.InspectorCheck"
+                [status]="expiration.InspectorCheck + ''"
+              >
+              </app-status-detail>
+            </td>
+            <td class="btn-container">
+              <button (click)="openViewModal($event)" class="btn-read">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 48 48"
+                >
+                  <path fill="none" d="M0 0h48v48h-48z" />
+                  <path
+                    d="M24 9c-10 0-18.54 6.22-22 15 3.46 8.78 12 15 22 15 10.01 0 18.54-6.22 22-15-3.46-8.78-11.99-15-22-15zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"
+                  />
+                </svg>
+              </button>
+              <button (click)="openUpdateModal($event)" class="btn-update">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="white"
+                    d="M17.864 3.60051C17.4735 3.20999 16.8403 3.20999 16.4498 3.60051L15.0356 5.01472 19.2782 9.25736 20.6924 7.84315C21.0829 7.45263 21.0829 6.81946 20.6924 6.42894L17.864 3.60051zM17.864 10.6716L13.6213 6.42894 4.72185 15.3284C4.53431 15.516 4.42896 15.7703 4.42896 16.0355L4.42896 18.864C4.42895 19.4163 4.87667 19.864 5.42896 19.864H8.25738C8.5226 19.864 8.77695 19.7586 8.96449 19.5711L17.864 10.6716z"
+                  />
+                </svg>
+              </button>
+              
+              <button
+                (click)="openDeleteConfirmModal($event)"
+                class="btn-delete"
+                *ngIf="expiration.orderPrio === null"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 92 92"
+                >
+                  <path
+                    d="M70.7 64.3c1.8 1.8 1.8 4.6 0 6.4-.9.9-2 1.3-3.2 1.3-1.2 0-2.3-.4-3.2-1.3L46 52.4 27.7 70.7c-.9.9-2 1.3-3.2 1.3s-2.3-.4-3.2-1.3c-1.8-1.8-1.8-4.6 0-6.4L39.6 46 21.3 27.7c-1.8-1.8-1.8-4.6 0-6.4 1.8-1.8 4.6-1.8 6.4 0L46 39.6l18.3-18.3c1.8-1.8 4.6-1.8 6.4 0 1.8 1.8 1.8 4.6 0 6.4L52.4 46l18.3 18.3z"
+                  />
+                </svg></button
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-------------------- paginated buttons of table -------------------->
+    <div *ngIf="existExpirations && !isLoading" class="pagination-wrap">
+      <pagination-controls
+        class="pagination-buttons"
+        (pageChange)="currentPage = $event"
+        [responsive]="responsivePagination"
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+      >
+      </pagination-controls>
+    </div>
+  </div>
 </section>

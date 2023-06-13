@@ -10,9 +10,11 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
-        ],
-        "createDefaultProgram": true
+          "tsconfig.json",
+          "e2e/tsconfig.json"],
+        "createDefaultProgram": true,
+        "tsconfigRootDir": "FRONT_logiport-app",
+        "sourceType": "module"
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
