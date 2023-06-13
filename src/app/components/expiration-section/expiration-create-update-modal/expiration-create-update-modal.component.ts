@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 
 import { ExpirationErrorNotificationService } from 'src/app/services/expiration/expiration-error-notification/expiration-error-notification.service';
-import { ExpirationService } from 'src/app/services/expiration/expiration.service'; 
+import { ExpirationService } from 'src/app/services/expiration/expiration.service';
 import { IExpiration, ICreateExpirationDTO, IUpdateExpirationDTO } from 'src/app/interfaces/expiration';
 import UtilsDate from 'src/app/utils/utilsDate';
 
@@ -20,12 +20,14 @@ export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private _expirationService: ExpirationService,
     private _expirationErrorNotification: ExpirationErrorNotificationService,
-    private toastr: ToastrService  
+    private toastr: ToastrService
   ) {
     this.expirationForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       expirationDate: ['', Validators.required],
+      initDate: ['', Validators.required],
+      inspectorCheck: [0, Validators.nullValidator],
     });
   }
 
@@ -46,6 +48,8 @@ export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
   createExpirationSubscription: Subscription | undefined;
   updateExpirationSubscription: Subscription | undefined;
   getExpirationByIdSubscription: Subscription | undefined;
+
+  inspectorCheck: number = 0;
 
   ngOnInit(): void {
     this.titleText = "AÑADIR VENCIMIENTO";
@@ -127,7 +131,6 @@ export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
 
   private updateExpiration(expiration: IUpdateExpirationDTO): Subscription {
     this.isLoading = true;
-
     return this._expirationService.updateExpiration(expiration).subscribe({
       next: response => {
         this.isLoading = false;
@@ -148,11 +151,18 @@ export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
 
     const expirationDateTimestamp: number = UtilsDate.dateToTimestamp(new Date(expirationDate));
 
+    let initDate: string = this.expirationForm.get('initDate')?.value;
+    initDate = UtilsDate.formatDateToYYYYMMDD(initDate);
+
+    const initDateTimestamp: number = UtilsDate.dateToTimestamp(new Date(initDate));
+
     const expiration: ICreateExpirationDTO = {
       idBoat: this.idBoatSelected == null ? "" : this.idBoatSelected,
       title: this.expirationForm.get('title')?.value,
       description: this.expirationForm.get('description')?.value,
       expirationDate: expirationDateTimestamp,
+      initDate: initDateTimestamp,
+      inspectorCheck: this.expirationForm.get('inspectorCheck')?.value,
     };
 
     return expiration;
@@ -162,14 +172,21 @@ export class ExpirationCreateUpdateModalComponent implements OnInit, OnDestroy {
 
     let expirationDateTimestamp = expiration.ExpirationDate;
     let expirationDate: string = "";
+    let initDateTimestamp = expiration.InitDate;
+    let initDate: string = "";
 
     if (expirationDateTimestamp) {
       expirationDate = UtilsDate.timestampToDate(expirationDateTimestamp);
+    }
+    if (initDateTimestamp) {
+      initDate = UtilsDate.timestampToDate(initDateTimestamp);
     }
 
     this.expirationForm.get('title')?.setValue(`${expiration.Title}`);
     this.expirationForm.get('description')?.setValue(`${expiration.Description}`);
     this.expirationForm.get('expirationDate')?.setValue(`${expirationDate}`);
+    this.expirationForm.get('initDate')?.setValue(`${initDate}`);
+    this.inspectorCheck = expiration.InspectorCheck;
   }
 
 }

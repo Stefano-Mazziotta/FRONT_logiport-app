@@ -41,6 +41,20 @@
                     </span>
                 </div>
                 <div class="form__input-container">
+                    <label class="form__label" for="initDate">* Fecha de inicio</label>
+                    <div class="input-wrap">
+                        <div class="input__decorator" [class.success]="expirationForm.get('initDate')?.valid"
+                            [class.error]="expirationForm.get('initDate')?.invalid && expirationForm.get('initDate')?.touched">
+                        </div>
+                        <input formControlName="initDate" class="form__input" type="text" onfocus="(this.type='date')" placeholder="Fecha de inicio"
+                            name="initDate" autocomplete="off" min="1900-01-01" max="2100-01-01">
+                    </div>
+                    <span class="form__error"
+                        *ngIf="expirationForm.get('initDate')?.invalid && expirationForm.get('initDate')?.touched">
+                        Este campo es<strong> obligatorio.</strong>
+                    </span>
+                </div>
+                <div class="form__input-container">
                     <label class="form__label" for="expirationDate">* Fecha de vencimiento</label>
                     <div class="input-wrap">
                         <div class="input__decorator" [class.success]="expirationForm.get('expirationDate')?.valid"
@@ -54,9 +68,22 @@
                         Este campo es<strong> obligatorio.</strong>
                     </span>
                 </div>
+                <div class="form__input-container">
+                    <label class="form__label" for="inspectorCheck">* Firma Inspector</label>
+                    <div class="input-wrap input-checkbox">
+                        <div class="input__decorator" [class.success]="expirationForm.get('inspectorCheck')?.valid"
+                            [class.error]="expirationForm.get('inspectorCheck')?.invalid && expirationForm.get('inspectorCheck')?.touched">
+                        </div>
+                        <div class="form__input input-checkbox-container"> 
+                        <input formControlName="inspectorCheck" class="form__input input-checkbox"  type="checkbox" onfocus="" placeholder="Firma del ispector"
+                            name="inspectorCheck" autocomplete="off" value="1" [(ngModel)]="inspectorCheck" [checked]="inspectorCheck">
+                        </div>
+                    </div>
+                    
+                </div>
                 
             </div>
-            <button type="submit" class="form__btn"[disabled]="expirationForm.invalid || expirationForm.untouched || isLoading">
+            <button type="submit" class="form__btn" [disabled]="expirationForm.invalid || expirationForm.untouched || isLoading">
                 {{ btnText }} <i *ngIf="isLoading" class="fa-solid fa-circle-notch loader-animation"></i>
             </button>
         </form>
