@@ -10,6 +10,9 @@ export interface IExpiration {
     TimeLastUpdate: number
     IsDeleted: boolean
     TimeDeleted: number
+    InitDate: number
+    InspectorCheck: number
+    orderPrio: number
 }
 
 export interface ICreateExpirationDTO {
@@ -17,6 +20,8 @@ export interface ICreateExpirationDTO {
     title: string
     description: string
     expirationDate: number
+    initDate: number
+    inspectorCheck: number
 }
 
 export interface IUpdateExpirationDTO extends ICreateExpirationDTO {
