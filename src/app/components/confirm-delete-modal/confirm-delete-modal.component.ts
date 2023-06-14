@@ -62,11 +62,11 @@ export class ConfirmDeleteModalComponent implements OnDestroy {
   }
 
   public closeModal(isSendRequest:boolean = false) {
-
+    this.clickModal = false;
     if (this.clickModal == false && !this.isLoading) {
       this.closeModalEvent.emit(isSendRequest);
     }
-    this.clickModal = false;
+    
   }
 
   public delete(): void {

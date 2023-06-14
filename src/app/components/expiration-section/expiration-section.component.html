@@ -111,7 +111,7 @@
             class="table__row-body"
             *ngFor="
               let expiration of expirationList
-                | paginate : { itemsPerPage: 7, currentPage: currentPage }
+                | paginate : { itemsPerPage: 15, currentPage: currentPage }
             "
           >
             <td style="display: none">{{ expiration.IdExpiration }}</td>
