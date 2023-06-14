@@ -53,11 +53,11 @@ export class MotorViewModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-
+    this.clickModal = false;
     if (this.clickModal == false) {
       this.closeModalEvent.emit();
     }
-    this.clickModal = false;
+    
   }
 
   private getMotorById(idMotor:string):Subscription{

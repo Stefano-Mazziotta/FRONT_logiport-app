@@ -66,11 +66,11 @@ export class BoatViewModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-
+    this.clickModal = false;
     if (this.clickModal == false) {
       this.closeModalEvent.emit();
     }
-    this.clickModal = false;
+    
   }
 
   private getBoatById(idBoat:string):Subscription{

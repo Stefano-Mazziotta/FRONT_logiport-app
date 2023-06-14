@@ -52,11 +52,11 @@ export class GeneratorViewModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-
+    this.clickModal = false;
     if (this.clickModal == false) {
       this.closeModalEvent.emit();
     }
-    this.clickModal = false;
+    
   }
 
   private getGeneratorById(idGenerator:string):Subscription{

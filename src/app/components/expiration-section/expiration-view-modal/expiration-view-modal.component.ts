@@ -54,11 +54,11 @@ export class ExpirationViewModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-
+    this.clickModal = false;
     if (this.clickModal == false) {
       this.closeModalEvent.emit();
     }
-    this.clickModal = false;
+    
   }
 
   private getExpirationById(idExpiration: string): Subscription {

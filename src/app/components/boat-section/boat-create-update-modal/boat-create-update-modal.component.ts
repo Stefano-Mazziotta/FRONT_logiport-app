@@ -83,13 +83,13 @@ export class BoatCreateUpdateModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(isSendRequest: boolean = false): void {
-
+    this.clickModal = false;
     if (this.clickModal == false && !this.isLoading) {
 
       this.boatForm.reset();
       this.closeModalEvent.emit(isSendRequest);
     }
-    this.clickModal = false;
+    
   }
 
   public onSubmit(): void {

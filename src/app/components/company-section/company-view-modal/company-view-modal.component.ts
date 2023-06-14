@@ -47,11 +47,11 @@ export class CompanyViewModalComponent implements OnInit, OnDestroy {
   }
 
   public closeModal() {
-
+    this.clickModal = false;
     if (this.clickModal == false && !this.isLoading) {
       this.closeModalEvent.emit();
     }
-    this.clickModal = false;
+    
   }
 
   private getCompanyById(idCompany: string): Subscription {
