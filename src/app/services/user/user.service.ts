@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
 
-    if(window.location.host == 'app.logiport.site'){
-      this.serverUrl = 'https://app.logiport.site/'
+    if(window.location.host == 'app.logiport.com.ar'){
+      this.serverUrl = 'https://app.logiport.com.ar/'
     }
 
   }

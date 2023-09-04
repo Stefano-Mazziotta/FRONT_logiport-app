@@ -44,5 +44,5 @@ jobs:
           SOURCE: "dist/logiport-app/"
           REMOTE_HOST: "ec2-54-232-160-105.sa-east-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
-          TARGET: "/var/www/app.logiport.site/front/"
+          TARGET: "/var/www/app.logiport.com.ar/front/"
 
